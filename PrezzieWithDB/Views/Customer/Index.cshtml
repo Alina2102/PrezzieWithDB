@@ -1,0 +1,70 @@
+﻿@model IEnumerable<PrezzieWithDB.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCustomer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            First name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            E-Mail
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            Birthday
+        </th>
+        <th>
+            Description
+        </th>
+        <th> </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.userName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.firstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.surname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.eMail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.countryUser)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.birthday)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.descriptionUser)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.userName }) |
+        @Html.ActionLink("Details", "Details", new { id = item.userName }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.userName })
+    </td>
+</tr>
+}
+
+</table>
