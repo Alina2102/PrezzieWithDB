@@ -13,7 +13,7 @@ namespace PrezzieWithDB.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202004021909106_init"; }
+            get { return "202004032033080_init"; }
         }
         
         string IMigrationMetadata.Source

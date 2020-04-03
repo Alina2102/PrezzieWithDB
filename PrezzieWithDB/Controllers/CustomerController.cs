@@ -134,6 +134,9 @@ namespace PrezzieWithDB.Controllers
             Customer customer = db.customers.Find(id);
             db.customers.Remove(customer);
             db.SaveChanges();
+            Profile profile = db.profiles.Find(id);
+            db.profiles.Remove(profile);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

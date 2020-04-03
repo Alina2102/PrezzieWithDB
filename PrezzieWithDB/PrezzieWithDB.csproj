@@ -129,19 +129,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SouvenirsController.cs" />
     <Compile Include="DAL\PrezzieContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004021909106_init.cs" />
-    <Compile Include="Migrations\202004021909106_init.designer.cs">
-      <DependentUpon>202004021909106_init.cs</DependentUpon>
+    <Compile Include="Migrations\202004032033080_init.cs" />
+    <Compile Include="Migrations\202004032033080_init.designer.cs">
+      <DependentUpon>202004032033080_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032045281_description.cs" />
+    <Compile Include="Migrations\202004032045281_description.designer.cs">
+      <DependentUpon>202004032045281_description.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Souvenir.cs" />
+    <Compile Include="Models\SouvenirInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerView.cs" />
+    <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -184,6 +192,11 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\CreateCustomer.cshtml" />
+    <Content Include="Views\Souvenirs\Delete.cshtml" />
+    <Content Include="Views\Souvenirs\Details.cshtml" />
+    <Content Include="Views\Souvenirs\Edit.cshtml" />
+    <Content Include="Views\Souvenirs\Index.cshtml" />
+    <Content Include="Views\Souvenirs\CreateSouvenir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -202,8 +215,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004021909106_init.resx">
-      <DependentUpon>202004021909106_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004032033080_init.resx">
+      <DependentUpon>202004032033080_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032045281_description.resx">
+      <DependentUpon>202004032045281_description.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
