@@ -77,31 +77,7 @@ namespace PrezzieWithDB.Controllers
             return View(customer);
         }
 
-        // GET: Customer/Create
-        public ActionResult Create()
-        {
-            ViewBag.userName = new SelectList(db.profiles, "userName", "eMail");
-            return View();
-        }
-
-        // POST: Customer/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "userName,countryUser")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.userName = new SelectList(db.profiles, "userName", "eMail", customer.userName);
-            return View(customer);
-        }
-
+       
         // GET: Customer/Edit/5
         public ActionResult Edit(string id)
         {
