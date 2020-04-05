@@ -137,9 +137,14 @@
     <Compile Include="Migrations\202004041002590_Init.Designer.cs">
       <DependentUpon>202004041002590_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004051131230_addrequest.cs" />
+    <Compile Include="Migrations\202004051131230_addrequest.Designer.cs">
+      <DependentUpon>202004051131230_addrequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Souvenir.cs" />
     <Compile Include="Models\SouvenirInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +162,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -212,6 +220,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004041002590_Init.resx">
       <DependentUpon>202004041002590_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051131230_addrequest.resx">
+      <DependentUpon>202004051131230_addrequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,5 +17,6 @@ namespace PrezzieWithDB.Models
         [Required]
         public virtual SouvenirInfo souvenirInfo { get; set; }
 
+        public virtual Request request { get; set; } 
     }
 }

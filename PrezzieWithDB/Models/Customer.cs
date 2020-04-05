@@ -11,9 +11,12 @@ namespace PrezzieWithDB.Models
         [Key]
         public string userName { get; set; }
         public string countryUser { get; set; }
+        public bool loggedIn { get; set; }
 
         [Required]
         public virtual Profile Profile { get; set; }
+
+        public virtual ICollection<Request> requests { get; set; }
 
     }
 }
