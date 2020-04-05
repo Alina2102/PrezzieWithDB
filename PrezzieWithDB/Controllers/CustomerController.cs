@@ -16,13 +16,13 @@ namespace PrezzieWithDB.Controllers
     {
         private PrezzieContext db = new PrezzieContext();
 
-        public ActionResult CreateCustomer()
+        public ActionResult SignUp()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCustomer(CustomerView model)
+        public ActionResult SignUp(CustomerView model)
         {
             if (ModelState.IsValid)
             {
@@ -47,6 +47,7 @@ namespace PrezzieWithDB.Controllers
                 db.customers.Add(customer);
                 db.SaveChanges();
 
+                Session["userName"] = customer.userName;
                 return RedirectToAction("Index");
 
             }
@@ -54,6 +55,45 @@ namespace PrezzieWithDB.Controllers
             return View();
         }
 
+
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(CustomerLoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if ((db.customers.Find(model.userName).userName) != null)
+                {
+                    if (db.customers.Find(model.userName).Profile.password == model.password)
+                        {
+                            Session["userName"] = model.userName;
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            model.LoginErrorMessage = "Wrong password!";
+                            return View("Login", model);
+                        }
+                    }
+                    else
+                    {
+                        model.LoginErrorMessage = "Wrong username!";
+                        return View("Login", model);
+                    }
+            }
+            return View();
+        }
 
         // GET: Customer
         public ActionResult Index()

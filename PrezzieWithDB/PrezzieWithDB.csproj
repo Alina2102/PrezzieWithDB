@@ -148,6 +148,7 @@
     <Compile Include="Models\Souvenir.cs" />
     <Compile Include="Models\SouvenirInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CustomerLoginModel.cs" />
     <Compile Include="ViewModels\CustomerView.cs" />
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
@@ -194,12 +195,14 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Customer\CreateCustomer.cshtml" />
+    <Content Include="Views\Customer\SignUp.cshtml" />
     <Content Include="Views\Souvenirs\Delete.cshtml" />
     <Content Include="Views\Souvenirs\Details.cshtml" />
     <Content Include="Views\Souvenirs\Edit.cshtml" />
     <Content Include="Views\Souvenirs\Index.cshtml" />
     <Content Include="Views\Souvenirs\CreateSouvenir.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

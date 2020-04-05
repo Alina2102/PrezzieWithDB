@@ -1,0 +1,21 @@
+﻿@if (Session["userName"] != null)
+{
+    using (Html.BeginForm("LogOut", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                Hello @Session["userName"] !
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#56c8c8">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "SignUp", "Customer", routeValues: null, htmlAttributes: new { id = "registerLink", style = "color:#ffffff;" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Customer", routeValues: null, htmlAttributes: new { id = "loginLink", style = "color:#56c8c8;" })</li>
+    </ul>
+}
