@@ -27,22 +27,26 @@ namespace PrezzieWithDB.Controllers
             if (ModelState.IsValid)
             {
 
-                Profile profile = new Profile();
-                profile.userName = model.userName;
-                profile.eMail = model.eMail;
-                profile.password = model.password;
-                profile.firstName = model.firstName;
-                profile.surname = model.surname;
-                profile.birthday = model.birthday;
-                profile.descriptionUser = model.descriptionUser;
-                
+                Profile profile = new Profile
+                {
+                    userName = model.userName,
+                    eMail = model.eMail,
+                    password = model.password,
+                    firstName = model.firstName,
+                    surname = model.surname,
+                    birthday = model.birthday,
+                    descriptionUser = model.descriptionUser
+                };
+
 
                 db.profiles.Add(profile);
                 db.SaveChanges();
 
-                Customer customer = new Customer();
-                customer.userName = profile.userName;
-                customer.countryUser = model.countryUser;
+                Customer customer = new Customer
+                {
+                    userName = profile.userName,
+                    countryUser = model.countryUser
+                };
 
                 db.customers.Add(customer);
                 db.SaveChanges();
@@ -73,24 +77,27 @@ namespace PrezzieWithDB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if ((db.customers.Find(model.userName).userName) != null)
+                try
+                {
+                    var customer = db.customers.Find(model.userName).userName;
+                }
+                catch (Exception)
+                {
+                    model.LoginErrorMessage = "Wrong username!";
+                    return View("Login", model);
+                }
                 {
                     if (db.customers.Find(model.userName).Profile.password == model.password)
                         {
                             Session["userName"] = model.userName;
                             return RedirectToAction("Index", "Home");
                         }
-                        else
+                    else
                         {
                             model.LoginErrorMessage = "Wrong password!";
                             return View("Login", model);
                         }
-                    }
-                    else
-                    {
-                        model.LoginErrorMessage = "Wrong username!";
-                        return View("Login", model);
-                    }
+                }
             }
             return View();
         }
