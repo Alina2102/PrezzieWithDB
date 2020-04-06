@@ -30,7 +30,10 @@ namespace PrezzieWithDB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.requests.Find(id);
+
+
+            var request = GetRequest(id);
+            
             if (request == null)
             {
                 return HttpNotFound();
@@ -156,6 +159,35 @@ namespace PrezzieWithDB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public RequestView GetRequest(int? souvenirID)
+        {
+            RequestView rv = new RequestView();
+            var request = db.requests.Find(souvenirID);
+
+            rv.souvenirID = request.souvenirID;
+            rv.userName = request.userName;
+            rv.amount = request.amount;
+            rv.reward = request.reward;
+            rv.status = request.status;
+
+            rv.souvenirName = request.souvenir.souvenirName;
+            rv.countrySouv = request.souvenir.countrySouv;
+
+            rv.price = request.souvenir.souvenirInfo.price;
+            rv.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
+
+            var customer = db.customers.Find(rv.userName);
+
+            rv.eMail = customer.Profile.eMail;
+            rv.countryUser = customer.countryUser;
+            rv.firstName = customer.Profile.firstName;
+            rv.surname = customer.Profile.surname;
+            rv.birthday = customer.Profile.birthday;
+            rv.descriptionUser = customer.Profile.descriptionUser;
+
+            return rv;
         }
     }
 }

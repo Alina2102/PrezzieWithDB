@@ -1,0 +1,118 @@
+﻿@model PrezzieWithDB.ViewModels.RequestView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Souvenir
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.souvenirName)
+        </dd>
+
+        <dt>
+            Country
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.countrySouv)
+        </dd>
+
+        <dt>
+            Amount
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+
+        <dt>
+            Usual price per piece
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            Reward
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reward)
+        </dd>
+
+        <dt>
+            Souvenir description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descriptionSouv)
+        </dd>
+
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Username
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            First name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            Surname
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.surname)
+        </dd>
+
+        <dt>
+            Country
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.countryUser)
+        </dd>
+
+        <dt>
+            Birthday
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birthday)
+        </dd>
+
+        <dt>
+            About the User
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descriptionUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.souvenirID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
