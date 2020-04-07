@@ -15,6 +15,8 @@ namespace PrezzieWithDB.Controllers
     public class RequestController : Controller
     {
         private PrezzieContext db = new PrezzieContext();
+        private static int? souvenierID_tmp = null;
+
 
         // GET: Request
         public ActionResult Index()
@@ -31,8 +33,8 @@ namespace PrezzieWithDB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
-            var request = GetRequest(id);
+           
+            RequestView request = GetRequest(id);
             
             if (request == null)
             {
@@ -98,13 +100,14 @@ namespace PrezzieWithDB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.requests.Find(id);
+            souvenierID_tmp = id;
+            RequestView request = GetRequest(id);
+
             if (request == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.userName = new SelectList(db.customers, "userName", "countryUser", request.userName);
-            ViewBag.souvenirID = new SelectList(db.souvenirs, "souvenirId", "souvenirName", request.souvenirID);
+            
             return View(request);
         }
 
@@ -113,17 +116,35 @@ namespace PrezzieWithDB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "souvenirID,userName,amount,reward,status")] Request request)
+        public ActionResult Edit(RequestView model, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(request).State = EntityState.Modified;
+
+                SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
+                souvenirInfo.price = model.price;
+                souvenirInfo.descriptionSouv = model.descriptionSouv;
+                db.Entry(souvenirInfo).CurrentValues.SetValues(souvenirInfo);
                 db.SaveChanges();
+
+                Souvenir souvenir = db.souvenirs.Find(souvenierID_tmp);
+                souvenir.souvenirName = model.souvenirName;
+                souvenir.countrySouv = model.countrySouv;
+                db.Entry(souvenir).CurrentValues.SetValues(souvenir);
+                db.SaveChanges();
+
+                Request request = db.requests.Find(souvenierID_tmp);
+                request.amount = model.amount;
+                request.reward = model.reward;
+                request.status = model.status;
+                db.Entry(request).CurrentValues.SetValues(request);
+                db.SaveChanges();
+
+                souvenierID_tmp = null;
                 return RedirectToAction("Index");
             }
-            ViewBag.userName = new SelectList(db.customers, "userName", "countryUser", request.userName);
-            ViewBag.souvenirID = new SelectList(db.souvenirs, "souvenirId", "souvenirName", request.souvenirID);
-            return View(request);
+
+            return View(model);
         }
 
         // GET: Request/Delete/5
