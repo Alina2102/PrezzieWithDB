@@ -13,7 +13,10 @@
 </h2>
 
 <p>
-    <a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Create New", "Create")</a>
+    @if (Session["userName"] != null)
+    {
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { id = "btn btn-default", style = "color:#feab33;" })
+    }
 </p>
 
 @foreach (var item in Model)

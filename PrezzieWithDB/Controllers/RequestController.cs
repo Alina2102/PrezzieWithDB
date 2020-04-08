@@ -28,12 +28,16 @@ namespace PrezzieWithDB.Controllers
         // GET: Request/Details/5
         public ActionResult Details(int? id)
         {
+            if(Session["userName"] == null)
+            {
+                return HttpNotFound();
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-           
             RequestView request = GetRequest(id);
             
             if (request == null)
