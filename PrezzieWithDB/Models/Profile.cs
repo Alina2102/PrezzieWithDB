@@ -11,6 +11,7 @@ namespace PrezzieWithDB.Models
         [Key]
         public string userName { get; set; }
         public string eMail { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
         public string firstName { get; set; }
         public string surname { get; set; }
