@@ -8,3 +8,9 @@ dotnet_style_readonly_field = true:none
 
 # IDE0060: Remove unused parameter
 dotnet_code_quality_unused_parameters = all:none
+
+# CS0252: Possible unintended reference comparison; left hand side needs cast
+dotnet_diagnostic.CS0252.severity = silent
+
+# CS0253: Possible unintended reference comparison; right hand side needs cast
+dotnet_diagnostic.CS0253.severity = none
