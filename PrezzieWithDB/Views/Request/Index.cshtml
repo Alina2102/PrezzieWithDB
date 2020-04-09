@@ -15,7 +15,7 @@
 <p>
     @if (Session["userName"] != null)
     {
-    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { id = "btn btn-default", style = "color:#feab33;" })
+    <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33">Create new</a>
     }
 </p>
 
