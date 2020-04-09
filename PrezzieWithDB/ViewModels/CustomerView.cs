@@ -11,7 +11,6 @@ namespace PrezzieWithDB.ViewModels
     {
         public string userName { get; set; }
         public string countryUser { get; set; }
-        [Index(IsUnique = true)]
         [DataType(DataType.EmailAddress)]
         public string eMail { get; set; }
         [DataType(DataType.Password)]

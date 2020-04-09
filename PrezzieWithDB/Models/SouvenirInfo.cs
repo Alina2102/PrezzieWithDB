@@ -11,7 +11,7 @@ namespace PrezzieWithDB.Models
 
         [Key]
         public int souvenirId { get; set; }
-        public float price { get; set; }
+        public double price { get; set; }
         public string descriptionSouv { get; set; }
 
         public virtual Souvenir souvenir { get; set; }

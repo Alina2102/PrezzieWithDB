@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202004051131230_addrequest.Designer.cs">
       <DependentUpon>202004051131230_addrequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004091215460_update.cs" />
+    <Compile Include="Migrations\202004091215460_update.Designer.cs">
+      <DependentUpon>202004091215460_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -234,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004051131230_addrequest.resx">
       <DependentUpon>202004051131230_addrequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004091215460_update.resx">
+      <DependentUpon>202004091215460_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

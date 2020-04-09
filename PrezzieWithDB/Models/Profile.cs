@@ -11,7 +11,6 @@ namespace PrezzieWithDB.Models
     {
         [Key]
         public string userName { get; set; }
-        [Index(IsUnique = true)]
         [DataType(DataType.EmailAddress)]
         public string eMail { get; set; }
         [DataType(DataType.Password)]
