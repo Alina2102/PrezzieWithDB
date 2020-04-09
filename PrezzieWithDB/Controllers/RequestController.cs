@@ -30,7 +30,8 @@ namespace PrezzieWithDB.Controllers
         {
             if(Session["userName"] == null)
             {
-                return HttpNotFound();
+                ViewBag.Message = "Please Login to view details";
+                return RedirectToAction("Login","Customer");
             }
 
             if (id == null)
