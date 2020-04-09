@@ -24,39 +24,47 @@ namespace PrezzieWithDB.Controllers
         [HttpPost]
         public ActionResult SignUp(CustomerView model)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                Profile profile = new Profile
+                if (ModelState.IsValid)
                 {
-                    userName = model.userName,
-                    eMail = model.eMail,
-                    password = model.password,
-                    firstName = model.firstName,
-                    surname = model.surname,
-                    birthday = model.birthday,
-                    descriptionUser = model.descriptionUser
-                };
+
+                    Profile profile = new Profile
+                    {
+                        userName = model.userName,
+                        eMail = model.eMail,
+                        password = model.password,
+                        firstName = model.firstName,
+                        surname = model.surname,
+                        birthday = model.birthday,
+                        descriptionUser = model.descriptionUser
+                    };
 
 
-                db.profiles.Add(profile);
-                db.SaveChanges();
+                    db.profiles.Add(profile);
+                    db.SaveChanges();
 
-                Customer customer = new Customer
-                {
-                    userName = profile.userName,
-                    countryUser = model.countryUser
-                };
+                    Customer customer = new Customer
+                    {
+                        userName = profile.userName,
+                        countryUser = model.countryUser
+                    };
 
-                db.customers.Add(customer);
-                db.SaveChanges();
+                    db.customers.Add(customer);
+                    db.SaveChanges();
 
-                Session["userName"] = customer.userName;
-                return RedirectToAction("Index");
+                    Session["userName"] = customer.userName;
+                    return RedirectToAction("Index");
 
+                }
+
+                return View();
             }
-
-            return View();
+            catch (Exception)
+            {
+                model.errorMessage = "Username or E-mail already exist";
+                return View("SignUp", model);
+            }
         }
 
 
