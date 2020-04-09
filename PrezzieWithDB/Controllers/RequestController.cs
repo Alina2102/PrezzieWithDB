@@ -75,6 +75,7 @@ namespace PrezzieWithDB.Controllers
                 souvenir.souvenirId = souvenirInfo.souvenirId;
                 souvenir.souvenirName = model.souvenirName;
                 souvenir.countrySouv = model.countrySouv;
+                souvenir.souvenirInfo = souvenirInfo;
 
                 db.souvenirs.Add(souvenir);
                 db.SaveChanges();
