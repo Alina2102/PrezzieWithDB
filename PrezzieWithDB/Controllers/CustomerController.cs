@@ -24,47 +24,51 @@ namespace PrezzieWithDB.Controllers
         [HttpPost]
         public ActionResult SignUp(CustomerView model)
         {
-            try
+            if (db.customers.Find(model.userName) != null)
             {
-                if (ModelState.IsValid)
-                {
-
-                    Profile profile = new Profile
-                    {
-                        userName = model.userName,
-                        eMail = model.eMail,
-                        password = model.password,
-                        firstName = model.firstName,
-                        surname = model.surname,
-                        birthday = model.birthday,
-                        descriptionUser = model.descriptionUser
-                    };
-
-
-                    db.profiles.Add(profile);
-                    db.SaveChanges();
-
-                    Customer customer = new Customer
-                    {
-                        userName = profile.userName,
-                        countryUser = model.countryUser
-                    };
-
-                    db.customers.Add(customer);
-                    db.SaveChanges();
-
-                    Session["userName"] = customer.userName;
-                    return RedirectToAction("Index");
-
-                }
-
-                return View();
-            }
-            catch (Exception)
-            {
-                model.errorMessage = "Username or E-mail already exist";
+                model.errorMessage = "Username already exists";
                 return View("SignUp", model);
             }
+            var customers = db.customers.Include(c => c.Profile);
+            foreach (Customer c in customers)
+            {
+                if (c.Profile.eMail == model.eMail)
+                {
+                    model.errorMessage = "E-mail already exists";
+                    return View("SignUp", model);
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                Profile profile = new Profile
+                {
+                    userName = model.userName,
+                    eMail = model.eMail,
+                    password = model.password,
+                    firstName = model.firstName,
+                    surname = model.surname,
+                    birthday = model.birthday,
+                    descriptionUser = model.descriptionUser
+                };
+
+                db.profiles.Add(profile);
+                db.SaveChanges();
+
+                Customer customer = new Customer
+                {
+                    userName = profile.userName,
+                    countryUser = model.countryUser
+                };
+
+                db.customers.Add(customer);
+                db.SaveChanges();
+
+                Session["userName"] = customer.userName;
+                return RedirectToAction("Index");
+            }
+
+
+            return View();
         }
 
 
@@ -96,15 +100,15 @@ namespace PrezzieWithDB.Controllers
                 }
                 {
                     if (db.customers.Find(model.userName).Profile.password == model.password)
-                        {
-                            Session["userName"] = model.userName;
-                            return RedirectToAction("Index", "Home");
-                        }
+                    {
+                        Session["userName"] = model.userName;
+                        return RedirectToAction("Index", "Home");
+                    }
                     else
-                        {
-                            model.LoginErrorMessage = "Wrong password!";
-                            return View("Login", model);
-                        }
+                    {
+                        model.LoginErrorMessage = "Wrong password!";
+                        return View("Login", model);
+                    }
                 }
             }
             return View();
@@ -146,7 +150,7 @@ namespace PrezzieWithDB.Controllers
             return View(customer);
         }
 
-       
+
         // GET: Customer/Edit/5
         public ActionResult Edit(string id)
         {
