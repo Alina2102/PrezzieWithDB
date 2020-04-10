@@ -115,7 +115,7 @@ namespace PrezzieWithDB.Controllers
         {
             if (Session["userName"] == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Customer");
             }
 
             if (Session["userName"] == "Admin")
