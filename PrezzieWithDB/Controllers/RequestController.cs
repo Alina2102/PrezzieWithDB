@@ -52,24 +52,29 @@ namespace PrezzieWithDB.Controllers
         // GET: Request/Details/5
         public ActionResult Details(int? id)
         {
-            if(Session["userName"] == null)
+            try
             {
-                return RedirectToAction("Login","Customer");
-            }
+                string userName = Session["userName"].ToString();
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            RequestView request = GetRequest(id);
-            
-            if (request == null)
-            {
-                return HttpNotFound();
+                RequestView request = GetRequest(id);
+
+                if (request == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(request);
             }
-            return View(request);
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Customer");
+            }
         }
+           
 
         // GET: Request/Create
         public ActionResult Create()

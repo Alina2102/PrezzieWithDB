@@ -89,27 +89,23 @@ namespace PrezzieWithDB.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var customer = db.customers.Find(model.userName).userName;
-                }
-                catch (Exception)
+                if (db.customers.Find(model.userName) == null)
                 {
                     model.LoginErrorMessage = "Wrong username!";
                     return View("Login", model);
                 }
+
+                if (db.customers.Find(model.userName).Profile.password == model.password)
                 {
-                    if (db.customers.Find(model.userName).Profile.password == model.password)
-                    {
-                        Session["userName"] = model.userName;
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        model.LoginErrorMessage = "Wrong password!";
-                        return View("Login", model);
-                    }
+                    Session["userName"] = model.userName;
+                    return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    model.LoginErrorMessage = "Wrong password!";
+                    return View("Login", model);
+                }
+
             }
             return View();
         }
