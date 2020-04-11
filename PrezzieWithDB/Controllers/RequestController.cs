@@ -22,6 +22,7 @@ namespace PrezzieWithDB.Controllers
         public ActionResult Index()
         {
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+            requests = requests.OrderByDescending(r => r.souvenirID);
             return View(requests.ToList());
         }
 
