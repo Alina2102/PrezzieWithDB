@@ -155,16 +155,22 @@
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Alina.JPG" />
+    <Content Include="Content\Bene.jpg" />
     <Content Include="Content\bg-plane.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img.png" />
+    <Content Include="Content\Jenny.jpg" />
     <Content Include="Content\login-bg.jpg" />
+    <Content Include="Content\Moritz.jpg" />
     <Content Include="Content\plane.jpg" />
     <Content Include="Content\plane2.jpg" />
     <Content Include="Content\Prezzie Logo1.png" />
+    <Content Include="Content\Vanessa.jpg" />
+    <Content Include="Content\Veit.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

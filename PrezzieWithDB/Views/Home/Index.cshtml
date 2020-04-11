@@ -7,7 +7,7 @@
 </div>
 
 <div class="jumbotron" style="background-color:white">
-    <p class="lead" align="center">
+    <p class="lead" align="center" style="position:relative; z-index:3">
         Did you ever finish your travel and thought: “Oh no, why didn’t I take that, I won’t get it in my country!” ?
         Your family and friends won´t travel to that destination in the near future and Amazon etc. can´t help you either?
         Then our website is exactly what you need!
@@ -15,24 +15,83 @@
     </p>
 </div>
 
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-md-4">
-            <h2 style="color:#56c8c8">Requests</h2>
-            <p>
-                Take a look what other members are searching for and create your own requests.
-            </p>
-            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Let´s go!", "Index", "Request")</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2 style="color:#56c8c8">Your profile</h2>
-            <p>Manage your profile and your requests.</p>
-            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Let´s go!", "Index", "Profile")</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2 style="color:#56c8c8">Contact</h2>
-            <p>Would you like to get in touch with us?</p>
-            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Let´s go!", "Contact", "Home")</a></p>
+<div style="width:100%; background-color:#eeeeee; padding:3em 0 2em; border-top-left-radius:40px; border-top-right-radius:40px">
+  
+    <div align="center" style="margin-bottom:3em">
+        <h1 style="color:#56c8c8">About us</h1>
+
+        <ul style="margin-top:4em; margin-left:-2em; list-style-type:none">
+            <li class="col-md-4">
+                <figure>
+                    <img src="~/Content/Jenny.jpg" style="border-radius:100%; width:100px;height:100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Jennifer Balles</figcaption>
+                </figure>
+            </li>
+            <li class="col-md-4">
+                <figure>
+                    <img src="~/Content/Moritz.jpg" style="border-radius: 100%; width: 100px; height: 100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Moritz Glandinen</figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="~/Content/Vanessa.jpg" style="border-radius:100%; width:100px;height:100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Vanessa Jörg</figcaption>
+                </figure>
+            </li>
+        </ul>
+
+        <ul style="margin-top:3em; margin-left:-2em; list-style-type:none">
+            <li class="col-md-4">
+                <figure>
+                    <img src="~/Content/Veit.jpg" style="border-radius:100%; width:100px;height:100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Veit Kiebler</figcaption>
+                </figure>
+            </li>
+            <li class="col-md-4">
+                <figure>
+                    <img src="~/Content/Alina.JPG" style="border-radius:100%; width:100px;height:100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Alina Langen</figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="~/Content/Bene.jpg" style="border-radius:100%; width:100px;height:100px" />
+                    <blockquote>Hier könnte Ihre Werbung stehen!<br />Blablablablablablabla</blockquote>
+                    <figcaption style="color:#56c8c8">- Benedikt Strozynski</figcaption>
+                </figure>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+
+<div style="width:100%; background-color:#56c8c8; padding:3em 0 2em; margin-top:0; margin-bottom:2em; border-bottom-left-radius:40px; border-bottom-right-radius: 40px">
+    <div align="center">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 style="color: #eeeeee">Requests</h2>
+                <p style="margin-top:1em">
+                    Take a look what other members are searching for<br />and create your own requests.
+                </p>
+                <p style="margin-top:2em"><a href='@Url.Action("Index", "Request")' class="btn btn-default" style="background-color:#feab33">Let´s go!</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2 style="color: #eeeeee">Your profile</h2>
+                <p style="margin-top:1em">Manage your profile and your requests.</p>
+                <p style="margin-top:3.4em"><a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#feab33">Let´s go!</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2 style="color:#eeeeee">Contact</h2>
+                <p style="margin-top:1em">Would you like to get in touch with us?</p>
+                <p style="margin-top:3.4em"><a href='@Url.Action("Contact", "Home")' class="btn btn-default" style="background-color:#feab33">Let´s go!</a></p>
+            </div>
         </div>
     </div>
 </div>
