@@ -117,21 +117,30 @@ namespace PrezzieWithDB.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            if (Session["userName"] == null)
+            string userName = Session["userName"].ToString();
+            if (userName == null)
             {
                 return RedirectToAction("Login", "Customer");
             }
 
-            if (Session["userName"] == "Admin")
+            if (userName == "Admin")
             {
                 var customers = db.customers.Include(c => c.Profile);
                 return View(customers.ToList());
             }
             else
             {
-                var customers = db.customers.Include(c => c.Profile);
-                //customers.Where(x => x.userName == Session["userName"]).SingleOrDefault().ToList();
-                return View(customers.ToList());
+                List<Customer> customers = db.customers.Include(c => c.Profile).ToList();
+                List<Customer> myCustomer = new List<Customer>();
+                foreach (Customer c in customers)
+                {
+                    if(c.userName == userName)
+                    {
+                        myCustomer.Add(c);
+                    }
+                }
+                
+                return View(myCustomer.ToList());
             }
         }
 

@@ -161,6 +161,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img.png" />
+    <Content Include="Content\login-bg.jpg" />
+    <Content Include="Content\plane.jpg" />
     <Content Include="Content\plane2.jpg" />
     <Content Include="Content\Prezzie Logo1.png" />
     <Content Include="favicon.ico" />
