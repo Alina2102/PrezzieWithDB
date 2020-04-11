@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "myOwnRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>myOwnRequest</h2>
+
+
+<h2>
+    Requests<form class="form-inline my-2 my-lg-0" align="right">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</h2>
+
+<p>
+        <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33">Create new</a>
+</p>
+<p>
+    <a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#feab33">Back to Profile</a>
+</p>
+
+@foreach (var item in Model)
+{<div class="jumbotron" style="background-color:#f9f3db">
+        <table class="table">
+            <tr>
+                <td rowspan="6" colspan="2"><img src="~/Content/img.png" /></td>
+            </tr>
+            <tr>
+                <td>Souvenir:</td>
+                <td>@item.souvenir.souvenirName</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>@item.souvenir.countrySouv</td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>@item.customer.userName</td>
+            </tr>
+            <tr>
+                <td>Country User:</td>
+                <td>@item.customer.countryUser</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>@item.souvenir.souvenirInfo.descriptionSouv</td>
+                <td>
+                    <a class="btn btn-default" style="background-color:#56c8c8" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
+                </td>
+            </tr>
+
+        </table>
+    </div>}
+

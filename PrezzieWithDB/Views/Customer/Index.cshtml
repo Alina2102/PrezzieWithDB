@@ -8,7 +8,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "SignUp")
+    @if (Session["userName"] != null || Session["userName"].ToString() != "Admin")
+    {
+        <a href='@Url.Action("MyOwnRequests", "Request")' class="btn btn-default" style="background-color:#feab33">Show my own Requests</a>
+    }
 </p>
 <table class="table">
     <tr>

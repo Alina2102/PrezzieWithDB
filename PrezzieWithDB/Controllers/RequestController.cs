@@ -25,6 +25,30 @@ namespace PrezzieWithDB.Controllers
             return View(requests.ToList());
         }
 
+        public ActionResult MyOwnRequests()
+        {
+            try
+            {
+                string userName = Session["userName"].ToString();
+                var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+                List<Request> myRequests = new List<Request>();
+
+                foreach (Request r in requests)
+                {
+                    if (r.userName == userName)
+                    {
+                        myRequests.Add(r);
+                    }
+                }
+
+                return View(myRequests.ToList());
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login","Customer");
+            }
+        }
+
         // GET: Request/Details/5
         public ActionResult Details(int? id)
         {
