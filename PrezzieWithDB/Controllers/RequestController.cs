@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 using PrezzieWithDB.DAL;
 using PrezzieWithDB.Models;
 using PrezzieWithDB.ViewModels;
@@ -17,15 +19,39 @@ namespace PrezzieWithDB.Controllers
         private PrezzieContext db = new PrezzieContext();
         private static int? souvenierID_tmp = null;
 
-
         // GET: Request
         public ActionResult Index()
         {
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
             requests = requests.OrderByDescending(r => r.souvenirID);
+            ViewBag.sort = "Latest";
             return View(requests.ToList());
         }
+       
+        [HttpPost]
+        public ActionResult Index(string sorting)
+        {
+            var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
 
+            switch (sorting)
+            {
+               
+                case "Souvenir":
+                    requests = requests.OrderBy(r => r.souvenir.souvenirName);
+                    break;
+                case "Country":
+                    requests = requests.OrderBy(r => r.souvenir.countrySouv);
+                    break;
+                case "Username":
+                    requests = requests.OrderBy(r => r.userName);
+                    break;
+                default:
+                    requests = requests.OrderByDescending(r => r.souvenirID);
+                    break;
+            }
+            ViewBag.sort = sorting;
+            return View(requests.ToList());
+        }
         public ActionResult MyOwnRequests()
         {
             try

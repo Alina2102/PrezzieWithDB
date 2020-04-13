@@ -18,56 +18,62 @@
         <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33">Create new</a>
     }
 
-<p/>
+<p />
 
-<form>
+<br>
 
-    <p>
-        Order requests by:
-    </p>
+<p>
+    Order requests by:
+</p>
 
-    <fieldset>
-        <input type="radio" id="la" name="Sorting" value="Latest" checked>
-        <label for="la"> Latest</label>
-        <input type="radio" id="sv" name="Sorting" value="Souvenir">
-        <label for="sv"> Souvenir</label>
-        <input type="radio" id="co" name="Sorting" value="Country">
-        <label for="co"> Country</label>
-        <input type="radio" id="un" name="Sorting" value="Username">
-        <label for="un"> Username</label>
-    </fieldset>
+@using (Html.BeginForm())
+{
 
-</form>
-        @foreach (var item in Model)
-        {<div class="jumbotron" style="background-color:#f9f3db">
-                <table class="table">
-                    <tr>
-                        <td rowspan="6" colspan="2"><img src="~/Content/img.png" /></td>
-                    </tr>
-                    <tr>
-                        <td>Souvenir:</td>
-                        <td>@item.souvenir.souvenirName</td>
-                    </tr>
-                    <tr>
-                        <td>Country:</td>
-                        <td>@item.souvenir.countrySouv</td>
-                    </tr>
-                    <tr>
-                        <td>Username:</td>
-                        <td>@item.customer.userName</td>
-                    </tr>
-                    <tr>
-                        <td>Country User:</td>
-                        <td>@item.customer.countryUser</td>
-                    </tr>
-                    <tr>
-                        <td>Description:</td>
-                        <td>@item.souvenir.souvenirInfo.descriptionSouv</td>
-                        <td>
-                            <a class="btn btn-default" style="background-color:#56c8c8" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
-                        </td>
-                    </tr>
+    <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
+    <label for="la"> Latest</label>
+    <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
+    <label for="sv"> Souvenir</label>
+    <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
+    <label for="co"> Country</label>
+    <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
+    <label for="un"> Username</label>
 
-                </table>
-            </div>}
+    <input type="submit" value="Update" name="sorting" class="btn btn-default" />
+}
+
+</br>
+
+
+@foreach (var item in Model)
+{<div class="jumbotron" style="background-color:#f9f3db">
+        <table class="table">
+            <tr>
+                <td rowspan="6" colspan="2"><img src="~/Content/img.png" /></td>
+            </tr>
+            <tr>
+                <td>Souvenir:</td>
+                <td>@item.souvenir.souvenirName</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>@item.souvenir.countrySouv</td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>@item.customer.userName</td>
+            </tr>
+            <tr>
+                <td>Country User:</td>
+                <td>@item.customer.countryUser</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>@item.souvenir.souvenirInfo.descriptionSouv</td>
+                <td>
+                    <a class="btn btn-default" style="background-color:#56c8c8" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
+                </td>
+            </tr>
+
+        </table>
+    </div>}
 
