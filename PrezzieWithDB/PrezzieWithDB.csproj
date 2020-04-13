@@ -155,6 +155,7 @@
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Content\Alina.JPG" />
     <Content Include="Content\Bene.jpg" />
     <Content Include="Content\bg-plane.jpg" />
