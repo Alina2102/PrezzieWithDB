@@ -13,6 +13,7 @@ namespace PrezzieWithDB.ViewModels
         public string countrySouv { get; set; }
 
         public float price { get; set; }
+        public string currency { get; set; }
         public string descriptionSouv { get; set; }
 
     }

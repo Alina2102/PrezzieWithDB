@@ -31,6 +31,7 @@ namespace PrezzieWithDB.Controllers
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
                 souvenirInfo.souvenirId = model.souvenirID;
                 souvenirInfo.price = model.price;
+                souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
 
                 db.souvenirInfos.Add(souvenirInfo);

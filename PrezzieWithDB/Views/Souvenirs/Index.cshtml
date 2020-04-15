@@ -22,6 +22,9 @@
             Price
         </th>
         <th>
+            Currency
+        </th>
+        <th>
             Description
         </th>
         <th></th>
@@ -37,6 +40,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.souvenirInfo.price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.souvenirInfo.currency)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.souvenirInfo.descriptionSouv)

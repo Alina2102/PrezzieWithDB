@@ -121,6 +121,7 @@ namespace PrezzieWithDB.Controllers
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
                 souvenirInfo.souvenirId = model.souvenirID;
                 souvenirInfo.price = model.price;
+                souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
 
                 db.souvenirInfos.Add(souvenirInfo);
@@ -184,6 +185,7 @@ namespace PrezzieWithDB.Controllers
 
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
                 souvenirInfo.price = model.price;
+                souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
                 db.Entry(souvenirInfo).CurrentValues.SetValues(souvenirInfo);
                 db.SaveChanges();
@@ -258,6 +260,7 @@ namespace PrezzieWithDB.Controllers
             rv.countrySouv = request.souvenir.countrySouv;
 
             rv.price = request.souvenir.souvenirInfo.price;
+            rv.currency = request.souvenir.souvenirInfo.currency;
             rv.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
 
             var customer = db.customers.Find(rv.userName);
