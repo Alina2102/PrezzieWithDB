@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202004150858195_currency.Designer.cs">
       <DependentUpon>202004150858195_currency.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004152028548_priceasdecimal.cs" />
+    <Compile Include="Migrations\202004152028548_priceasdecimal.Designer.cs">
+      <DependentUpon>202004152028548_priceasdecimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -247,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004150858195_currency.resx">
       <DependentUpon>202004150858195_currency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004152028548_priceasdecimal.resx">
+      <DependentUpon>202004152028548_priceasdecimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

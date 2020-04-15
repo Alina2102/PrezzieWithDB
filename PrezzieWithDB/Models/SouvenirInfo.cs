@@ -11,8 +11,9 @@ namespace PrezzieWithDB.Models
 
         [Key]
         public int souvenirId { get; set; }
-        public double price { get; set; }
-        public string currency { get; set; }  
+        public decimal price { get; set; }
+        public string currency { get; set; }
+        [DataType(DataType.MultilineText)]
         public string descriptionSouv { get; set; }
 
         public virtual Souvenir souvenir { get; set; }

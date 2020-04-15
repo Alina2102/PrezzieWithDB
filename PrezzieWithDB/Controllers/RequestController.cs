@@ -160,7 +160,7 @@ namespace PrezzieWithDB.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             souvenierID_tmp = id;
             RequestView request = GetRequest(id);

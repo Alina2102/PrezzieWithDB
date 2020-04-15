@@ -15,6 +15,7 @@ namespace PrezzieWithDB.Controllers
     public class CustomerController : Controller
     {
         private PrezzieContext db = new PrezzieContext();
+        private static string userName_tmp = null;
 
         public ActionResult SignUp()
         {
@@ -163,14 +164,14 @@ namespace PrezzieWithDB.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Customer");
             }
-            Customer customer = db.customers.Find(id);
+            userName_tmp = id;
+            CustomerView customer = GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.userName = new SelectList(db.profiles, "userName", "eMail", customer.userName);
             return View(customer);
         }
 
@@ -179,16 +180,38 @@ namespace PrezzieWithDB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "userName,countryUser")] Customer customer)
+        public ActionResult Edit(CustomerView model, string id)
         {
+            var customers = db.customers.Include(c => c.Profile);
+            foreach (Customer c in customers)
+            {
+                if (c.Profile.eMail == model.eMail)
+                {
+                    model.errorMessage = "E-mail already exists";
+                    return View("Edit", model);
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
+                Profile profile = db.profiles.Find(userName_tmp);
+                profile.userName = model.userName;
+                profile.password = model.password;
+                profile.eMail = model.eMail;
+                profile.firstName = model.firstName;
+                profile.surname = model.surname;
+                profile.birthday = model.birthday;
+                profile.descriptionUser = model.descriptionUser;
+                db.Entry(profile).CurrentValues.SetValues(profile);
+                db.SaveChanges();
+
+
+                Customer customer = db.customers.Find(userName_tmp);
+                customer.countryUser = model.countryUser;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.userName = new SelectList(db.profiles, "userName", "eMail", customer.userName);
-            return View(customer);
+           return View(model);
         }
 
         // GET: Customer/Delete/5
@@ -227,6 +250,23 @@ namespace PrezzieWithDB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public CustomerView GetCustomer(string userName)
+        {
+            CustomerView cv = new CustomerView();
+            var customer = db.customers.Find(userName);
+
+            cv.userName = customer.userName;
+            cv.password = customer.Profile.password;
+            cv.eMail = customer.Profile.eMail;
+            cv.firstName = customer.Profile.firstName;
+            cv.surname = customer.Profile.surname;
+            cv.birthday = customer.Profile.birthday;
+            cv.countryUser = customer.countryUser;
+            cv.descriptionUser = customer.Profile.descriptionUser;
+
+            return cv;
         }
     }
 }
