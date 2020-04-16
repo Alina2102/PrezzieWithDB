@@ -134,17 +134,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004140959581_init.cs" />
-    <Compile Include="Migrations\202004140959581_init.Designer.cs">
-      <DependentUpon>202004140959581_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004150858195_currency.cs" />
-    <Compile Include="Migrations\202004150858195_currency.Designer.cs">
-      <DependentUpon>202004150858195_currency.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004152028548_priceasdecimal.cs" />
-    <Compile Include="Migrations\202004152028548_priceasdecimal.Designer.cs">
-      <DependentUpon>202004152028548_priceasdecimal.cs</DependentUpon>
+    <Compile Include="Migrations\202004160646433_Init.cs" />
+    <Compile Include="Migrations\202004160646433_Init.Designer.cs">
+      <DependentUpon>202004160646433_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -246,14 +238,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004140959581_init.resx">
-      <DependentUpon>202004140959581_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004150858195_currency.resx">
-      <DependentUpon>202004150858195_currency.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004152028548_priceasdecimal.resx">
-      <DependentUpon>202004152028548_priceasdecimal.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004160646433_Init.resx">
+      <DependentUpon>202004160646433_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

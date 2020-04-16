@@ -185,7 +185,7 @@ namespace PrezzieWithDB.Controllers
             var customers = db.customers.Include(c => c.Profile);
             foreach (Customer c in customers)
             {
-                if (c.Profile.eMail == model.eMail)
+                if (c.Profile.eMail == model.eMail && c.userName != model.userName)
                 {
                     model.errorMessage = "E-mail already exists";
                     return View("Edit", model);
