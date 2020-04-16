@@ -22,20 +22,31 @@ namespace PrezzieWithDB.Controllers
         // GET: Request
         public ActionResult Index()
         {
-            var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+            var requests = db.requests.Where(x => x.status == "new");
             requests = requests.OrderByDescending(r => r.souvenirID);
             ViewBag.sort = "Latest";
+            ViewBag.status = "New";
             return View(requests.ToList());
         }
        
         [HttpPost]
-        public ActionResult Index(string sorting)
+        public ActionResult Index(string sorting, string status)
         {
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
 
+            switch (status)
+            {
+                case "InProgress":
+                    requests = db.requests.Where(x => x.status == "in progress");
+                    break;
+                default:
+                    requests = db.requests.Where(x => x.status == "new");
+                    break;
+            }
+            ViewBag.status = status;
+
             switch (sorting)
             {
-               
                 case "Souvenir":
                     requests = requests.OrderBy(r => r.souvenir.souvenirName);
                     break;

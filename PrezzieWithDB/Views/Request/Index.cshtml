@@ -22,21 +22,42 @@
 
 <br>
 
-<p>
-    Order requests by:
-</p>
-
 @using (Html.BeginForm())
 {
+    <p>
+        Order requests by:
+    </p>
 
-    <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
-    <label for="la"> Latest</label>
-    <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
-    <label for="sv"> Souvenir</label>
-    <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
-    <label for="co"> Country</label>
-    <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
-    <label for="un"> Username</label>
+    <p>
+        <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
+
+        <label for="la"> Latest</label>
+        <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
+
+        <label for="sv"> Souvenir</label>
+        <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
+
+        <label for="co"> Country</label>
+        <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
+
+        <label for="un"> Username</label>
+    </p>
+
+    <p>
+        Select status:
+    </p>
+
+    <p>
+        <input type="radio" name="status" value="New" @(ViewBag.status == "New" ? "checked = 'true'" : "")>
+        <label for="ne"> New</label>
+
+        <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
+        <label for="ip"> In Progress</label>
+    </p>
+
+
+
+
 
     <input type="submit" value="Update" name="sorting" class="btn btn-default" />
 }
@@ -47,42 +68,42 @@
 
 @foreach (var item in Model)
 {
-<div style="width:100%; background-color:#eeeeee; margin-bottom:3em; border:double; border-color:#56c8c8">
-    <div class="row">
-        <div class="col-md-3">
-            <img src="~/Content/img.png" style="width:200px; height:200px; padding:1em 1em 1em" />
-        </div>
-        <div class="col-md-7">
-            <h2 style="color:#feab33">@item.souvenir.souvenirName</h2>
-            <table style="border:hidden">
-                <tr>
-                    <td>Country:</td>
-                    <td style="padding-left:4em">@item.souvenir.countrySouv</td>
-                </tr>
-                <tr>
-                    <td>Username:</td>
-                    <td style="padding-left:4em">@item.customer.userName</td>
-                </tr>
-                <tr>
-                    <td>Country User:</td>
-                    <td style="padding-left:4em">@item.customer.countryUser</td>
-                </tr>
-                <tr>
-                    <td>Usual price per piece:</td>
-                    <td style="padding-left:4em">@item.souvenir.souvenirInfo.price @item.souvenir.souvenirInfo.currency</td>
-                </tr>
-                <tr>
-                    <td>Amount:</td>
-                    <td style="padding-left:4em">@item.amount</td>
-                </tr>
-            </table>
+    <div style="width:100%; background-color:#eeeeee; margin-bottom:3em; border:double; border-color:#56c8c8">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="~/Content/img.png" style="width:200px; height:200px; padding:1em 1em 1em" />
+            </div>
+            <div class="col-md-7">
+                <h2 style="color:#feab33">@item.souvenir.souvenirName</h2>
+                <table style="border:hidden">
+                    <tr>
+                        <td>Country:</td>
+                        <td style="padding-left:4em">@item.souvenir.countrySouv</td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td style="padding-left:4em">@item.customer.userName</td>
+                    </tr>
+                    <tr>
+                        <td>Country User:</td>
+                        <td style="padding-left:4em">@item.customer.countryUser</td>
+                    </tr>
+                    <tr>
+                        <td>Usual price per piece:</td>
+                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price @item.souvenir.souvenirInfo.currency</td>
+                    </tr>
+                    <tr>
+                        <td>Amount:</td>
+                        <td style="padding-left:4em">@item.amount</td>
+                    </tr>
+                </table>
 
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
+            </div>
         </div>
     </div>
-</div>
 
 }
 
