@@ -122,7 +122,7 @@ namespace PrezzieWithDB.Controllers
                     var customers = db.customers.Include(c => c.Profile);
                     return View(customers.ToList());
                 }
-                else
+                else 
                 {
                     List<Customer> customers = db.customers.Include(c => c.Profile).ToList();
                     List<Customer> myCustomer = new List<Customer>();
@@ -131,11 +131,11 @@ namespace PrezzieWithDB.Controllers
                         if (c.userName == userName)
                         {
                             myCustomer.Add(c);
+                            return RedirectToAction("Details", new { id = c.userName });
                         }
                     }
-
-                    return View(myCustomer.ToList());
                 }
+                return View();
             }
             catch (Exception)
             {
@@ -146,17 +146,26 @@ namespace PrezzieWithDB.Controllers
         // GET: Customer/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string userName = Session["userName"].ToString();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Customer customer = db.customers.Find(id);
+                if (customer == null || customer.userName != userName)
+                {
+                    return HttpNotFound();
+                }
+                return View(customer);
             }
-            Customer customer = db.customers.Find(id);
-            if (customer == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Customer");
             }
-            return View(customer);
         }
+        
 
 
         // GET: Customer/Edit/5
