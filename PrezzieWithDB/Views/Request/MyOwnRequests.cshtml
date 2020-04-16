@@ -4,53 +4,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>myOwnRequest</h2>
-
-
 <h2>
-    Requests<form class="form-inline my-2 my-lg-0" align="right">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    Manage your requests!
 </h2>
 
+<hr />
+
 <p>
-        <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33">Create new</a>
+    <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33; margin-top:1em; margin-bottom:1em">Create new</a>
+    <a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#56c8c8; margin-top:1em; margin-bottom:1em">Back to Profile</a>
 </p>
-<p>
-    <a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#feab33">Back to Profile</a>
-</p>
+
 
 @foreach (var item in Model)
-{<div class="jumbotron" style="background-color:#f9f3db">
-        <table class="table">
-            <tr>
-                <td rowspan="6" colspan="2"><img src="~/Content/img.png" /></td>
-            </tr>
-            <tr>
-                <td>Souvenir:</td>
-                <td>@item.souvenir.souvenirName</td>
-            </tr>
-            <tr>
-                <td>Country:</td>
-                <td>@item.souvenir.countrySouv</td>
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td>@item.customer.userName</td>
-            </tr>
-            <tr>
-                <td>Country User:</td>
-                <td>@item.customer.countryUser</td>
-            </tr>
-            <tr>
-                <td>Description:</td>
-                <td>@item.souvenir.souvenirInfo.descriptionSouv</td>
-                <td>
-                    <a class="btn btn-default" style="background-color:#56c8c8" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
-                </td>
-            </tr>
+{
+    <div style="width:100%; background-color:#eeeeee; margin-bottom:3em; border:double; border-color:#56c8c8">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="~/Content/img.png" style="width: 200px; height: 200px; padding: 1em 1em 1em" />
+            </div>
+            <div class="col-md-7">
+                <h2 style="color:#feab33">@item.souvenir.souvenirName</h2>
+                <table style="border:hidden">
+                    <tr>
+                        <td>Country:</td>
+                        <td style="padding-left:4em">@item.souvenir.countrySouv</td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td style="padding-left:4em">@item.customer.userName</td>
+                    </tr>
+                    <tr>
+                        <td>Country User:</td>
+                        <td style="padding-left:4em">@item.customer.countryUser</td>
+                    </tr>
+                    <tr>
+                        <td>Usual price per piece:</td>
+                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price @item.souvenir.souvenirInfo.currency</td>
+                    </tr>
+                    <tr>
+                        <td>Amount:</td>
+                        <td style="padding-left:4em">@item.amount</td>
+                    </tr>
+                </table>
 
-        </table>
-    </div>}
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Edit", "Edit", new { id = item.souvenirID })
+            </div>
+        </div>
+    </div>
+
+}
 

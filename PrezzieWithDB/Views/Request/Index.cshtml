@@ -5,64 +5,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>
-    Requests<form class="form-inline my-2 my-lg-0" align="right">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</h2>
+<div class="row">
+    <div class="col-md-8">
+        <h2>
+            Requests
+        </h2>
+    </div>
 
-<p>
-    @if (Session["userName"] != null)
-    {
-        <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33">Create new</a>
-    }
+    <div class="col-md-4">
+        <form class="form-inline my-2 my-lg-0" align="right" style="margin-top:1.5em">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
 
-<p />
+<hr />
 
-<br>
+<div class="row">
+    <div class="col-md-10" style="margin-bottom:2em">
 
-@using (Html.BeginForm())
-{
-    <p>
-        Order requests by:
-    </p>
+        @using (Html.BeginForm())
+        {
+            <p>
+                Order requests by:
+            </p>
 
-    <p>
-        <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
+            <p>
+                <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
 
-        <label for="la"> Latest</label>
-        <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
+                <label for="la"> Latest</label>
+                <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
 
-        <label for="sv"> Souvenir</label>
-        <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
+                <label for="sv"> Souvenir</label>
+                <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
 
-        <label for="co"> Country</label>
-        <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
+                <label for="co"> Country</label>
+                <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
 
-        <label for="un"> Username</label>
-    </p>
+                <label for="un"> Username</label>
+            </p>
 
-    <p>
-        Select status:
-    </p>
+            <p>
+                Select status:
+            </p>
 
-    <p>
-        <input type="radio" name="status" value="New" @(ViewBag.status == "New" ? "checked = 'true'" : "")>
-        <label for="ne"> New</label>
+            <p>
+                <input type="radio" name="status" value="New" @(ViewBag.status == "New" ? "checked = 'true'" : "")>
+                <label for="ne"> New</label>
 
-        <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
-        <label for="ip"> In Progress</label>
-    </p>
-
-
-
+                <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
+                <label for="ip"> In Progress</label>
+            </p>
 
 
-    <input type="submit" value="Update" name="sorting" class="btn btn-default" />
-}
 
-</br>
+
+
+            <input type="submit" value="Update" name="sorting" class="btn btn-default" style="background-color:#56c8c8" />
+        }
+    </div>
+
+    <div class="col-md-2">
+        <p>
+            @if (Session["userName"] != null)
+            {
+                <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33; margin-left:4.5em">Create new</a>
+            }
+
+        <p />
+    </div>
+</div>
 
 
 
