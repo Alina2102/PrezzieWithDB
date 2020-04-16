@@ -90,7 +90,7 @@ namespace PrezzieWithDB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.customers.Find(model.userName).userName == null || db.customers.Find(model.userName).userName != model.userName)
+                if (db.customers.Find(model.userName) == null || db.customers.Find(model.userName).userName != model.userName)
                 {
                     model.LoginErrorMessage = "Wrong username!";
                     return View("Login", model);
