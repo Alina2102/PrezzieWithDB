@@ -128,6 +128,8 @@ namespace PrezzieWithDB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RequestView model, HttpPostedFileBase file)
         {
+            if (ModelState.IsValid)
+            {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
                 souvenirInfo.souvenirId = model.souvenirID;
                 souvenirInfo.price = model.price;
@@ -137,22 +139,21 @@ namespace PrezzieWithDB.Controllers
                 db.souvenirInfos.Add(souvenirInfo);
                 db.SaveChanges();
 
-
                 Souvenir souvenir = new Souvenir();
 
-            try
-            {
-                string fileName = souvenirInfo.souvenirId.ToString();
-                string extension = Path.GetExtension(file.FileName);
-                fileName += extension;
-                souvenir.selectedPicture = "~/Content/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
-                file.SaveAs(fileName);
-            }
-            catch (Exception)
-            {
-                souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
-            }
+                try
+                {
+                    string fileName = souvenirInfo.souvenirId.ToString();
+                    string extension = Path.GetExtension(file.FileName);
+                    fileName += extension;
+                    souvenir.selectedPicture = "~/Content/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
+                    file.SaveAs(fileName);
+                }
+                catch (Exception)
+                {
+                    souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+                }
                 souvenir.souvenirId = souvenirInfo.souvenirId;
                 souvenir.souvenirName = model.souvenirName;
                 souvenir.countrySouv = model.countrySouv;
@@ -173,8 +174,10 @@ namespace PrezzieWithDB.Controllers
 
                 db.requests.Add(request);
                 db.SaveChanges();
-            
+
                 return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         // GET: Request/Edit/5

@@ -21,7 +21,7 @@
 <hr />
 
     <div style="background-color:#56c8c8; border-radius:40px; margin-right:-1em" align="center">
-        <img src="~/Content/default-profile.png" style="width:300px; height:300px; margin-top:4em" />
+        <img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
         <h2 style="color:#eeeeee; margin-top:1em">@Html.DisplayFor(model => model.userName)</h2>
 
         <div style="margin-top:4em; margin-bottom:3em" align="left">
