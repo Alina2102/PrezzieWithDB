@@ -21,7 +21,8 @@
     <div style="width:100%; background-color:#eeeeee; margin-bottom:3em; border:double; border-color:#56c8c8">
         <div class="row">
             <div class="col-md-3">
-                <img src="~/Content/img.png" style="width: 200px; height: 200px; padding: 1em 1em 1em" />
+                <img src="@Url.Content(item.souvenir.selectedPicture)" alt="Here should be a photo" style="width:200px; height:200px; padding:1em 1em 1em" />
+                <a href="#" class="btn btn-default" style="margin-left:2.7em; margin-top:-1em">Change picture</a>
             </div>
             <div class="col-md-7">
                 <h2 style="color:#feab33">@item.souvenir.souvenirName</h2>
@@ -50,7 +51,7 @@
 
             </div>
             <div class="col-md-2">
-                <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Edit", "Edit", new { id = item.souvenirID })
+                <a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em; margin-left:7em" @Html.ActionLink("Edit", "Edit", new { id = item.souvenirID })
             </div>
         </div>
     </div>

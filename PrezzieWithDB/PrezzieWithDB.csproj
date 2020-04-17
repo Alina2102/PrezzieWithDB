@@ -134,10 +134,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004171203409_Init.cs" />
-    <Compile Include="Migrations\202004171203409_Init.Designer.cs">
-      <DependentUpon>202004171203409_Init.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -165,6 +161,7 @@
     <Content Include="Content\Jenny.jpg" />
     <Content Include="Content\login-bg.jpg" />
     <Content Include="Content\Moritz.jpg" />
+    <Content Include="Content\mountains.jpg" />
     <Content Include="Content\plane.jpg" />
     <Content Include="Content\plane2.jpg" />
     <Content Include="Content\Prezzie Logo1.png" />
@@ -237,11 +234,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004171203409_Init.resx">
-      <DependentUpon>202004171203409_Init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

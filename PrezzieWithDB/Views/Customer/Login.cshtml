@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="jumbotron" style="background-image:url(/Content/plane2.jpg)">
-        <h2>Login</h2>
+    <div class="jumbotron" style="background-image:url(/Content/mountains.jpg); background-size:cover; height:10em">
+        <h2 style="margin-top:-1em">Login</h2>
     </div>
 
 @using (Html.BeginForm())
@@ -14,10 +14,10 @@
     @Html.AntiForgeryToken()
 
 
-    <label class="field-validation-error" style="color:firebrick">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+    <label class="field-validation-error" style="color: firebrick">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
 
     <div class="form-horizontal">
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <p class="control-label col-md-2">Username</p>

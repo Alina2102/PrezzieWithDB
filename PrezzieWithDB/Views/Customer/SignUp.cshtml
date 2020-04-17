@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron" style="background-image:url(/Content/plane2.jpg)">
-    <h2>Registration</h2>
+<div class="jumbotron" style="background-image:url(/Content/mountains.jpg); background-size:cover; height:10em">
+    <h2 style="margin-top:-1em">Registration</h2>
 </div>
 
 
@@ -17,7 +17,6 @@
     <label class="field-validation-error" style="color:firebrick">@Html.DisplayFor(model => model.errorMessage)</label>
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <p class="control-label col-md-2">Username</p>
@@ -89,6 +88,10 @@
             <div class="col-md-10">
                 <input type="file" name="file" id="file">
             </div>
+        </div>
+
+        <div class="col-md-offset-2 col-md-10">
+            <p style="margin-left:-0.5em">For optimal resolution please select a square image!</p>
         </div>
 
         <div class="form-group">

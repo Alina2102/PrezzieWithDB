@@ -5,81 +5,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="row">
-        <div class="col-md-10">
             <h2>Profile</h2>
-        </div>
-        <div class="col-md-2">
-            <p style="margin-top:1em">
-                @if (Session["userName"] != null || Session["userName"].ToString() != "Admin")
-                {
-                    <a href='@Url.Action("MyOwnRequests", "Request")' class="btn btn-default" style="background-color:#feab33">Show my own Requests</a>
-                }
-            </p>
-        </div>
-    </div>
+
 <hr />
 
-    <div style="background-color:#56c8c8; border-radius:40px; margin-right:-1em" align="center">
-        <img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
-        <h2 style="color:#eeeeee; margin-top:1em">@Html.DisplayFor(model => model.userName)</h2>
+<div class="row" style="background-color:#eeeeee; border-radius:40px; margin-right:-1em" align="center">
 
-        <div style="margin-top:4em; margin-bottom:3em" align="left">
-            <dl class="dl-horizontal">
+    <p style="margin-top:3em">
+        @if (Session["userName"] != null || Session["userName"].ToString() != "Admin")
+        {
+            <a href='@Url.Action("MyOwnRequests", "Request")' class="btn btn-default" style="background-color:#feab33">Show my own Requests</a>
+        }
+    </p>
 
-                <dt>
-                    E-Mail:
-                </dt>
+    <div class="col-md-6" style="margin-top:7em; margin-bottom:3em" align="left">
+        <dl class="dl-horizontal">
 
-                <dd>
-                    @Html.DisplayFor(model => model.Profile.eMail)
-                </dd>
+            <dt style="color:#56c8c8">
+                E-Mail:
+            </dt>
 
-                <dt style="margin-top:1em">
-                    First name:
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Profile.eMail)
+            </dd>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.Profile.firstName)
-                </dd>
+            <dt style="margin-top:1em; color:#56c8c8">
+                First name:
+            </dt>
 
-                <dt style="margin-top:1em">
-                    Surname:
-                </dt>
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.Profile.firstName)
+            </dd>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.Profile.surname)
-                </dd>
+            <dt style="margin-top:1em; color:#56c8c8">
+                Surname:
+            </dt>
 
-                <dt style="margin-top:1em">
-                    Country:
-                </dt>
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.Profile.surname)
+            </dd>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.countryUser)
-                </dd>
+            <dt style="margin-top:1em; color:#56c8c8">
+                Country:
+            </dt>
 
-                <dt style="margin-top:1em">
-                    Birthday:
-                </dt>
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.countryUser)
+            </dd>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.Profile.birthday)
-                </dd>
+            <dt style="margin-top:1em; color:#56c8c8">
+                Birthday:
+            </dt>
 
-                <dt style="margin-top:1em">
-                    Description:
-                </dt>
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.Profile.birthday)
+            </dd>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.Profile.descriptionUser)
-                </dd>
+            <dt style="margin-top:1em; color:#56c8c8">
+                Description:
+            </dt>
+
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.Profile.descriptionUser)
+            </dd>
 
 
-            </dl>
-        </div>
-
-        <a class="btn btn-default" style="background-color:#feab33; margin-bottom:3em" @Html.ActionLink("Edit your profile", "Edit", new { id = Model.userName })
-
+        </dl>
     </div>
+
+    <div class="col-md-6" style="margin-top:-2em">
+
+        <img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
+        <h2 style="color:#56c8c8; margin-top:1em">@Html.DisplayFor(model => model.userName)</h2>
+    </div>
+
+    <a class="btn btn-default" style="background-color:#56c8c8; margin-bottom:3em" @Html.ActionLink("Edit your profile", "Edit", new { id = Model.userName })
+    <a href="#" class="btn btn-default" style="margin-bottom:3em">Change profile picture</a>
+</div>
 
