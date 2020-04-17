@@ -134,13 +134,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004161337256_init.cs" />
-    <Compile Include="Migrations\202004161337256_init.Designer.cs">
-      <DependentUpon>202004161337256_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004170753073_add Profile selected picture.cs" />
-    <Compile Include="Migrations\202004170753073_add Profile selected picture.Designer.cs">
-      <DependentUpon>202004170753073_add Profile selected picture.cs</DependentUpon>
+    <Compile Include="Migrations\202004171203409_Init.cs" />
+    <Compile Include="Migrations\202004171203409_Init.Designer.cs">
+      <DependentUpon>202004171203409_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -165,7 +161,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\defaultSouvenir.png" />
     <Content Include="Content\defaultUser.png" />
-    <Content Include="Content\defaultUser2.png" />
     <Content Include="Content\header-bg.jpg" />
     <Content Include="Content\Jenny.jpg" />
     <Content Include="Content\login-bg.jpg" />
@@ -244,11 +239,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004161337256_init.resx">
-      <DependentUpon>202004161337256_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004170753073_add Profile selected picture.resx">
-      <DependentUpon>202004170753073_add Profile selected picture.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004171203409_Init.resx">
+      <DependentUpon>202004171203409_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
