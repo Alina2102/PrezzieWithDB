@@ -134,6 +134,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004161337256_init.cs" />
+    <Compile Include="Migrations\202004161337256_init.Designer.cs">
+      <DependentUpon>202004161337256_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004170753073_add Profile selected picture.cs" />
+    <Compile Include="Migrations\202004170753073_add Profile selected picture.Designer.cs">
+      <DependentUpon>202004170753073_add Profile selected picture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -155,8 +163,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\defaultSouvenir.png" />
+    <Content Include="Content\defaultUser.png" />
+    <Content Include="Content\defaultUser2.png" />
     <Content Include="Content\header-bg.jpg" />
-    <Content Include="Content\img.png" />
     <Content Include="Content\Jenny.jpg" />
     <Content Include="Content\login-bg.jpg" />
     <Content Include="Content\Moritz.jpg" />
@@ -232,6 +242,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004161337256_init.resx">
+      <DependentUpon>202004161337256_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004170753073_add Profile selected picture.resx">
+      <DependentUpon>202004170753073_add Profile selected picture.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -23,7 +24,7 @@ namespace PrezzieWithDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(CustomerView model)
+        public ActionResult SignUp(CustomerView model, HttpPostedFileBase file)
         {
             if (db.customers.Find(model.userName) != null)
             {
@@ -39,8 +40,7 @@ namespace PrezzieWithDB.Controllers
                     return View("SignUp", model);
                 }
             }
-            if (ModelState.IsValid)
-            {
+
                 Profile profile = new Profile
                 {
                     userName = model.userName,
@@ -55,21 +55,30 @@ namespace PrezzieWithDB.Controllers
                 db.profiles.Add(profile);
                 db.SaveChanges();
 
-                Customer customer = new Customer
+                Customer customer = new Customer();
+                try
                 {
-                    userName = profile.userName,
-                    countryUser = model.countryUser
-                };
+                    string fileName = profile.userName;
+                    string extension = Path.GetExtension(file.FileName);
+                    fileName += extension;
+                    customer.selectedPicture = "~/Content/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
+                    file.SaveAs(fileName);
+                }
+                catch (Exception)
+                {
+                    customer.selectedPicture = "~/Content/defaultUser.png";
+                }
+
+                customer.userName = profile.userName;
+                customer.countryUser = model.countryUser;
 
                 db.customers.Add(customer);
                 db.SaveChanges();
 
                 Session["userName"] = customer.userName;
+
                 return RedirectToAction("Index");
-            }
-
-
-            return View();
         }
 
 

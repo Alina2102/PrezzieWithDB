@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace PrezzieWithDB.ViewModels
         public string birthday { get; set; }
         [DataType(DataType.MultilineText)]
         public string descriptionUser { get; set; }
+        [DisplayName("Upload Profile Picture")]
+        public string selectedPicture { get; set; }
         public string errorMessage { get; set; }
 
     }

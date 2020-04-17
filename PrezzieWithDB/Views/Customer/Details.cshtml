@@ -70,6 +70,9 @@
 
     </dl>
 </div>
+<div class="col-md-3">
+    <img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:200px; height:200px; padding:1em 1em 1em" />
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.userName }) |
     @Html.ActionLink("Back to List", "Index")

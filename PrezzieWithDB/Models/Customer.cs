@@ -11,7 +11,8 @@ namespace PrezzieWithDB.Models
         [Key]
         public string userName { get; set; }
         public string countryUser { get; set; }
-        
+        public string selectedPicture { get; set; }
+
         [Required]
         public virtual Profile Profile { get; set; }
 

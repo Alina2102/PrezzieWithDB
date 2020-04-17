@@ -28,6 +28,9 @@ namespace PrezzieWithDB.ViewModels
         public string surname { get; set; }
         public string birthday { get; set; }
         public string descriptionUser { get; set; }
+        public string selectedPicture { get; set; }
+        public string imagePath { get; set; }
+        public HttpPostedFile imageFile { get; set; }
 
     }
 }
