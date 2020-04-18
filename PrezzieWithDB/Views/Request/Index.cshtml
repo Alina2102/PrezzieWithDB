@@ -47,10 +47,9 @@
             </p>
 
             <p>
-                <input type="radio" name="status" value="New" @(ViewBag.status == "New" ? "checked = 'true'" : "")>
+                <label>@Html.CheckBox("New", false)</label>
                 <label for="ne"> New</label>
-
-                <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
+                <label>@Html.CheckBox("InProgress", false)</label>
                 <label for="ip"> In Progress</label>
             </p>
             <p>

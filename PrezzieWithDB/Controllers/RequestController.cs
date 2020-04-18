@@ -26,25 +26,40 @@ namespace PrezzieWithDB.Controllers
             var requests = db.requests.Where(x => x.status == "new");
             requests = requests.OrderByDescending(r => r.souvenirID);
             ViewBag.sort = "Latest";
-            ViewBag.status = "New";
+            ViewBag.New = true;
+            ViewBag.inProgress = false;
             return View(requests.ToList());
         }
 
         [HttpPost]
-        public ActionResult Index(string sorting, string status, string search)
+        public ActionResult Index(string sorting, bool New, bool InProgress, string search)
         {
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
 
-            switch (status)
+            if (New == true && InProgress == false)
             {
-                case "InProgress":
-                    requests = db.requests.Where(x => x.status == "in progress");
-                    break;
-                default:
-                    requests = db.requests.Where(x => x.status == "new");
-                    break;
+                requests = db.requests.Where(x => x.status == "new");
+                ViewBag.New = true;
+                ViewBag.inProgress = false;
             }
-            ViewBag.status = status;
+            else if (New == true && InProgress == true)
+            { 
+                requests = db.requests.Where(x => x.status == "in progress" || x.status == "new");
+                ViewBag.New = true;
+                ViewBag.inProgress = true;
+            }
+            else if (New == false && InProgress == true)
+            {
+                requests = db.requests.Where(x => x.status == "in progress");
+                ViewBag.New = false;
+                ViewBag.inProgress = true;
+            }
+            else
+            {
+                requests = db.requests.Where(x => x.status == "new");
+                ViewBag.New = true;
+                ViewBag.inProgress = false;
+            }
 
             switch (sorting)
             {
