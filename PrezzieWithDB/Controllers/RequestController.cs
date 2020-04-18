@@ -318,5 +318,41 @@ namespace PrezzieWithDB.Controllers
 
             return rv;
         }
+
+        public ActionResult ChangePicture(int? souvenirID)
+        {
+            souvenierID_tmp = souvenirID;
+            Request request = db.requests.Find(souvenirID);
+            return View(request);
+        }
+        [HttpPost]
+        public ActionResult ChangePicture(HttpPostedFileBase file)
+        {
+            Request request = db.requests.Find(souvenierID_tmp);
+            try
+            {
+                string fileName = request.souvenirID.ToString();
+                string extension = Path.GetExtension(file.FileName);
+                fileName += extension;
+                request.souvenir.selectedPicture = "~/Content/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
+                file.SaveAs(fileName);
+            }
+            catch (Exception)
+            {
+                request.souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+            }
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.SaveChanges();
+            return RedirectToAction("MyOwnRequests");
+        }
+        public ActionResult DeletePicture()
+        {
+            Request request = db.requests.Find(souvenierID_tmp);
+            request.souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.SaveChanges();
+            return RedirectToAction("MyOwnRequests");
+        }
     }
 }

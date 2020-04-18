@@ -213,8 +213,6 @@ namespace PrezzieWithDB.Controllers
             if (ModelState.IsValid)
             {
                 Profile profile = db.profiles.Find(userName_tmp);
-                profile.userName = model.userName;
-                profile.password = model.password;
                 profile.eMail = model.eMail;
                 profile.firstName = model.firstName;
                 profile.surname = model.surname;
