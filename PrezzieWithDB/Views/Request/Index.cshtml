@@ -12,12 +12,8 @@
         </h2>
     </div>
 
-    <div class="col-md-4">
-        <form class="form-inline my-2 my-lg-0" align="right" style="margin-top:1.5em">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
+    
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">     
 </div>
 
 <hr />
@@ -57,14 +53,18 @@
                 <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
                 <label for="ip"> In Progress</label>
             </p>
+            <p>
+                Search:
+            </p>
+
+            <p>
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            </p>
 
 
-
-
-
-            <input type="submit" value="Update" name="sorting" class="btn btn-default" style="background-color:#56c8c8" />
-        }
-    </div>
+                <input type="submit" value="Update" name="sorting" class="btn btn-default" style="background-color:#56c8c8" />
+                }
+        </div>
 
     <div class="col-md-2">
         <p>

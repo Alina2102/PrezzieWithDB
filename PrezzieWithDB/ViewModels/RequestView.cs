@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -24,8 +25,7 @@ namespace PrezzieWithDB.ViewModels
         public string surname { get; set; }
         public string birthday { get; set; }
         public string descriptionUser { get; set; }
+        [DisplayName("Upload Request Picture")]
         public string selectedPicture { get; set; }
-        public string imagePath { get; set; }
-        public HttpPostedFile imageFile { get; set; }
     }
 }

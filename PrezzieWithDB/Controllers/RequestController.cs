@@ -29,9 +29,9 @@ namespace PrezzieWithDB.Controllers
             ViewBag.status = "New";
             return View(requests.ToList());
         }
-       
+
         [HttpPost]
-        public ActionResult Index(string sorting, string status)
+        public ActionResult Index(string sorting, string status, string search)
         {
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
 
@@ -62,7 +62,26 @@ namespace PrezzieWithDB.Controllers
                     break;
             }
             ViewBag.sort = sorting;
-            return View(requests.ToList());
+
+            if (search == "")
+            {
+                return View(requests.ToList());
+            }
+            else
+            {
+                //List<Request> requests1 = new List<Request>();
+                //requests1 = requests.ToList();
+                List<Request> requests1 = requests.ToList();
+                List<Request> searchRequests = new List<Request>();
+                foreach (Request r in requests1)
+                {
+                    if (r.souvenir.souvenirName.ToLower().Contains(search.ToLower()))
+                    {
+                        searchRequests.Add(r);
+                    }
+                }
+                return View(searchRequests.ToList());
+            }
         }
         public ActionResult MyOwnRequests()
         {

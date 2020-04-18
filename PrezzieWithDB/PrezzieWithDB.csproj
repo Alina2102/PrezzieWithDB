@@ -141,8 +141,13 @@
     <Compile Include="Models\Souvenir.cs" />
     <Compile Include="Models\SouvenirInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CustomerChangePasswordView.cs" />
+    <Compile Include="ViewModels\CustomerChangePicture.cs" />
+    <Compile Include="ViewModels\CustomerEditView.cs" />
     <Compile Include="ViewModels\CustomerLoginModel.cs" />
     <Compile Include="ViewModels\CustomerView.cs" />
+    <Compile Include="ViewModels\RequestChangePictureView.cs" />
+    <Compile Include="ViewModels\RequestEditView.cs" />
     <Compile Include="ViewModels\RequestView.cs" />
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
