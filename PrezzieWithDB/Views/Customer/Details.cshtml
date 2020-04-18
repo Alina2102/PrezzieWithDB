@@ -11,12 +11,6 @@
 
 <div class="row" style="background-color:#eeeeee; border-radius:40px; margin-right:-1em" align="center">
 
-    <p style="margin-top:3em">
-        @if (Session["userName"] != null || Session["userName"].ToString() != "Admin")
-        {
-            <a href='@Url.Action("MyOwnRequests", "Request")' class="btn btn-default" style="background-color:#feab33">Show my own Requests</a>
-        }
-    </p>
 
     <div class="col-md-6" style="margin-top:7em; margin-bottom:3em" align="left">
         <dl class="dl-horizontal">
@@ -80,8 +74,7 @@
     </div>
 
     <a class="btn btn-default" style="background-color:#56c8c8; margin-bottom:3em" @Html.ActionLink("Edit your profile", "Edit", new { id = Model.userName })
-    <a class="btn btn-default" style="background-color:#56c8c8; margin-bottom:3em" @Html.ActionLink("Change profile picture", "changePicture", Model )
-    
-       <a href="#" class="btn btn-default" style="margin-bottom:3em">Change profile picture</a>
+    <a class="btn btn-default" style="margin-bottom:3em" @Html.ActionLink("Change profile picture", "changePicture", Model )
+
 </div>
 
