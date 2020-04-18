@@ -122,6 +122,39 @@ namespace PrezzieWithDB.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult MyOwnRequests(string status)
+        {
+            string userName = Session["userName"].ToString();
+            var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+
+            switch (status)
+            {
+                case "InProgress":
+                   requests = db.requests.Where(x => x.status == "in progress");
+                    break;
+                case "Done":
+                   requests = db.requests.Where(x => x.status == "done");
+                    break;
+                default:
+                   requests = db.requests.Where(x => x.status == "new");
+                    break;
+            }
+            ViewBag.status = status;
+
+            List<Request> myRequests = new List<Request>();
+
+            foreach (Request r in requests)
+            {
+                if (r.userName == userName)
+                {
+                    myRequests.Add(r);
+                }
+            }
+            return View(myRequests.ToList());
+        }
+
+
         // GET: Request/Details/5
         public ActionResult Details(int? id)
         {
@@ -263,7 +296,7 @@ namespace PrezzieWithDB.Controllers
                 db.SaveChanges();
 
                 souvenierID_tmp = null;
-                return RedirectToAction("Index");
+                return RedirectToAction("MyOwnRequests");
             }
 
             return View(model);

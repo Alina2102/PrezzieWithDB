@@ -16,6 +16,29 @@
     <a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#56c8c8; margin-top:1em; margin-bottom:1em">Back to Profile</a>
 </p>
 
+@using (Html.BeginForm())
+{
+
+    <p>
+        Select status:
+    </p>
+
+    <p>
+        <input type="radio" name="status" value="New" @(ViewBag.status == "New" ? "checked = 'true'" : "")>
+        <label for="ne"> New</label>
+
+        <input type="radio" name="status" value="InProgress" @(ViewBag.status == "InProgress" ? "checked = 'true'" : "")>
+        <label for="ip"> In Progress</label>
+
+        <input type="radio" name="status" value="Done" @(ViewBag.status == "Done" ? "checked = 'true'" : "")>
+        <label for="ip"> Done</label>
+    </p>
+
+    <input type="submit" value="Update" name="sorting" class="btn btn-default" style="background-color:#56c8c8; margin-bottom: 2em" />
+
+}
+
+
 
 @foreach (var item in Model)
 {
@@ -23,7 +46,7 @@
         <div class="row">
             <div class="col-md-3">
                 <img src="@Url.Content(item.souvenir.selectedPicture)" alt="Here should be a photo" style="width:200px; height:200px; padding:1em 1em 1em" />
-                <a class="btn btn-default" style="margin-left:2.5em; margin-top:-1em" @Html.ActionLink("Change Picture", "changePicture", new { souvenirID =item.souvenirID })
+                <a class="btn btn-default" style="margin-left:2.5em; margin-top:-1em" @Html.ActionLink("Change Picture", "changePicture", new { souvenirID = item.souvenirID })
             </div>
             <div class="col-md-7">
                 <h2 style="color:#feab33">@item.souvenir.souvenirName</h2>
