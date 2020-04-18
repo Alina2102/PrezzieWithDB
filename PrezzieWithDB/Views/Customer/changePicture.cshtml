@@ -1,0 +1,37 @@
+﻿@model PrezzieWithDB.Models.Customer
+
+@{
+    ViewBag.Title = "changePicture";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>changePicture</h2>
+@using (Html.BeginForm("changePicture", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.selectedPicture, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="file" id="file">
+        </div>
+    </div>
+
+    <div class="col-md-offset-2 col-md-10">
+        <p style="margin-left:-0.5em">For optimal resolution please select a square image!</p>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="change" class="btn btn-default" style="background-color:#feab33" />
+        </div>
+    </div>
+}
+<img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
+    <div>
+    <a href='@Url.Action("DeletePicture", "Customer")' class="btn btn-default" style="background-color:#56c8c8">Delete Picture</a>
+    </div>
+    <div>
+        @Html.ActionLink("Back to Profile", "Index")
+    </div>
+

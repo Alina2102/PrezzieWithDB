@@ -286,5 +286,40 @@ namespace PrezzieWithDB.Controllers
 
             return cv;
         }
+
+        public ActionResult ChangePicture(Customer customer)
+        {
+            userName_tmp = customer.userName;
+            return View(customer);
+        }
+        [HttpPost]
+        public ActionResult ChangePicture(HttpPostedFileBase file)
+        {
+            Customer customer = db.customers.Find(userName_tmp);
+            try
+            {
+                string fileName = customer.userName;
+                string extension = Path.GetExtension(file.FileName);
+                fileName += extension;
+                customer.selectedPicture = "~/Content/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
+                file.SaveAs(fileName);
+            }
+            catch (Exception)
+            {
+                customer.selectedPicture = "~/Content/defaultUser.png";
+            }
+            db.Entry(customer).CurrentValues.SetValues(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult DeletePicture()
+        {
+            Customer customer = db.customers.Find(userName_tmp);
+            customer.selectedPicture = "~/Content/defaultUser.png";
+            db.Entry(customer).CurrentValues.SetValues(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
