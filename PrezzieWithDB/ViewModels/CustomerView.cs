@@ -19,7 +19,7 @@ namespace PrezzieWithDB.ViewModels
         public string birthday { get; set; }
         public string descriptionUser { get; set; }
         [DisplayName("Upload Profile Picture")]
-        public string selectedPicture { get; set; }
+        public string selectedPictureCustomer { get; set; }
         public string errorMessage { get; set; }
 
     }

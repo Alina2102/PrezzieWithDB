@@ -20,7 +20,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Profile.eMail)
+                @Html.DisplayFor(model => model.profile.eMail)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -28,7 +28,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.Profile.firstName)
+                @Html.DisplayFor(model => model.profile.firstName)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -36,7 +36,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.Profile.surname)
+                @Html.DisplayFor(model => model.profile.surname)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -52,7 +52,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.Profile.birthday)
+                @Html.DisplayFor(model => model.profile.birthday)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -60,7 +60,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.Profile.descriptionUser)
+                @Html.DisplayFor(model => model.profile.descriptionUser)
             </dd>
 
 
@@ -69,7 +69,7 @@
 
     <div class="col-md-6" style="margin-top:-2em">
 
-        <img src="@Url.Content(Model.selectedPicture)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
+        <img src="@Url.Content(Model.selectedPictureCustomer)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
         <h2 style="color:#56c8c8; margin-top:1em">@Html.DisplayFor(model => model.userName)</h2>
     </div>
 

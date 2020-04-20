@@ -31,10 +31,10 @@ namespace PrezzieWithDB.Controllers
                 model.errorMessage = "Username already exists";
                 return View("SignUp", model);
             }
-            var customers = db.customers.Include(c => c.Profile);
+            var customers = db.customers.Include(c => c.profile);
             foreach (Customer c in customers)
             {
-                if (c.Profile.eMail == model.eMail)
+                if (c.profile.eMail == model.eMail)
                 {
                     model.errorMessage = "E-mail already exists";
                     return View("SignUp", model);
@@ -61,13 +61,13 @@ namespace PrezzieWithDB.Controllers
                     string fileName = profile.userName;
                     string extension = Path.GetExtension(file.FileName);
                     fileName += extension;
-                    customer.selectedPicture = "~/Content/" + fileName;
+                    customer.selectedPictureCustomer = "~/Content/" + fileName;
                     fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
                     file.SaveAs(fileName);
                 }
                 catch (Exception)
                 {
-                    customer.selectedPicture = "~/Content/defaultUser.png";
+                    customer.selectedPictureCustomer = "~/Content/defaultUser.png";
                 }
 
                 customer.userName = profile.userName;
@@ -105,7 +105,7 @@ namespace PrezzieWithDB.Controllers
                     return View("Login", model);
                 }
 
-                if (db.customers.Find(model.userName).Profile.password == model.password)
+                if (db.customers.Find(model.userName).profile.password == model.password)
                 {
                     Session["userName"] = model.userName;
                     return RedirectToAction("Index", "Home");
@@ -128,12 +128,12 @@ namespace PrezzieWithDB.Controllers
                 string userName = Session["userName"].ToString();
                 if (userName == "Admin")
                 {
-                    var customers = db.customers.Include(c => c.Profile);
+                    var customers = db.customers.Include(c => c.profile);
                     return View(customers.ToList());
                 }
                 else 
                 {
-                    List<Customer> customers = db.customers.Include(c => c.Profile).ToList();
+                    List<Customer> customers = db.customers.Include(c => c.profile).ToList();
                     List<Customer> myCustomer = new List<Customer>();
                     foreach (Customer c in customers)
                     {
@@ -200,10 +200,10 @@ namespace PrezzieWithDB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CustomerView model, string id)
         {
-            var customers = db.customers.Include(c => c.Profile);
+            var customers = db.customers.Include(c => c.profile);
             foreach (Customer c in customers)
             {
-                if (c.Profile.eMail == model.eMail && c.userName != model.userName)
+                if (c.profile.eMail == model.eMail && c.userName != model.userName)
                 {
                     model.errorMessage = "E-mail already exists";
                     return View("Edit", model);
@@ -274,13 +274,13 @@ namespace PrezzieWithDB.Controllers
             var customer = db.customers.Find(userName);
 
             cv.userName = customer.userName;
-            cv.password = customer.Profile.password;
-            cv.eMail = customer.Profile.eMail;
-            cv.firstName = customer.Profile.firstName;
-            cv.surname = customer.Profile.surname;
-            cv.birthday = customer.Profile.birthday;
+            cv.password = customer.profile.password;
+            cv.eMail = customer.profile.eMail;
+            cv.firstName = customer.profile.firstName;
+            cv.surname = customer.profile.surname;
+            cv.birthday = customer.profile.birthday;
             cv.countryUser = customer.countryUser;
-            cv.descriptionUser = customer.Profile.descriptionUser;
+            cv.descriptionUser = customer.profile.descriptionUser;
 
             return cv;
         }
@@ -299,13 +299,13 @@ namespace PrezzieWithDB.Controllers
                 string fileName = customer.userName;
                 string extension = Path.GetExtension(file.FileName);
                 fileName += extension;
-                customer.selectedPicture = "~/Content/" + fileName;
+                customer.selectedPictureCustomer = "~/Content/" + fileName;
                 fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
                 file.SaveAs(fileName);
             }
             catch (Exception)
             {
-                customer.selectedPicture = "~/Content/defaultUser.png";
+                customer.selectedPictureCustomer = "~/Content/defaultUser.png";
             }
             db.Entry(customer).CurrentValues.SetValues(customer);
             db.SaveChanges();
@@ -314,7 +314,7 @@ namespace PrezzieWithDB.Controllers
         public ActionResult DeletePicture()
         {
             Customer customer = db.customers.Find(userName_tmp);
-            customer.selectedPicture = "~/Content/defaultUser.png";
+            customer.selectedPictureCustomer = "~/Content/defaultUser.png";
             db.Entry(customer).CurrentValues.SetValues(customer);
             db.SaveChanges();
             return RedirectToAction("Index");

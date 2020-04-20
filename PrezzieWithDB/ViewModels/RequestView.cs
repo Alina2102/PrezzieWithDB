@@ -26,9 +26,7 @@ namespace PrezzieWithDB.ViewModels
         public string birthday { get; set; }
         public string descriptionUser { get; set; }
         [DisplayName("Upload Request Picture")]
-        public string selectedPicture { get; set; }
-        public bool selectedInProgress { get; set; }
-        public bool selectedNew { get; set; }
-        public bool selectedDone { get; set; }
+        public string selectedPictureSouvenir { get; set; }
+        public string selectedPictureCustomer { get; set; }
     }
 }

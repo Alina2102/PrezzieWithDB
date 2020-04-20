@@ -19,7 +19,6 @@ namespace PrezzieWithDB.ViewModels
         public string countrySouv { get; set; }
 
         [Required]
-        [Range(0.01, 10000.00, ErrorMessage = "Price must be between 0.01 and 10000.00")]
         public decimal price { get; set; }
         public string currency { get; set; }
         [DataType(DataType.MultilineText)]

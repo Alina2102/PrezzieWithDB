@@ -1,4 +1,4 @@
-﻿@model PrezzieWithDB.ViewModels.RequestView
+﻿@model PrezzieWithDB.ViewModels.RequestCreate
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -76,7 +76,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.selectedPicture, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.selectedPictureSouvenir, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="file" id="file">
         </div>

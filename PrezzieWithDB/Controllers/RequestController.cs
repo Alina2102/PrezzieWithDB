@@ -193,13 +193,16 @@ namespace PrezzieWithDB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RequestView model, HttpPostedFileBase file)
+        public ActionResult Create(RequestCreate model, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
-                souvenirInfo.souvenirId = model.souvenirID;
-                souvenirInfo.price = model.price;
+                if (model.price.Contains("."))
+                {
+                    model.price = model.price.Replace(".", ",");
+                }
+                souvenirInfo.price = Decimal.Parse(model.price);
                 souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
 
@@ -213,13 +216,13 @@ namespace PrezzieWithDB.Controllers
                     string fileName = souvenirInfo.souvenirId.ToString();
                     string extension = Path.GetExtension(file.FileName);
                     fileName += extension;
-                    souvenir.selectedPicture = "~/Content/" + fileName;
+                    souvenir.selectedPictureSouvenir = "~/Content/" + fileName;
                     fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
                     file.SaveAs(fileName);
                 }
                 catch (Exception)
                 {
-                    souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+                    souvenir.selectedPictureSouvenir = "~/Content/defaultSouvenir.png";
                 }
                 souvenir.souvenirId = souvenirInfo.souvenirId;
                 souvenir.souvenirName = model.souvenirName;
@@ -237,7 +240,7 @@ namespace PrezzieWithDB.Controllers
                 request.amount = model.amount;
                 request.reward = model.reward;
                 request.status = "new";
-                request.souvenirID = model.souvenirID;
+                request.souvenirID = souvenirInfo.souvenirId;
 
                 db.requests.Add(request);
                 db.SaveChanges();
@@ -254,15 +257,26 @@ namespace PrezzieWithDB.Controllers
             {
                 return RedirectToAction("Index");
             }
+            
             souvenierID_tmp = id;
-            RequestView request = GetRequest(id);
+            Request request = db.requests.Find(id);
 
             if (request == null)
             {
                 return HttpNotFound();
             }
+
+            RequestEditView requestEdit = new RequestEditView();
+            requestEdit.amount = request.amount;
+            requestEdit.reward = request.reward;
+            requestEdit.status = request.status;
+            requestEdit.souvenirName = request.souvenir.souvenirName;
+            requestEdit.countrySouv = request.souvenir.countrySouv;
+            requestEdit.price = request.souvenir.souvenirInfo.price.ToString();
+            requestEdit.currency = request.souvenir.souvenirInfo.currency;
+            requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
             
-            return View(request);
+            return View(requestEdit);
         }
 
         // POST: Request/Edit/5
@@ -270,13 +284,17 @@ namespace PrezzieWithDB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RequestView model, int id)
+        public ActionResult Edit(RequestEditView model, int id)
         {
             if (ModelState.IsValid)
             {
 
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
-                souvenirInfo.price = model.price;
+                if (model.price.Contains("."))
+                {
+                  model.price = model.price.Replace('.',',');
+                }
+                souvenirInfo.price = Decimal.Parse(model.price);
                 souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
                 db.Entry(souvenirInfo).CurrentValues.SetValues(souvenirInfo);
@@ -357,12 +375,12 @@ namespace PrezzieWithDB.Controllers
 
             var customer = db.customers.Find(rv.userName);
 
-            rv.eMail = customer.Profile.eMail;
+            rv.eMail = customer.profile.eMail;
             rv.countryUser = customer.countryUser;
-            rv.firstName = customer.Profile.firstName;
-            rv.surname = customer.Profile.surname;
-            rv.birthday = customer.Profile.birthday;
-            rv.descriptionUser = customer.Profile.descriptionUser;
+            rv.firstName = customer.profile.firstName;
+            rv.surname = customer.profile.surname;
+            rv.birthday = customer.profile.birthday;
+            rv.descriptionUser = customer.profile.descriptionUser;
 
             return rv;
         }
@@ -382,24 +400,26 @@ namespace PrezzieWithDB.Controllers
                 string fileName = request.souvenirID.ToString();
                 string extension = Path.GetExtension(file.FileName);
                 fileName += extension;
-                request.souvenir.selectedPicture = "~/Content/" + fileName;
+                request.souvenir.selectedPictureSouvenir = "~/Content/" + fileName;
                 fileName = Path.Combine(Server.MapPath("~/Content/"), fileName);
                 file.SaveAs(fileName);
             }
             catch (Exception)
             {
-                request.souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+                request.souvenir.selectedPictureSouvenir = "~/Content/defaultSouvenir.png";
             }
             db.Entry(request).CurrentValues.SetValues(request);
             db.SaveChanges();
+            souvenierID_tmp = null;
             return RedirectToAction("MyOwnRequests");
         }
         public ActionResult DeletePicture()
         {
             Request request = db.requests.Find(souvenierID_tmp);
-            request.souvenir.selectedPicture = "~/Content/defaultSouvenir.png";
+            request.souvenir.selectedPictureSouvenir = "~/Content/defaultSouvenir.png";
             db.Entry(request).CurrentValues.SetValues(request);
             db.SaveChanges();
+            souvenierID_tmp = null;
             return RedirectToAction("MyOwnRequests");
         }
     }

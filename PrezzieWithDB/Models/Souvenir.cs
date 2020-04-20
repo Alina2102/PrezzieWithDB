@@ -13,7 +13,7 @@ namespace PrezzieWithDB.Models
         public int souvenirId { get; set; }
         public string souvenirName { get; set; }
         public string countrySouv { get; set; }
-        public string selectedPicture { get; set; }
+        public string selectedPictureSouvenir { get; set; }
 
         [Required]
         public virtual SouvenirInfo souvenirInfo { get; set; }
