@@ -84,8 +84,6 @@ namespace PrezzieWithDB.Controllers
             }
             else
             {
-                //List<Request> requests1 = new List<Request>();
-                //requests1 = requests.ToList();
                 List<Request> requests1 = requests.ToList();
                 List<Request> searchRequests = new List<Request>();
                 foreach (Request r in requests1)
@@ -199,7 +197,11 @@ namespace PrezzieWithDB.Controllers
             if (ModelState.IsValid)
             {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
-                if (model.price.Contains("."))
+                if(model.price == null)
+                {
+                    model.price = "0,0";
+                }
+                else if (model.price.Contains("."))
                 {
                     model.price = model.price.Replace(".", ",");
                 }
@@ -291,9 +293,13 @@ namespace PrezzieWithDB.Controllers
             {
 
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
-                if (model.price.Contains("."))
+                if (model.price == null)
                 {
-                  model.price = model.price.Replace('.',',');
+                    model.price = "0,0";
+                }
+                else if (model.price.Contains("."))
+                {
+                    model.price = model.price.Replace(".", ",");
                 }
                 souvenirInfo.price = Decimal.Parse(model.price);
                 souvenirInfo.currency = model.currency;

@@ -36,25 +36,22 @@
                     </dt>
 
                     <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.price)
-                    </dd>
-
-                    <dt style="margin-top:1em">
-                        Currency:
-                    </dt>
-
-                    <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.currency)
+                        @Model.price @Model.currency
                     </dd>
 
                     <dt style="margin-top:1em">
                         Reward:
                     </dt>
-
+                    @{  string displayReward = (Decimal.Parse(Model.reward) * Model.amount * Model.price / 100).ToString();
+                        if (displayReward == null)
+                        {
+                            displayReward = "Nothing yet";
+                        }
+                    }
                     <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.reward)
+                        @displayReward @Model.currency
                     </dd>
-
+                        
                     <dt style="margin-top:1em">
                         Status:
                     </dt>
