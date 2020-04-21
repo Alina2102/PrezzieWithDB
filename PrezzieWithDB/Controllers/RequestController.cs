@@ -423,5 +423,10 @@ namespace PrezzieWithDB.Controllers
             souvenierID_tmp = null;
             return RedirectToAction("MyOwnRequests");
         }
+
+        public void SendMail(RequestView model)
+        {
+
+        }
     }
 }
