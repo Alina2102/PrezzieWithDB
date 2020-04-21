@@ -104,6 +104,7 @@ namespace PrezzieWithDB.Controllers
             {
                 string userName = Session["userName"].ToString();
                 var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+                requests = requests.OrderByDescending(r => r.souvenirID);
                 List<Request> myRequests = new List<Request>();
 
                 foreach (Request r in requests)
@@ -127,7 +128,7 @@ namespace PrezzieWithDB.Controllers
         {
             string userName = Session["userName"].ToString();
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
-
+            requests = requests.OrderByDescending(r => r.souvenirID);
             switch (status)
             {
                 case "InProgress":
