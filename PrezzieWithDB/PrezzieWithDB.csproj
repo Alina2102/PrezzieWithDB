@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\CustomerChangePicture.cs" />
     <Compile Include="ViewModels\CustomerEditView.cs" />
     <Compile Include="ViewModels\CustomerLoginModel.cs" />
+    <Compile Include="ViewModels\CustomerSignUpModel.cs" />
     <Compile Include="ViewModels\CustomerView.cs" />
     <Compile Include="ViewModels\RangeAttribute.cs" />
     <Compile Include="ViewModels\RequestChangePictureView.cs" />
