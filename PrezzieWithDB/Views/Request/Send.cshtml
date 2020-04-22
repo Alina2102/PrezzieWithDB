@@ -1,0 +1,43 @@
+﻿@model PrezzieWithDB.ViewModels.SendMailModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4>Send your comments.</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.receiver, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.receiver, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.receiver)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.subject, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.subject, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.subject)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.message, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.message, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.message)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Send" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

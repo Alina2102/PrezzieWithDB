@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
@@ -345,12 +347,37 @@ namespace PrezzieWithDB.Controllers
         // POST: Request/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Request request = db.requests.Find(id);
+            Customer customer = request.customer;
+            /////////////////////////////////////////////////
+            var body = "<p>Dear " + customer.profile.firstName + ",</p> " + "<p></p><p>we had to delete your request " + request.souvenir.souvenirName + " with the request ID: " + request.souvenirID + " because it was against our business security rules</p><p></p><p>With kind Regards</p><p>Your Prezzie Team</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(customer.profile.eMail));  // replace with valid value 
+            message.From = new MailAddress("prezzie.info@gmail.com");  // replace with valid value
+            message.Subject = "Prezzie - your Request " + request.souvenir.souvenirName + " was deleted";
+            message.Body = body;
+            message.IsBodyHtml = true;
+
             db.requests.Remove(request);
             db.SaveChanges();
-            return RedirectToAction("Index");
+        
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "prezzie.info@gmail.com",  // replace with valid value
+                    Password = "A1b2C3D$"  // replace with valid value
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return RedirectToAction("Sent");
+            }
+            /////////////////////////////////////////////////
         }
 
         protected override void Dispose(bool disposing)
@@ -430,9 +457,26 @@ namespace PrezzieWithDB.Controllers
             return RedirectToAction("MyOwnRequests");
         }
 
-        public void SendMail(RequestView model)
+        public ActionResult Send()
         {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Send(SendMailModel model)
+        {
+   
+            if (ModelState.IsValid)
+            {
+                
+            }
+            return View(model);
+        }
+
+        public ActionResult Sent()
+        {
+            return View();
         }
     }
 }

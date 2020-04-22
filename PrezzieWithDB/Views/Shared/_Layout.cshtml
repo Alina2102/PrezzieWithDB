@@ -25,8 +25,10 @@
                     @if (Session["userName"] != null)
                     {<li>@Html.ActionLink("Profile", "Index", "Customer")</li>
                      <li>@Html.ActionLink("My own requests", "MyOwnRequests", "Request")</li>}
+
                     <li>@Html.ActionLink("Requests", "Index", "Request")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Send Email", "Send", "Request")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

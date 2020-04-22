@@ -143,9 +143,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004210848405_init.cs" />
-    <Compile Include="Migrations\202004210848405_init.Designer.cs">
-      <DependentUpon>202004210848405_init.cs</DependentUpon>
+    <Compile Include="Migrations\202004221400220_Init.cs" />
+    <Compile Include="Migrations\202004221400220_Init.Designer.cs">
+      <DependentUpon>202004221400220_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\RequestEditView.cs" />
     <Compile Include="ViewModels\RequestView.cs" />
     <Compile Include="ViewModels\RequiredAttribute.cs" />
+    <Compile Include="ViewModels\SendMailModel.cs" />
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +244,9 @@
     <Content Include="Views\Request\MyOwnRequests.cshtml" />
     <Content Include="Views\Customer\ChangePicture.cshtml" />
     <Content Include="Views\Request\ChangePicture.cshtml" />
+    <Content Include="Views\Request\Send.cshtml" />
+    <Content Include="Views\Request\Sent.cshtml" />
+    <Content Include="Views\Request\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -261,8 +265,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004210848405_init.resx">
-      <DependentUpon>202004210848405_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004221400220_Init.resx">
+      <DependentUpon>202004221400220_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
