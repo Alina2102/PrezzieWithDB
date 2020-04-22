@@ -200,17 +200,65 @@ namespace PrezzieWithDB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CustomerEditView model, string id)
         {
-            var customers = db.customers.Include(c => c.profile);
-            foreach (Customer c in customers)
+            Boolean isValid = true;
+
+            ViewBag.ErrorMessageEmail = null;
+            ViewBag.ErrorMessageFirstName = null;
+            ViewBag.ErrorMessageSurName = null;
+            ViewBag.ErrorMessageBirthday = null;
+            ViewBag.ErrorMessageCountry = null;
+            ViewBag.ErrorMessageDescription = null;
+           
+            if(model.eMail == null)
             {
-                if (c.profile.eMail == model.eMail && c.userName != model.userName)
+                ViewBag.ErrorMessageEmail = "Please enter an email address";
+                isValid = false;
+            }
+            else
+            {
+                var customers = db.customers.Include(c => c.profile);
+                foreach (Customer c in customers)
                 {
-                    model.errorMessage = "E-mail already exists";
-                    return View("Edit", model);
+                    if (c.profile.eMail == model.eMail && c.userName != model.userName)
+                    {
+                        ViewBag.ErrorMessageEmail = "E-mail already exists";
+                        isValid = false;
+                    }
                 }
             }
 
-            if (ModelState.IsValid)
+            if (model.firstName == null || model.firstName.Length < 4 || model.firstName.Length > 30)
+            {
+                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.surname == null || model.surname.Length < 4 || model.surname.Length > 30)
+            {
+                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.birthday == null)
+            {
+                ViewBag.ErrorMessageBirthday = "Please enter a birthday";
+                isValid = false;
+            }
+            if (model.countryUser == null)
+            {
+                ViewBag.ErrorMessageCountry = "Please select a country";
+                isValid = false;
+            }
+            if (model.descriptionUser != null && model.descriptionUser.Length > 300)
+            {
+                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters";
+                isValid = false;
+            }
+
+            if(isValid == false)
+            {
+            return View("Edit", model);
+            }
+
+            else
             {
                 Profile profile = db.profiles.Find(userName_tmp);
                 profile.eMail = model.eMail;
@@ -227,7 +275,6 @@ namespace PrezzieWithDB.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           return View(model);
         }
 
         // GET: Customer/Delete/5
