@@ -185,7 +185,7 @@ namespace PrezzieWithDB.Controllers
                 return RedirectToAction("Login", "Customer");
             }
             userName_tmp = id;
-            CustomerView customer = GetCustomer(id);
+            CustomerEditView customer = GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -198,7 +198,7 @@ namespace PrezzieWithDB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CustomerView model, string id)
+        public ActionResult Edit(CustomerEditView model, string id)
         {
             var customers = db.customers.Include(c => c.profile);
             foreach (Customer c in customers)
@@ -268,13 +268,12 @@ namespace PrezzieWithDB.Controllers
             base.Dispose(disposing);
         }
 
-        public CustomerView GetCustomer(string userName)
+        public CustomerEditView GetCustomer(string userName)
         {
-            CustomerView cv = new CustomerView();
+            CustomerEditView cv = new CustomerEditView();
             var customer = db.customers.Find(userName);
 
             cv.userName = customer.userName;
-            cv.password = customer.profile.password;
             cv.eMail = customer.profile.eMail;
             cv.firstName = customer.profile.firstName;
             cv.surname = customer.profile.surname;
