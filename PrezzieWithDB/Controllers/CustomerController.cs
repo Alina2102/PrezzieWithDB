@@ -24,8 +24,19 @@ namespace PrezzieWithDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(CustomerView model, HttpPostedFileBase file)
+        public ActionResult SignUp(CustomerSignUpModel model, HttpPostedFileBase file)
         {
+            Boolean isValid = true;
+
+            ViewBag.ErrorMessageUsername= null;
+            ViewBag.ErrorMessagePassword = null;
+            ViewBag.ErrorMessageEmail = null;
+            ViewBag.ErrorMessageFirstName = null;
+            ViewBag.ErrorMessageSurName = null;
+            ViewBag.ErrorMessageBirthday = null;
+            ViewBag.ErrorMessageCountry = null;
+            ViewBag.ErrorMessageDescription = null;
+
             if (db.customers.Find(model.userName) != null)
             {
                 model.errorMessage = "Username already exists";
@@ -40,7 +51,49 @@ namespace PrezzieWithDB.Controllers
                     return View("SignUp", model);
                 }
             }
+            if (model.userName == null)
+            {
+                ViewBag.ErrorMessageUsername = "Please enter an username";
+                isValid = false;
+            }
+            if (model.password == null)
+            {
+                ViewBag.ErrorMessagePassword = "Please enter a password"; 
+                isValid = false;
+            }
+            if (model.eMail == null)
+            {
+                ViewBag.ErrorMessageEmail = "Please enter an email address";
+                isValid = false;
+            }
+            if (model.firstName == null || model.firstName.Length < 4 || model.firstName.Length > 30)
+            {
+                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.surname == null || model.surname.Length < 4 || model.surname.Length > 30)
+            {
+                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.birthday == null)
+            {
+                ViewBag.ErrorMessageBirthday = "Please enter a birthday";
+                isValid = false;
+            }
+            if (model.countryUser == null)
+            {
+                ViewBag.ErrorMessageCountry = "Please select a country";
+                isValid = false;
+            }
+            if (model.descriptionUser != null && model.descriptionUser.Length > 300)
+            {
+                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters";
+                isValid = false;
+            }
 
+            if (isValid == true)
+            {
                 Profile profile = new Profile
                 {
                     userName = model.userName,
@@ -79,6 +132,13 @@ namespace PrezzieWithDB.Controllers
                 Session["userName"] = customer.userName;
 
                 return RedirectToAction("Index");
+            }
+
+            else
+            {
+                return View("SignUp", model);
+            }
+            
         }
 
 
