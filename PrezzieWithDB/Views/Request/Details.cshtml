@@ -1,4 +1,4 @@
-﻿@model PrezzieWithDB.ViewModels.RequestView
+﻿@model  PrezzieWithDB.ViewModels.RequestView
 
 @{
     ViewBag.Title = "Details";
@@ -11,122 +11,124 @@
     <hr />
 
     <div class="row" align="center" style="background-image:url(/Content/header-bg.jpg); background-position:center; background-repeat:no-repeat; background-size:cover">
-    <div class="col-md-6" style="background-color:#eeeeee; margin-top:7.5em; margin-bottom:7.5em; border-top-left-radius:40px; border-bottom-left-radius:40px; height:30em; opacity:0.9">
-        <h2 style="color:#56c8c8; margin-top:2em">Souvenir: @Html.DisplayFor(model => model.souvenirName)</h2>
-        <div align="left">
-            <dl class="dl-horizontal" style="margin-top:2em">
-                <dt>
-                    Country:
-                </dt>
+        <div class="col-md-6" style="background-color:#eeeeee; margin-top:7.5em; margin-bottom:7.5em; border-top-left-radius:40px; border-bottom-left-radius:40px; height:30em; opacity:0.9">
+            <h2 style="color:#56c8c8; margin-top:2em">Souvenir: @Html.DisplayFor(model => model.souvenirName)</h2>
+            <div align="left">
+                <dl class="dl-horizontal" style="margin-top:2em">
+                    <dt>
+                        Country:
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.countrySouv)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.countrySouv)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Amount:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Amount:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.amount)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.amount)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Usual price per piece:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Usual price per piece:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.price)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Model.price @Model.currency
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Currency:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Reward:
+                    </dt>
+                    @{  string displayReward = (Decimal.Parse(Model.reward) * Model.amount * Model.price / 100).ToString();
+                        if (displayReward == null)
+                        {
+                            displayReward = "Nothing yet";
+                        }
+                    }
+                    <dd style="margin-top:1em">
+                        @displayReward @Model.currency
+                    </dd>
+                        
+                    <dt style="margin-top:1em">
+                        Status:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.currency)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.status)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Reward:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Souvenir description:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.reward)
-                </dd>
-
-                <dt style="margin-top:1em">
-                    Status:
-                </dt>
-
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.status)
-                </dd>
-
-                <dt style="margin-top:1em">
-                    Souvenir description:
-                </dt>
-
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.descriptionSouv)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.descriptionSouv)
+                    </dd>
 
 
-            </dl>
+                </dl>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-6" style="background-color:#56c8c8; margin-top:7.5em; margin-bottom:7.5em; border-top-right-radius:40px; border-bottom-right-radius:40px; height:30em; opacity:0.9">
-        <h2 style="color:#eeeeee; margin-top:2em">User: @Html.DisplayFor(model => model.userName)</h2>
-        <div align="left">
-            <dl class="dl-horizontal" style="margin-top:2em">
-                <dt>
-                    First name:
-                </dt>
+        <div class="col-md-6" style="background-color:#56c8c8; margin-top:7.5em; margin-bottom:7.5em; border-top-right-radius:40px; border-bottom-right-radius:40px; height:30em; opacity:0.9">
+            <h2 style="color:#eeeeee; margin-top:2em">User: @Html.DisplayFor(model => model.userName)</h2>
+            <div align="left">
+                <dl class="dl-horizontal" style="margin-top:2em">
+                    <dt>
+                        First name:
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.firstName)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.firstName)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Surname:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Surname:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.surname)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.surname)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Country:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Country:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.countryUser)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.countryUser)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    Birthday:
-                </dt>
+                    <dt style="margin-top:1em">
+                        Birthday:
+                    </dt>
 
-                <dd style="        margin-top: 1em
+                    <dd style="        margin-top: 1em
 ">
-                    @Html.DisplayFor(model => model.birthday)
-                </dd>
+                        @Html.DisplayFor(model => model.birthday)
+                    </dd>
 
-                <dt style="margin-top:1em">
-                    About the User:
-                </dt>
+                    <dt style="margin-top:1em">
+                        About the User:
+                    </dt>
 
-                <dd style="margin-top:1em">
-                    @Html.DisplayFor(model => model.descriptionUser)
-                </dd>
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.descriptionUser)
+                    </dd>
 
-            </dl>
+                </dl>
+            </div>
+            @{PrezzieWithDB.DAL.PrezzieContext db = new PrezzieWithDB.DAL.PrezzieContext();
+                 PrezzieWithDB.Models.Customer currentUser = db.customers.Find(Session["userName"]);
+                string subject = "Prezzie - I want to bring your request: " + Model.souvenirName;
+                string body = "Hello " + Model.firstName + ",%0AI am " + currentUser.profile.firstName + " and I saw your request. I going to " + Model.countrySouv + " and can bring it to you.%0ASo let me know if it's okay for you :-)%0A%0AKind regards%0A" + Model.firstName +" "+ Model.surname;
+                <a class="btn btn-default" style="background-color:#feab33; margin-top:3em" href="mailto:@Model.eMail?subject=@subject&body=@body">Contact me!</a>
+            }
         </div>
-        <a class="btn btn-default" style="background-color:#feab33; margin-top:3em" href="mailto:@Model.eMail">Contact me!</a>
-    </div>
     </div>
 </div>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
