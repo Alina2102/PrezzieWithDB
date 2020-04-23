@@ -9,9 +9,6 @@ namespace PrezzieWithDB.ViewModels
 {
     public class RequestCreate
     {
-        [Required]
-        [MinLength(3)]
-        [MaxLength(50)]
         public string souvenirName { get; set; }
         [Required]
         public string countrySouv { get; set; }
@@ -22,8 +19,6 @@ namespace PrezzieWithDB.ViewModels
         public string currency { get; set; }
         public string reward { get; set; }
         [DataType(DataType.MultilineText)]
-        [MinLength(5)]
-        [MaxLength(200)] 
         public string descriptionSouv { get; set; }
         [DisplayName("Upload Request Picture")]
         public string selectedPictureSouvenir { get; set; }

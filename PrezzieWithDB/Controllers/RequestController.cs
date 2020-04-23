@@ -217,14 +217,15 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessageCountry = "Please select a country";
                 isValid = false;
             }
-            /*if (model.amount < 1 || model.amount > 1000)
+            //Fehlermeldung von amount wird noch nicht angezeigt
+            if (model.amount < 1 || model.amount > 1000)
             {
-                ViewBag.ErrorMessageAmount = "Please enter an amount";
+                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000";
                 isValid = false;
-            }*/
-            if (model.price == null || model.price.Length > 5 )
+            }
+            if (model.price == null || model.price.Length > 7 )
             {
-                ViewBag.ErrorMessagePrice = "Please enter a price under 100000";
+                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits";
                 isValid = false;
             }
             if (model.currency == null)
@@ -343,9 +344,61 @@ namespace PrezzieWithDB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(RequestEditView model, int id)
         {
-            if (ModelState.IsValid)
-            {
+            Boolean isValid = true;
 
+            ViewBag.ErrorMessageSouvenirName = null;
+            ViewBag.ErrorMessageCountry = null;
+            ViewBag.ErrorMessageAmount = null;
+            ViewBag.ErrorMessagePrice = null;
+            ViewBag.ErrorMessageCurrency = null;
+            ViewBag.ErrorMessageReward = null;
+            ViewBag.ErrorMessageDescription = null;
+            ViewBag.ErrorMessageStatus = null;
+
+
+            if (model.souvenirName == null || model.souvenirName.Length < 3 || model.souvenirName.Length > 30)
+            {
+                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.countrySouv == null)
+            {
+                ViewBag.ErrorMessageCountry = "Please select a country";
+                isValid = false;
+            }
+            if (model.amount < 1 || model.amount > 1000)
+            {
+                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000";
+                isValid = false;
+            }
+            if (model.price == null || model.price.Length > 7)
+            {
+                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits";
+                isValid = false;
+            }
+            if (model.currency == null)
+            {
+                ViewBag.ErrorMessageCurrency = "Please select a currency";
+                isValid = false;
+            }
+            if (model.reward == null)
+            {
+                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward)";
+                isValid = false;
+            }
+            if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
+            {
+                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters";
+                isValid = false;
+            }
+            if (model.status == null)
+            {
+                ViewBag.ErrorMessageStatus = "Please select a status";
+                isValid = false;
+            }
+
+            if (isValid == true)
+            { 
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
                 if (model.price == null)
                 {
@@ -377,8 +430,10 @@ namespace PrezzieWithDB.Controllers
                 souvenierID_tmp = null;
                 return RedirectToAction("MyOwnRequests");
             }
-
-            return View(model);
+            else
+            {
+            return View("Edit", model);
+            }
         }
 
         // GET: Request/Delete/5
