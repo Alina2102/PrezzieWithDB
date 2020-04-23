@@ -109,15 +109,14 @@
 
             </div>
             <div class="col-md-2">
-                <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })
+                @if (Session["userName"] != null && Session["userName"].ToString() == "Admin")
+                {
+                    <p><a class="btn btn-default" style="background-color:firebrick; margin-top:8em; margin-left:6em" @Html.ActionLink("Delete", "Delete", new { id = item.souvenirID })</p>
+                }
+                    <p><a class="btn btn-default" style="background-color:#56c8c8; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })</p>
             </div>
-            @if (Session["userName"] != null && Session["userName"].ToString() == "Admin")
-            {
-                <div class="col-md-2">
-                    <a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Delete", "Delete", new { id = item.souvenirID })
-                </div>
-            }
             </div>
+            
     </div>
 
 }
