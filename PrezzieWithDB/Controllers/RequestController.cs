@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
 using PrezzieWithDB.DAL;
 using PrezzieWithDB.Models;
 using PrezzieWithDB.ViewModels;
@@ -196,14 +197,61 @@ namespace PrezzieWithDB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RequestCreate model, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            Boolean isValid = true;
+
+            ViewBag.ErrorMessageSouvenirName = null;
+            ViewBag.ErrorMessageCountry = null;
+            //ViewBag.ErrorMessageAmount = null;
+            ViewBag.ErrorMessagePrice = null;
+            ViewBag.ErrorMessageCurrency = null;
+            ViewBag.ErrorMessageReward = null;
+            ViewBag.ErrorMessageDescription = null;
+
+            if (model.souvenirName == null || model.souvenirName.Length < 3 || model.souvenirName.Length > 30)
+            {
+                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters";
+                isValid = false;
+            }
+            if (model.countrySouv == null)
+            {
+                ViewBag.ErrorMessageCountry = "Please select a country";
+                isValid = false;
+            }
+            /*if (model.amount < 1 || model.amount > 1000)
+            {
+                ViewBag.ErrorMessageAmount = "Please enter an amount";
+                isValid = false;
+            }*/
+            if (model.price == null || model.price.Length > 5 )
+            {
+                ViewBag.ErrorMessagePrice = "Please enter a price under 100000";
+                isValid = false;
+            }
+            if (model.currency == null)
+            {
+                ViewBag.ErrorMessageCurrency = "Please select a currency";
+                isValid = false;
+            }
+            if (model.reward == null)
+            {
+                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward)";
+                isValid = false;
+            }
+            if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
+            {
+                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters";
+                isValid = false;
+            }
+
+            if (isValid == true)
             {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
                 if(model.price == null)
                 {
                     model.price = "0,0";
                 }
-                else if (model.price.Contains("."))
+                else 
+                if (model.price.Contains("."))
                 {
                     model.price = model.price.Replace(".", ",");
                 }
@@ -252,7 +300,11 @@ namespace PrezzieWithDB.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View(model);
+
+            else
+            {
+            return View("Create", model);
+            }
         }
 
         // GET: Request/Edit/5
