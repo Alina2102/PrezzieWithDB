@@ -1,4 +1,4 @@
-﻿@model PrezzieWithDB.Models.Customer
+﻿@model PrezzieWithDB.ViewModels.CustomerView
 
 @{
     ViewBag.Title = "Details";
@@ -20,7 +20,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.profile.eMail)
+                @Html.DisplayFor(model => model.eMail)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -28,7 +28,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.profile.firstName)
+                @Html.DisplayFor(model => model.firstName)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -36,7 +36,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.profile.surname)
+                @Html.DisplayFor(model => model.surname)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -52,7 +52,7 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.profile.birthday)
+                @Html.DisplayFor(model => model.birthday)
             </dd>
 
             <dt style="margin-top:1em; color:#56c8c8">
@@ -60,7 +60,31 @@
             </dt>
 
             <dd style="margin-top:1em">
-                @Html.DisplayFor(model => model.profile.descriptionUser)
+                @Html.DisplayFor(model => model.descriptionUser)
+            </dd>
+
+            <dt style="margin-top:1em; color:#56c8c8">
+                Stars:
+            </dt>
+
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.rating)
+            </dd>
+
+            <dt style="margin-top:1em; color:#56c8c8">
+                Rating:
+            </dt>
+
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.ratingDescription)
+            </dd>
+
+            <dt style="margin-top:1em; color:#56c8c8">
+                Rating Count:
+            </dt>
+
+            <dd style="margin-top:1em">
+                @Html.DisplayFor(model => model.ratingCount)
             </dd>
 
 

@@ -183,6 +183,7 @@ namespace PrezzieWithDB.Controllers
         // GET: Customer
         public ActionResult Index()
         {
+
             try
             {
                 string userName = Session["userName"].ToString();
@@ -223,11 +224,43 @@ namespace PrezzieWithDB.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 Customer customer = db.customers.Find(id);
+                CustomerView cv = new CustomerView();
+                cv.birthday = customer.profile.birthday;
+                cv.countryUser = customer.countryUser;
+                cv.descriptionUser = customer.profile.descriptionUser;
+                cv.eMail = customer.profile.eMail;
+                cv.firstName = customer.profile.firstName;
+                cv.surname = customer.profile.surname;
+                cv.selectedPictureCustomer = customer.selectedPictureCustomer;
+                cv.userName = customer.userName;
+                cv.password = customer.profile.password;
+
+                try
+                {
+                    List<CustomerRating> customerRatings = new List<CustomerRating>();
+                    customerRatings = customer.customerRatings.ToList();
+
+                    foreach (CustomerRating cr in customerRatings)
+                    {
+                        cv.rating += cr.ratingID;
+                    }
+                    cv.ratingCount = customerRatings.Count;
+                    cv.rating /= cv.ratingCount;
+                    cv.rating = Math.Round(cv.rating, 1);
+                    int ratingRounded = (int)cv.rating;
+                    cv.ratingDescription = db.ratings.Find(ratingRounded).ratingDescription;
+                }
+                catch (Exception)
+                {
+                    cv.ratingCount = 0;
+                    cv.rating = 0;
+                    cv.ratingDescription = "no Ratings";
+                }
                 if (customer == null || customer.userName != userName)
                 {
                     return HttpNotFound();
                 }
-                return View(customer);
+                return View(cv);
             }
             catch (Exception)
             {

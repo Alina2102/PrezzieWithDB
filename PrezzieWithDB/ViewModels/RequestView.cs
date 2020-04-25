@@ -28,5 +28,8 @@ namespace PrezzieWithDB.ViewModels
         [DisplayName("Upload Request Picture")]
         public string selectedPictureSouvenir { get; set; }
         public string selectedPictureCustomer { get; set; }
+        public double rating { get; set; }
+        public string ratingDescription { get; set; }
+        public int ratingCount { get; set; }
     }
 }

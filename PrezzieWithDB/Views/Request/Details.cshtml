@@ -105,8 +105,7 @@
                         Birthday:
                     </dt>
 
-                    <dd style="        margin-top: 1em
-">
+                    <dd style="margin-top:1em">
                         @Html.DisplayFor(model => model.birthday)
                     </dd>
 
@@ -117,7 +116,28 @@
                     <dd style="margin-top:1em">
                         @Html.DisplayFor(model => model.descriptionUser)
                     </dd>
+                    <dt style="margin-top:1em">
+                        Stars:
+                    </dt>
 
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.rating)
+                    </dd>
+
+                    <dt style="margin-top:1em">
+                        Rating:
+                    </dt>
+
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.ratingDescription)
+                    </dd>
+                    <dt style="margin-top:1em">
+                        Rating Count:
+                    </dt>
+
+                    <dd style="margin-top:1em">
+                        @Html.DisplayFor(model => model.ratingCount)
+                    </dd>
                 </dl>
             </div>
             @{PrezzieWithDB.DAL.PrezzieContext db = new PrezzieWithDB.DAL.PrezzieContext();

@@ -523,6 +523,29 @@ namespace PrezzieWithDB.Controllers
             rv.birthday = customer.profile.birthday;
             rv.descriptionUser = customer.profile.descriptionUser;
 
+            try
+            {
+                List<CustomerRating> customerRatings = new List<CustomerRating>();
+                customerRatings = customer.customerRatings.ToList();
+
+                foreach (CustomerRating cr in customerRatings)
+                {
+                    rv.rating += cr.ratingID;
+                }
+                rv.ratingCount = customerRatings.Count;
+                rv.rating /= rv.ratingCount;
+                rv.rating = Math.Round(rv.rating, 1);
+                int ratingRounded = (int)rv.rating;
+                rv.ratingDescription = db.ratings.Find(ratingRounded).ratingDescription;
+            }
+            catch (Exception)
+            {
+                rv.ratingCount = 0;
+                rv.rating = 0;
+                rv.ratingDescription = "no Ratings";
+            }
+        
+
             return rv;
         }
 
