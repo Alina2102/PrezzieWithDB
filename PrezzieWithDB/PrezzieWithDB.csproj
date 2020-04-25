@@ -143,9 +143,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004251059177_Init.cs" />
+    <Compile Include="Migrations\202004251059177_Init.Designer.cs">
+      <DependentUpon>202004251059177_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerRating.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Souvenir.cs" />
     <Compile Include="Models\SouvenirInfo.cs" />
@@ -260,6 +266,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004251059177_Init.resx">
+      <DependentUpon>202004251059177_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

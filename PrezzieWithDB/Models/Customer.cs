@@ -17,6 +17,6 @@ namespace PrezzieWithDB.Models
         public virtual Profile profile { get; set; }
 
         public virtual ICollection<Request> requests { get; set; }
-
+        public virtual ICollection<CustomerRating> customerRatings { get; set; }
     }
-}
+}   

@@ -122,6 +122,12 @@
             </div>
             @{PrezzieWithDB.DAL.PrezzieContext db = new PrezzieWithDB.DAL.PrezzieContext();
                  PrezzieWithDB.Models.Customer currentUser = db.customers.Find(Session["userName"]);
+                PrezzieWithDB.Models.Request request = db.requests.Find(Model.souvenirID);
+                request.status = "in progress";
+                request.userNameDelivery = currentUser.userName;
+                db.Entry(request).CurrentValues.SetValues(request);
+                db.SaveChanges();
+
                 string subject = "Prezzie - I want to bring your request: " + Model.souvenirName;
                 string body = "Hello " + Model.firstName + ",%0AI am " + currentUser.profile.firstName + " and I saw your request. I going to " + Model.countrySouv + " and can bring it to you.%0ASo let me know if it's okay for you :-)%0A%0AKind regards%0A" + Model.firstName +" "+ Model.surname;
                 <a class="btn btn-default" style="background-color:#feab33; margin-top:3em" href="mailto:@Model.eMail?subject=@subject&body=@body">Contact me!</a>

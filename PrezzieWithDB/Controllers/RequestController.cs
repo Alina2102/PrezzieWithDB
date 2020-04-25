@@ -201,7 +201,7 @@ namespace PrezzieWithDB.Controllers
 
             ViewBag.ErrorMessageSouvenirName = null;
             ViewBag.ErrorMessageCountry = null;
-            //ViewBag.ErrorMessageAmount = null;
+            ViewBag.ErrorMessageAmount = null;
             ViewBag.ErrorMessagePrice = null;
             ViewBag.ErrorMessageCurrency = null;
             ViewBag.ErrorMessageReward = null;
@@ -584,6 +584,37 @@ namespace PrezzieWithDB.Controllers
         public ActionResult Sent()
         {
             return View();
+        }
+
+        public ActionResult FullFilled(int id)
+        {
+            Request request = db.requests.Find(id);
+            Customer customer = db.customers.Find(request.userNameDelivery);
+            request.status = "done";
+            CustomerRating customerRating = new CustomerRating();
+            customerRating.customer = customer;
+            // 
+            Rating rating = db.ratings.Find(5);
+
+            customerRating.rating = rating;
+            db.customerRatings.Add(customerRating);
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.Entry(customer).CurrentValues.SetValues(customer);
+
+            db.SaveChanges();
+
+            return RedirectToAction("MyOwnRequests");
+        }
+
+        public ActionResult SetNew(int id)
+        {
+            Request request = db.requests.Find(id);
+            request.status = "new";
+            request.userNameDelivery = null;
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.SaveChanges();
+
+            return RedirectToAction("MyOwnRequests");
         }
     }
 }

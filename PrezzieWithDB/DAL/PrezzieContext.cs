@@ -19,6 +19,8 @@ namespace PrezzieWithDB.DAL
         public DbSet<Souvenir> souvenirs { get; set; }
         public DbSet<SouvenirInfo> souvenirInfos { get; set; }
         public DbSet<Request> requests { get; set; }
+        public DbSet<Rating> ratings { get; set; }
+        public DbSet<CustomerRating> customerRatings { get; set; }
 
     }
 }
