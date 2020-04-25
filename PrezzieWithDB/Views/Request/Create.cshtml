@@ -123,7 +123,7 @@
     $(function () {
 
         $("#@Html.IdFor(s => s.amount)")
-        .on("input",function () {
+            .on("input", function () {
 
             if ($(this).val() < 1 || $(this).val() > 100) {
                 alert("Cannot be less than 1 or more than 100");
