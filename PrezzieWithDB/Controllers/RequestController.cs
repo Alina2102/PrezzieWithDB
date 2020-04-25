@@ -586,15 +586,24 @@ namespace PrezzieWithDB.Controllers
             return View();
         }
 
-        public ActionResult FullFilled(int id)
+        public ActionResult FullFilled(int id, string userNameDelivery)
         {
-            Request request = db.requests.Find(id);
+            souvenierID_tmp = id;
+            Customer customer = new Customer();
+            customer.userName = userNameDelivery;
+            return View(customer);
+        }
+        [HttpPost]
+        public ActionResult FullFilled(int stars)
+        {
+            Request request = db.requests.Find(souvenierID_tmp);
             Customer customer = db.customers.Find(request.userNameDelivery);
             request.status = "done";
             CustomerRating customerRating = new CustomerRating();
             customerRating.customer = customer;
             // 
-            Rating rating = db.ratings.Find(5);
+
+            Rating rating = db.ratings.Find(stars);
 
             customerRating.rating = rating;
             db.customerRatings.Add(customerRating);

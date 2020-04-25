@@ -1,0 +1,49 @@
+﻿@model PrezzieWithDB.Models.Customer
+
+@{
+    ViewBag.Title = "FullFilled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>FullFilled</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Rating for User @Model.userName</h4>
+    <hr />
+    <p>
+        <div>
+            <input type="radio" name="stars" value="1">
+            <label> bad </label>
+        </div>
+        <div>
+            <input type="radio" name="stars" value="2">
+            <label> poor </label>
+        </div>
+        <div>
+            <input type="radio" name="stars" value="3">
+            <label> ok </label>
+        </div>
+        <div>
+            <input type="radio" name="stars" value="4">
+            <label> good </label>
+        </div>
+        <div>
+            <input type="radio" name="stars" value="5">
+            <label> super </label>
+        </div>
+    </p>
+         <div class="form-group">
+             <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Rate!" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

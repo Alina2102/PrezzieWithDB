@@ -26,17 +26,17 @@ namespace PrezzieWithDB.Migrations
             ratings.Add(new Rating()
             {
             ratingID = 1,
-            ratingDescription = "Not fullfilled"
+            ratingDescription = "bad"
             });
             ratings.Add(new Rating()
             {
                 ratingID = 2,
-                ratingDescription = "Not good"
+                ratingDescription = "poor"
             });
             ratings.Add(new Rating()
             {
                 ratingID = 3,
-                ratingDescription = "was okay"
+                ratingDescription = "okay"
             });
             ratings.Add(new Rating()
             {
@@ -46,7 +46,7 @@ namespace PrezzieWithDB.Migrations
             ratings.Add(new Rating()
             {
                 ratingID = 5,
-                ratingDescription = "very good"
+                ratingDescription = "super"
             });
 
             foreach (Rating rating in ratings)

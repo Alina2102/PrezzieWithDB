@@ -76,7 +76,7 @@
         <div class="form-group">
             <p class="control-label col-md-2">Reward</p>
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.reward, Enumerable.Range(1, 100).Select(i => new SelectListItem { Text = i.ToString() + "%", Value = i.ToString() }), "Select a reward", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.reward, Enumerable.Range(5, 50).Select(i => new SelectListItem {Text = i.ToString() + "%", Value = i.ToString() }), "Select a reward", new { @class = "form-control" })
                 @if (ViewBag.ErrorMessageReward != null)
                 {
                     <p style="color:firebrick">@ViewBag.ErrorMessageReward</p>

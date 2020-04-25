@@ -79,7 +79,7 @@
                     <a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em; margin-left:7em" @Html.ActionLink("Set Status to new", "SetNew", new { id = item.souvenirID })
                 </div>
                 <div class="col-md-2">
-                    <a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em; margin-left:7em" @Html.ActionLink("Fullfilled", "FullFilled", new { id = item.souvenirID })
+                    <a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em; margin-left:7em" @Html.ActionLink("Fullfilled", "FullFilled", new { id = item.souvenirID, userNameDelivery = item.userNameDelivery })
                 </div>
             }
             <div class="col-md-2">

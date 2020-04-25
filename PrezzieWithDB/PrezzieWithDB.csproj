@@ -250,6 +250,7 @@
     <Content Include="Views\Request\Send.cshtml" />
     <Content Include="Views\Request\Sent.cshtml" />
     <Content Include="Views\Request\Delete.cshtml" />
+    <Content Include="Views\Request\FullFilled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
