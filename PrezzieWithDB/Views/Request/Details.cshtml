@@ -116,28 +116,27 @@
                     <dd style="margin-top:1em">
                         @Html.DisplayFor(model => model.descriptionUser)
                     </dd>
-                    <dt style="margin-top:1em">
-                        Stars:
-                    </dt>
+                    @if (Model.ratingCount > 0)
+                    {
+                        <dt style="margin-top:1em">
+                            Rating:
+                        </dt>
 
-                    <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.rating)
-                    </dd>
+                        <dd style="margin-top:1em">
+                            @Html.DisplayFor(model => model.rating) ☆ - @Html.DisplayFor(model => model.ratingDescription) (@Html.DisplayFor(model => model.ratingCount) ratings)
+                        </dd>
+                    }
 
-                    <dt style="margin-top:1em">
-                        Rating:
-                    </dt>
+                    @if (Model.ratingCount == 0)
+                    {
+                        <dt style="margin-top:1em">
+                            Rating:
+                        </dt>
 
-                    <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.ratingDescription)
-                    </dd>
-                    <dt style="margin-top:1em">
-                        Rating Count:
-                    </dt>
-
-                    <dd style="margin-top:1em">
-                        @Html.DisplayFor(model => model.ratingCount)
-                    </dd>
+                        <dd style="margin-top:1em">
+                            no ratings yet
+                        </dd>
+                    }
                 </dl>
             </div>
             @{PrezzieWithDB.DAL.PrezzieContext db = new PrezzieWithDB.DAL.PrezzieContext();
