@@ -46,7 +46,7 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.inProgress = false;
             }
             else if (New == true && InProgress == true)
-            { 
+            {
                 requests = db.requests.Where(x => x.status == "in progress" || x.status == "new");
                 ViewBag.New = true;
                 ViewBag.inProgress = true;
@@ -120,7 +120,7 @@ namespace PrezzieWithDB.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Login","Customer");
+                return RedirectToAction("Login", "Customer");
             }
         }
 
@@ -133,13 +133,13 @@ namespace PrezzieWithDB.Controllers
             switch (status)
             {
                 case "InProgress":
-                   requests = db.requests.Where(x => x.status == "in progress");
+                    requests = db.requests.Where(x => x.status == "in progress");
                     break;
                 case "Done":
-                   requests = db.requests.Where(x => x.status == "done");
+                    requests = db.requests.Where(x => x.status == "done");
                     break;
                 default:
-                   requests = db.requests.Where(x => x.status == "new");
+                    requests = db.requests.Where(x => x.status == "new");
                     break;
             }
             ViewBag.status = status;
@@ -182,7 +182,7 @@ namespace PrezzieWithDB.Controllers
                 return RedirectToAction("Login", "Customer");
             }
         }
-           
+
 
         // GET: Request/Create
         public ActionResult Create()
@@ -223,7 +223,7 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000";
                 isValid = false;
             }
-            if (model.price == null || model.price.Length > 7 )
+            if (model.price == null || model.price.Length > 7)
             {
                 ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits";
                 isValid = false;
@@ -247,11 +247,11 @@ namespace PrezzieWithDB.Controllers
             if (isValid == true)
             {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
-                if(model.price == null)
+                if (model.price == null)
                 {
                     model.price = "0,0";
                 }
-                else 
+                else
                 if (model.price.Contains("."))
                 {
                     model.price = model.price.Replace(".", ",");
@@ -304,7 +304,7 @@ namespace PrezzieWithDB.Controllers
 
             else
             {
-            return View("Create", model);
+                return View("Create", model);
             }
         }
 
@@ -315,7 +315,7 @@ namespace PrezzieWithDB.Controllers
             {
                 return RedirectToAction("Index");
             }
-            
+
             souvenierID_tmp = id;
             Request request = db.requests.Find(id);
 
@@ -333,7 +333,7 @@ namespace PrezzieWithDB.Controllers
             requestEdit.price = request.souvenir.souvenirInfo.price.ToString();
             requestEdit.currency = request.souvenir.souvenirInfo.currency;
             requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
-            
+
             return View(requestEdit);
         }
 
@@ -398,7 +398,7 @@ namespace PrezzieWithDB.Controllers
             }
 
             if (isValid == true)
-            { 
+            {
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
                 if (model.price == null)
                 {
@@ -432,7 +432,7 @@ namespace PrezzieWithDB.Controllers
             }
             else
             {
-            return View("Edit", model);
+                return View("Edit", model);
             }
         }
 
@@ -469,13 +469,13 @@ namespace PrezzieWithDB.Controllers
 
             db.requests.Remove(request);
             db.SaveChanges();
-        
+
             using (var smtp = new SmtpClient())
             {
                 var credential = new NetworkCredential
                 {
-                    UserName = "prezzie.info@gmail.com",  // replace with valid value
-                    Password = "A1b2C3D$"  // replace with valid value
+                    UserName = "prezzie.info@gmail.com",
+                    Password = "A1b2C3D$"
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp.gmail.com";
@@ -484,7 +484,6 @@ namespace PrezzieWithDB.Controllers
                 await smtp.SendMailAsync(message);
                 return RedirectToAction("Sent");
             }
-            /////////////////////////////////////////////////
         }
 
         protected override void Dispose(bool disposing)
@@ -544,7 +543,7 @@ namespace PrezzieWithDB.Controllers
                 rv.rating = 0;
                 rv.ratingDescription = "no Ratings";
             }
-        
+
 
             return rv;
         }
@@ -587,23 +586,6 @@ namespace PrezzieWithDB.Controllers
             return RedirectToAction("MyOwnRequests");
         }
 
-        public ActionResult Send()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Send(SendMailModel model)
-        {
-   
-            if (ModelState.IsValid)
-            {
-                
-            }
-            return View(model);
-        }
-
         public ActionResult Sent()
         {
             return View();
@@ -624,7 +606,6 @@ namespace PrezzieWithDB.Controllers
             request.status = "done";
             CustomerRating customerRating = new CustomerRating();
             customerRating.customer = customer;
-            // 
 
             Rating rating = db.ratings.Find(stars);
 
@@ -647,6 +628,56 @@ namespace PrezzieWithDB.Controllers
             db.SaveChanges();
 
             return RedirectToAction("MyOwnRequests");
+        }
+        [HttpGet]
+        public ActionResult ContactMe(int souvenirID, string souvenirName,string countrySouv, string eMail, string firstName, string surname)
+        {
+            RequestContactModel rcm = new RequestContactModel();
+            rcm.souvenirID = souvenirID;
+            rcm.souvenirName = souvenirName;
+            rcm.countrySouv = countrySouv;
+            rcm.eMail = eMail;
+            rcm.firstName = firstName;
+            rcm.surname = surname;
+            rcm.customerSend = db.customers.Find(Session["userName"].ToString());
+
+            rcm.emailSubject = "Prezzie - an user wants to bring you your request: " + rcm.souvenirName;
+            rcm.emailBody = "Hello " + rcm.firstName + "," + Environment.NewLine + Environment.NewLine + "I am " + rcm.customerSend.profile.firstName + " and I saw your request: " + rcm.souvenirName + "." + Environment.NewLine + "I am going to " + rcm.countrySouv + " and can bring it to you." + Environment.NewLine + "So let me know if it's okay for you :-) " + Environment.NewLine + "You can contact me under: " + rcm.customerSend.profile.eMail + "." + Environment.NewLine + Environment.NewLine + "Kind regards " + Environment.NewLine + rcm.customerSend.profile.firstName + " " + rcm.customerSend.profile.surname;
+            
+            return View(rcm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ContactMe(RequestContactModel rcm)
+        {
+
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(rcm.eMail));
+            message.From = new MailAddress("prezzie.info@gmail.com");
+            message.Subject = rcm.emailSubject;
+            message.Body = rcm.emailBody;
+            message.IsBodyHtml = true;
+
+            Request request = db.requests.Find(rcm.souvenirID);
+            request.status = "in progress";
+            request.userNameDelivery = rcm.userName;
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.SaveChanges();
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "prezzie.info@gmail.com",
+                    Password = "A1b2C3D$"
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return RedirectToAction("Sent");
+            }
         }
     }
 }

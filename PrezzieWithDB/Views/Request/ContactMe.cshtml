@@ -1,0 +1,59 @@
+﻿@model PrezzieWithDB.ViewModels.RequestContactModel
+
+@{
+    ViewBag.Title = "ContactMe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ContactMe</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>RequestContactModel</h4>
+    <hr />
+    <dt>
+        Souvenir:
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.souvenirName)
+    </dd>
+
+    <dt style="margin-top:1em">
+        Recipient:
+    </dt>
+
+    <dd style="margin-top:1em">
+        @Model.firstName @Model.surname
+    </dd>
+
+    <dt style="margin-top:1em">
+        Subject:
+    </dt>
+
+    <dd style="margin-top:1em">
+        @Html.EditorFor(model => model.emailSubject, new { htmlAttributes = new { @class = "form-control" } })
+    </dd>
+
+    <dt style="margin-top:1em">
+        Your personal Message:
+    </dt>
+
+    <dd style="margin-top:1em">
+        @Html.EditorFor(model => model.emailBody, new { htmlAttributes = new { @class = "form-control" } })
+    </dd>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Send" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
