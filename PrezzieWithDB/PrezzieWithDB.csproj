@@ -143,10 +143,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004251505466_init.cs" />
-    <Compile Include="Migrations\202004251505466_init.Designer.cs">
-      <DependentUpon>202004251505466_init.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerRating.cs" />
@@ -164,6 +160,7 @@
     <Compile Include="ViewModels\CustomerView.cs" />
     <Compile Include="ViewModels\RangeAttribute.cs" />
     <Compile Include="ViewModels\RequestChangePictureView.cs" />
+    <Compile Include="ViewModels\RequestContactModel.cs" />
     <Compile Include="ViewModels\RequestCreate.cs" />
     <Compile Include="ViewModels\RequestEditView.cs" />
     <Compile Include="ViewModels\RequestView.cs" />
@@ -251,6 +248,7 @@
     <Content Include="Views\Request\Sent.cshtml" />
     <Content Include="Views\Request\Delete.cshtml" />
     <Content Include="Views\Request\FullFilled.cshtml" />
+    <Content Include="Views\Request\ContactMe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -267,11 +265,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004251505466_init.resx">
-      <DependentUpon>202004251505466_init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
