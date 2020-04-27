@@ -71,18 +71,28 @@
                         <td>Amount:</td>
                         <td style="padding-left:4em">@item.amount</td>
                     </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td style="padding-left:4em">@item.status</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        @if (item.status == "in progress")
+                        {
+                            <td style="padding-left:4em"><a style="color:green" @Html.ActionLink("Set Status to new", "SetNew", new { id = item.souvenirID })</td>
+                        }
+                    </tr>
                 </table>
 
             </div>
-            <div class="col-md-2">
-                <p><a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em; margin-right:-1em" @Html.ActionLink("Edit", "Edit", new { id = item.souvenirID })</p>
-                   
-                @if (item.status == "in progress") 
+            <div class="col-md-1">
+                @if (item.status == "in progress")
                 {
-                <p><a class="btn btn-default" style="background-color:lightgreen; margin-right:-1em" @Html.ActionLink("Set Status to new", "SetNew", new { id = item.souvenirID })</p>
-                <p><a class="btn btn-default" style="background-color:#feab33; margin-right:-1em" @Html.ActionLink("Fullfilled", "FullFilled", new { id = item.souvenirID, userNameDelivery = item.userNameDelivery })</p>
+                    <p><a class="btn btn-default" style="background-color:#feab33; margin-top:12.5em" @Html.ActionLink("Fullfilled", "FullFilled", new { id = item.souvenirID, userNameDelivery = item.userNameDelivery })</p>
                 }
-
+            </div>
+            <div class="col-md-1">
+                <p><a class="btn btn-default" style="background-color:#56c8c8; margin-top:12.5em" @Html.ActionLink("Edit", "Edit", new { id = item.souvenirID })</p>
             </div>
         </div>
     </div>
