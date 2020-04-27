@@ -478,7 +478,7 @@ namespace PrezzieWithDB.Controllers
                 isValid = false;
             }
 
-            if (model.confirmPassword == null && model.password != model.confirmPassword)
+            if (model.confirmPassword == null || model.password != model.confirmPassword)
             {
                 ViewBag.ErrorMessageConfirmPassword = "Please confirm the password";
                 isValid = false;
