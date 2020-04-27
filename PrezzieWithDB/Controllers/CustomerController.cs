@@ -51,19 +51,19 @@ namespace PrezzieWithDB.Controllers
                     return View("SignUp", model);
                 }
             }
-            if (model.userName == null)
+            if (model.userName == null || model.userName.Length < 3 || model.userName.Length > 30)
             {
-                ViewBag.ErrorMessageUsername = "Please enter an username";
+                ViewBag.ErrorMessageUsername = "Please enter an username between 3 and 30 characters";
                 isValid = false;
             }
-            if (model.password == null)
+            if (model.password == null || model.password.Length < 3 || model.password.Length > 30)
             {
-                ViewBag.ErrorMessagePassword = "Please enter a password"; 
+                ViewBag.ErrorMessagePassword = "Please a password between 3 and 30 characters ";
                 isValid = false;
             }
-            if (model.eMail == null)
+            if (model.eMail == null || model.password.Length < 3 || model.password.Length > 30)
             {
-                ViewBag.ErrorMessageEmail = "Please enter an email address";
+                ViewBag.ErrorMessageEmail = "Please enter an email address between 3 and 30 characters";
                 isValid = false;
             }
             if (model.firstName == null || model.firstName.Length < 4 || model.firstName.Length > 30)
@@ -457,6 +457,50 @@ namespace PrezzieWithDB.Controllers
             db.Entry(customer).CurrentValues.SetValues(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(CustomerChangePasswordView model)
+        {
+            
+            Boolean isValid = true;
+
+            ViewBag.ErrorMessagePassword = null;
+            ViewBag.ErrorMessageConfirmPassword = null;
+
+
+            if (model.password == null || model.password.Length < 3 || model.password.Length > 30)
+            {
+                ViewBag.ErrorMessagePassword = "Please enter a password between 3 and 30 characters ";
+                isValid = false;
+            }
+
+            if (model.confirmPassword == null && model.password != model.confirmPassword)
+            {
+                ViewBag.ErrorMessageConfirmPassword = "Please confirm the password";
+                isValid = false;
+            }
+
+            if (isValid == true)
+            {
+
+                model.userName = Session["userName"].ToString();
+                
+                Profile profile = db.profiles.Find(model.userName);
+
+                profile.password = model.password;
+                db.Entry(profile).CurrentValues.SetValues(profile);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+                }
+            else
+            {
+                return View("ChangePassword", model);
+            }
         }
     }
 }
