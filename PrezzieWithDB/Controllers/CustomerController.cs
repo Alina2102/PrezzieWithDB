@@ -39,7 +39,7 @@ namespace PrezzieWithDB.Controllers
 
             if (db.customers.Find(model.userName) != null)
             {
-                model.errorMessage = "Username already exists";
+                model.errorMessage = "Username already exists.";
                 return View("SignUp", model);
             }
             var customers = db.customers.Include(c => c.profile);
@@ -47,48 +47,48 @@ namespace PrezzieWithDB.Controllers
             {
                 if (c.profile.eMail == model.eMail)
                 {
-                    model.errorMessage = "E-mail already exists";
+                    model.errorMessage = "E-mail already exists.";
                     return View("SignUp", model);
                 }
             }
             if (model.userName == null || model.userName.Length < 3 || model.userName.Length > 30)
             {
-                ViewBag.ErrorMessageUsername = "Please enter an username between 3 and 30 characters";
+                ViewBag.ErrorMessageUsername = "Please enter an username between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.password == null || model.password.Length < 3 || model.password.Length > 30)
             {
-                ViewBag.ErrorMessagePassword = "Please a password between 3 and 30 characters ";
+                ViewBag.ErrorMessagePassword = "Please a password between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.eMail == null || model.password.Length < 3 || model.password.Length > 30)
             {
-                ViewBag.ErrorMessageEmail = "Please enter an email address between 3 and 30 characters";
+                ViewBag.ErrorMessageEmail = "Please enter an email address between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.firstName == null || model.firstName.Length < 4 || model.firstName.Length > 30)
             {
-                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters";
+                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.surname == null || model.surname.Length < 4 || model.surname.Length > 30)
             {
-                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
+                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.birthday == null)
             {
-                ViewBag.ErrorMessageBirthday = "Please enter a birthday";
+                ViewBag.ErrorMessageBirthday = "Please enter a birthday.";
                 isValid = false;
             }
             if (model.countryUser == null)
             {
-                ViewBag.ErrorMessageCountry = "Please select a country";
+                ViewBag.ErrorMessageCountry = "Please select a country.";
                 isValid = false;
             }
             if (model.descriptionUser != null && model.descriptionUser.Length > 300)
             {
-                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters";
+                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters.";
                 isValid = false;
             }
 
@@ -304,7 +304,7 @@ namespace PrezzieWithDB.Controllers
            
             if(model.eMail == null)
             {
-                ViewBag.ErrorMessageEmail = "Please enter an email address";
+                ViewBag.ErrorMessageEmail = "Please enter an email address.";
                 isValid = false;
             }
             else
@@ -314,7 +314,7 @@ namespace PrezzieWithDB.Controllers
                 {
                     if (c.profile.eMail == model.eMail && c.userName != model.userName)
                     {
-                        ViewBag.ErrorMessageEmail = "E-mail already exists";
+                        ViewBag.ErrorMessageEmail = "E-mail already exists.";
                         isValid = false;
                     }
                 }
@@ -322,27 +322,27 @@ namespace PrezzieWithDB.Controllers
 
             if (model.firstName == null || model.firstName.Length < 4 || model.firstName.Length > 30)
             {
-                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters";
+                ViewBag.ErrorMessageFirstName = "Please enter a valid first name between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.surname == null || model.surname.Length < 4 || model.surname.Length > 30)
             {
-                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
+                ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.birthday == null)
             {
-                ViewBag.ErrorMessageBirthday = "Please enter a birthday";
+                ViewBag.ErrorMessageBirthday = "Please enter a birthday.";
                 isValid = false;
             }
             if (model.countryUser == null)
             {
-                ViewBag.ErrorMessageCountry = "Please select a country";
+                ViewBag.ErrorMessageCountry = "Please select a country.";
                 isValid = false;
             }
             if (model.descriptionUser != null && model.descriptionUser.Length > 300)
             {
-                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters";
+                ViewBag.ErrorMessageDescription = "The maximum capacity are 300 characters.";
                 isValid = false;
             }
 
@@ -474,15 +474,22 @@ namespace PrezzieWithDB.Controllers
 
             if (model.password == null || model.password.Length < 3 || model.password.Length > 30)
             {
-                ViewBag.ErrorMessagePassword = "Please enter a password between 3 and 30 characters ";
+                ViewBag.ErrorMessagePassword = "Please enter a password between 3 and 30 characters.";
                 isValid = false;
             }
 
-            if (model.confirmPassword == null || model.password != model.confirmPassword)
+            if (model.confirmPassword == null)
             {
-                ViewBag.ErrorMessageConfirmPassword = "Please confirm the password";
+                ViewBag.ErrorMessageConfirmPassword = "Please confirm the password.";
                 isValid = false;
             }
+
+            if (model.password != model.confirmPassword)
+            {
+                ViewBag.ErrorMessageConfirmPassword = "Please make sure your passwords match.";
+                isValid = false;
+            }
+
 
             if (isValid == true)
             {

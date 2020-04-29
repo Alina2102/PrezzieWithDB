@@ -209,38 +209,38 @@ namespace PrezzieWithDB.Controllers
 
             if (model.souvenirName == null || model.souvenirName.Length < 3 || model.souvenirName.Length > 30)
             {
-                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters";
+                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.countrySouv == null)
             {
-                ViewBag.ErrorMessageCountry = "Please select a country";
+                ViewBag.ErrorMessageCountry = "Please select a country.";
                 isValid = false;
             }
             //Fehlermeldung von amount wird noch nicht angezeigt
             if (model.amount < 1 || model.amount > 1000)
             {
-                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000";
+                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000.";
                 isValid = false;
             }
             if (model.price == null || model.price.Length > 7)
             {
-                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits";
+                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits.";
                 isValid = false;
             }
             if (model.currency == null)
             {
-                ViewBag.ErrorMessageCurrency = "Please select a currency";
+                ViewBag.ErrorMessageCurrency = "Please select a currency.";
                 isValid = false;
             }
             if (model.reward == null)
             {
-                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward)";
+                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward in %).";
                 isValid = false;
             }
             if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
             {
-                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters";
+                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters.";
                 isValid = false;
             }
 
@@ -358,42 +358,42 @@ namespace PrezzieWithDB.Controllers
 
             if (model.souvenirName == null || model.souvenirName.Length < 3 || model.souvenirName.Length > 30)
             {
-                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters";
+                ViewBag.ErrorMessageSouvenirName = "The name of your souvenir should have between 3 and 30 characters.";
                 isValid = false;
             }
             if (model.countrySouv == null)
             {
-                ViewBag.ErrorMessageCountry = "Please select a country";
+                ViewBag.ErrorMessageCountry = "Please select a country.";
                 isValid = false;
             }
             if (model.amount < 1 || model.amount > 1000)
             {
-                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000";
+                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000.";
                 isValid = false;
             }
             if (model.price == null || model.price.Length > 7)
             {
-                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits";
+                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits.";
                 isValid = false;
             }
             if (model.currency == null)
             {
-                ViewBag.ErrorMessageCurrency = "Please select a currency";
+                ViewBag.ErrorMessageCurrency = "Please select a currency.";
                 isValid = false;
             }
             if (model.reward == null)
             {
-                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward)";
+                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward in %).";
                 isValid = false;
             }
             if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
             {
-                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters";
+                ViewBag.ErrorMessageDescription = "Please enter a description of your souvenir, it should be more than 5 and less than 300 characters.";
                 isValid = false;
             }
             if (model.status == null)
             {
-                ViewBag.ErrorMessageStatus = "Please select a status";
+                ViewBag.ErrorMessageStatus = "Please select a status.";
                 isValid = false;
             }
 

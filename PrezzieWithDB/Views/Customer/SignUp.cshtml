@@ -19,7 +19,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <p class="control-label col-md-2">Username</p>
+            <b class="control-label col-md-2">Username</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageUsername != null)
@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Password</p>
+            <b class="control-label col-md-2">Password</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessagePassword != null)
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">E-Mail</p>
+            <b class="control-label col-md-2">E-Mail</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.eMail, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageEmail != null)
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">First name</p>
+            <b class="control-label col-md-2">First name</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageFirstName != null)
@@ -63,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Surname</p>
+            <b class="control-label col-md-2">Surname</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.surname, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageSurName != null)
@@ -74,7 +74,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Birthday</p>
+            <b class="control-label col-md-2">Birthday</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageBirthday != null)
@@ -85,7 +85,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Country</p>
+            <b class="control-label col-md-2">Country</b>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.countryUser, new SelectList(
                 new List<Object> { "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Côte d'Ivoire", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (formerly Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzani", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe" }), "Select a country", new { @class = "form-control" })
@@ -97,7 +97,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Tell us something about you</p>
+            <b class="control-label col-md-2">Tell us something about you</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.descriptionUser, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageDescription != null)
@@ -108,7 +108,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.selectedPictureCustomer, new { @class = "control-label col-md-2" })
+            <b class="control-label col-md-2">Upload a profile picture</b>
             <div class="col-md-10">
                 <input type="file" name="file" id="file">
             </div>

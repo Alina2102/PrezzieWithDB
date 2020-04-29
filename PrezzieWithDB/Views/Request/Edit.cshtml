@@ -5,19 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit request</h2>
+<h2 style="margin-bottom:1em">Edit request</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="form-horizontal" style="background-color:#56c8c8; border-radius:40px; padding-top:2em">
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <p class="control-label col-md-2">Souvenir</p>
+        <div class="form-group" style="margin-top:3em">
+            <b class="control-label col-md-2">Souvenir</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.souvenirName, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageSouvenirName != null)
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Country</p>
+            <b class="control-label col-md-2">Country</b>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.countrySouv,
                 new SelectList(
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="form-group">
-            <p class="control-label col-md-2">Amount</p>
+            <b class="control-label col-md-2">Amount</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageAmount != null)
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Usual price per piece</p>
+            <b class="control-label col-md-2">Usual price per piece</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessagePrice != null)
@@ -62,7 +62,7 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Currency</p>
+            <b class="control-label col-md-2">Currency</b>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.currency, new SelectList(
                 new List<Object> { "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CAD", "CDF", "CHE", "CHF", "CHW", "CLF", "CLP", "CNY", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR", "IQD", "IRR", "ISK", "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "USN", "UYI", "UYU", "UYW", "UZS", "VES", "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XBA", "XBB", "XBC", "XBD", "XCD", "XDR", "XOF", "XPD", "XPF", "XPT", "XSU", "XTS", "XUA", "XXX", "YER", "ZAR", "ZMW", "ZWL" }), new { @class = "form-control" })
@@ -70,12 +70,12 @@
                 {
                     <p style="color:firebrick">@ViewBag.ErrorMessageCurrency</p>
                 }
-                <a href="https://en.wikipedia.org/wiki/List_of_circulating_currencies" style="color:#56c8c8">Don´t know the ISO code?</a>
+                <a href="https://en.wikipedia.org/wiki/List_of_circulating_currencies" style="color:#eeeeee">Don´t know the ISO code?</a>
             </div>
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Reward</p>
+            <b class="control-label col-md-2">Reward</b>
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.reward, Enumerable.Range(1, 100).Select(i => new SelectListItem { Text = i.ToString() + "%", Value = i.ToString() }), new { @class = "form-control" })
                 @if (ViewBag.ErrorMessageReward != null)
@@ -86,19 +86,20 @@
         </div>
 
         <div class="form-group">
-            <p class="control-label col-md-2">Description</p>
+            <b class="control-label col-md-2">About the souvenir</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.descriptionSouv, new { htmlAttributes = new { @class = "form-control" } })
                 @if (ViewBag.ErrorMessageDescription != null)
                 {
                     <p style="color:firebrick">@ViewBag.ErrorMessageDescription</p>
                 }
+                <p>e.g. brand, where to get it and other additional information</p>
             </div>
         </div>
         @if (Model.status == "in progress")
         {
             <div class="form-group">
-                <p class="control-label col-md-2">Status</p>
+                <b class="control-label col-md-2">Status</b>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.status, new SelectList(new List<Object> { "in progress", "done" }), new { @class = "form-control" })
                     @if (ViewBag.ErrorMessageStatus != null)
@@ -111,7 +112,7 @@
         @if (Model.status != "in progress")
         {
             <div class="form-group">
-                <p class="control-label col-md-2">Status</p>
+                <b class="control-label col-md-2">Status</b>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.status, new SelectList(new List<Object> { "new", "done" }), new { @class = "form-control" })
                     @if (ViewBag.ErrorMessageStatus != null)
@@ -123,14 +124,14 @@
         }
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" style="background-color:#feab33" />
+                <input type="submit" value="Save" class="btn btn-default" style="background-color:#feab33; margin-bottom:3em" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "MyOwnRequests")
+    @Html.ActionLink("Back to my requests", "MyOwnRequests")
 </div>
 
 @section Scripts {

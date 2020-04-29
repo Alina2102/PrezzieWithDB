@@ -5,32 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>changePicture</h2>
+<h2>Change request picture</h2>
 @using (Html.BeginForm("changePicture", "Request", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.souvenir.selectedPictureSouvenir, new { @class = "control-label col-md-2" })
+    <div class="form-group" style="margin-top:2em">
+        <b class="control-label col-md-2">Upload request picture</b>
         <div class="col-md-10">
             <input type="file" name="file" id="file">
         </div>
     </div>
 
     <div class="col-md-offset-2 col-md-10">
-        <p style="margin-left:-0.5em">For optimal resolution please select a square image!</p>
+        <p>For optimal resolution please select a square image!</p>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom:1em">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="change" class="btn btn-default" style="background-color:#feab33" />
         </div>
     </div>
 }
 <img src="@Url.Content(Model.souvenir.selectedPictureSouvenir)" alt="Here should be a photo" style="width:300px; height:300px; margin-top:4em" />
-<div>
-    <a href='@Url.Action("DeletePicture", "Request")' class="btn btn-default" style="background-color:#56c8c8">Delete Picture</a>
+<div style="margin-top:2em">
+    <a href='@Url.Action("DeletePicture", "Request")' class="btn btn-default" style="background-color:firebrick">Delete Picture</a>
 </div>
-<div>
+<div style="margin-top:2em">
     @Html.ActionLink("Back to Requests", "MyOwnRequests")
 </div>
