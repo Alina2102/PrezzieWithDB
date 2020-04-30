@@ -11,7 +11,7 @@
     <hr />
 
     <div class="row" align="center" style="background-image:url(/Content/header-bg.jpg); background-position:center; background-repeat:no-repeat; background-size:cover">
-        <div class="col-md-6" style="background-color:#eeeeee; margin-top:7.5em; margin-bottom:7.5em; border-top-left-radius:40px; border-bottom-left-radius:40px; height:30em; opacity:0.9">
+        <div class="col-md-6" style="background-color:#eeeeee; margin-top:7.5em; margin-bottom:7.5em; border-top-left-radius:40px; border-bottom-left-radius:40px; height:30em">
             <h2 style="color:#56c8c8; margin-top:2em">Souvenir: @Html.DisplayFor(model => model.souvenirName)</h2>
             <div align="left">
                 <dl class="dl-horizontal" style="margin-top:2em">
@@ -61,7 +61,7 @@
                     </dd>
 
                     <dt style="margin-top:1em">
-                        Souvenir description:
+                        About the souvenir:
                     </dt>
 
                     <dd style="margin-top:1em">
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="background-color:#56c8c8; margin-top:7.5em; margin-bottom:7.5em; border-top-right-radius:40px; border-bottom-right-radius:40px; height:30em; opacity:0.9">
+        <div class="col-md-6" style="background-color:#56c8c8; margin-top:7.5em; margin-bottom:7.5em; border-top-right-radius:40px; border-bottom-right-radius:40px; height:30em">
             <h2 style="color:#eeeeee; margin-top:2em">User: @Html.DisplayFor(model => model.userName)</h2>
             <div align="left">
                 <dl class="dl-horizontal" style="margin-top:2em">
@@ -139,7 +139,7 @@
                     }
                 </dl>
             </div>
-            <button> @Html.ActionLink("Contact me", "ContactMe", new { souvenirID = Model.souvenirID, souvenirName = Model.souvenirName, countrySouv = Model.countrySouv, eMail = Model.eMail, firstName = Model.firstName, surname = Model.surname}) </button>
+            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Contact me", "ContactMe", new { souvenirID = Model.souvenirID, souvenirName = Model.souvenirName, countrySouv = Model.countrySouv, eMail = Model.eMail, firstName = Model.firstName, surname = Model.surname}) </p>
         </div>
     </div>
 </div>
