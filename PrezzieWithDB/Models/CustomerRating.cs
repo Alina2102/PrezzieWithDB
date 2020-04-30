@@ -9,9 +9,11 @@ namespace PrezzieWithDB.Models
     public class CustomerRating
     {
         [Key]
-        public int profileRatingID { get; set; }
+        public int customerRatingID { get; set; }
         public string userName { get; set; }
         public int ratingID { get; set; }
+        public DateTime ratingDate { get; set; }
+        public string userEvaluating { get; set; }
 
 
         public virtual Customer customer { get; set; }

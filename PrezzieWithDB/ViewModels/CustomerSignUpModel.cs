@@ -27,7 +27,7 @@ namespace PrezzieWithDB.ViewModels
         public string surname { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public string birthday { get; set; }
+        public DateTime birthday { get; set; }
         [Required]
         public string countryUser { get; set; }
         [DataType(DataType.MultilineText)]

@@ -22,7 +22,8 @@ namespace PrezzieWithDB.ViewModels
         public string surname { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public string birthday { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime birthday { get; set; }
         [Required]
         public string countryUser { get; set; }
         [DataType(DataType.MultilineText)]

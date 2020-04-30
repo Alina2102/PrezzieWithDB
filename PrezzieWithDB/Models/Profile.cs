@@ -18,7 +18,7 @@ namespace PrezzieWithDB.Models
         public string firstName { get; set; }
         public string surname { get; set; }
         [DataType(DataType.Date)]
-        public string birthday { get; set; }
+        public DateTime birthday { get; set; }
         [DataType(DataType.MultilineText)]
         public string descriptionUser { get; set; }
 

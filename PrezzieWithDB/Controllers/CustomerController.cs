@@ -22,6 +22,7 @@ namespace PrezzieWithDB.Controllers
         {
             return View();
         }
+        
 
         [HttpPost]
         public ActionResult SignUp(CustomerSignUpModel model, HttpPostedFileBase file)
@@ -61,7 +62,7 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessagePassword = "Please a password between 3 and 30 characters ";
                 isValid = false;
             }
-            if (model.eMail == null || model.password.Length < 3 || model.password.Length > 30)
+            if (model.eMail == null || model.eMail.Length < 3 || model.eMail.Length > 30)
             {
                 ViewBag.ErrorMessageEmail = "Please enter an email address between 3 and 30 characters";
                 isValid = false;
@@ -76,10 +77,25 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
                 isValid = false;
             }
-            if (model.birthday == null)
+            if (model.birthday == null || model.birthday.ToString() == "01.01.0001 00:00:00")
             {
                 ViewBag.ErrorMessageBirthday = "Please enter a birthday";
                 isValid = false;
+            }
+            else
+            {
+                DateTime today = DateTime.Now;
+                var diff = (today - model.birthday).TotalDays;
+                if (diff < 6570)
+                {
+                    ViewBag.ErrorMessageBirthday = "You have to be 18 Years old to register on this homepage";
+                    isValid = false;
+                }
+                if (diff > 43800)
+                {
+                    ViewBag.ErrorMessageBirthday = "Your birth date would mean you are over 120 years old. Sorry that's not possible :-)";
+                    isValid = false;
+                }
             }
             if (model.countryUser == null)
             {
@@ -330,10 +346,24 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessageSurName = "Please enter a valid surname between 3 and 30 characters";
                 isValid = false;
             }
-            if (model.birthday == null)
+            if (model.birthday == null || model.birthday.ToString() == "01.01.0001 00:00:00")
             {
                 ViewBag.ErrorMessageBirthday = "Please enter a birthday";
                 isValid = false;
+            }
+            else {
+                DateTime today = DateTime.Now;
+                var diff = (today - model.birthday).TotalDays;
+            if (diff < 6570)
+            {
+                ViewBag.ErrorMessageBirthday = "You have to be 18 Years old to register on this homepage";
+                isValid = false;
+            }
+            if (diff > 43800)
+            {
+                ViewBag.ErrorMessageBirthday = "Your birth date would mean you are over 120 years old. Sorry that's not possible :-)";
+                isValid = false;
+            }
             }
             if (model.countryUser == null)
             {
