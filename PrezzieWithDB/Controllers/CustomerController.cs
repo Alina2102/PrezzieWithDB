@@ -454,9 +454,14 @@ namespace PrezzieWithDB.Controllers
             return cv;
         }
 
-        public ActionResult ChangePicture(Customer customer)
+        public ActionResult ChangePicture(string userName)
         {
-            userName_tmp = customer.userName;
+            if (userName == null)
+            {
+                return RedirectToAction("Index");
+            }
+            userName_tmp = userName;
+            Customer customer = db.customers.Find(userName);
             return View(customer);
         }
         [HttpPost]

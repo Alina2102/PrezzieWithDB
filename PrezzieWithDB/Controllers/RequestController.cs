@@ -21,7 +21,7 @@ namespace PrezzieWithDB.Controllers
     public class RequestController : Controller
     {
         private PrezzieContext db = new PrezzieContext();
-        private static int? souvenierID_tmp = null;
+        private static int? souvenirID_tmp = null;
 
         // GET: Request
         public ActionResult Index()
@@ -316,7 +316,7 @@ namespace PrezzieWithDB.Controllers
                 return RedirectToAction("Index");
             }
 
-            souvenierID_tmp = id;
+            souvenirID_tmp = id;
             Request request = db.requests.Find(id);
 
             if (request == null)
@@ -399,7 +399,7 @@ namespace PrezzieWithDB.Controllers
 
             if (isValid == true)
             {
-                SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenierID_tmp);
+                SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenirID_tmp);
                 if (model.price == null)
                 {
                     model.price = "0,0";
@@ -414,20 +414,20 @@ namespace PrezzieWithDB.Controllers
                 db.Entry(souvenirInfo).CurrentValues.SetValues(souvenirInfo);
                 db.SaveChanges();
 
-                Souvenir souvenir = db.souvenirs.Find(souvenierID_tmp);
+                Souvenir souvenir = db.souvenirs.Find(souvenirID_tmp);
                 souvenir.souvenirName = model.souvenirName;
                 souvenir.countrySouv = model.countrySouv;
                 db.Entry(souvenir).CurrentValues.SetValues(souvenir);
                 db.SaveChanges();
 
-                Request request = db.requests.Find(souvenierID_tmp);
+                Request request = db.requests.Find(souvenirID_tmp);
                 request.amount = model.amount;
                 request.reward = model.reward;
                 request.status = model.status;
                 db.Entry(request).CurrentValues.SetValues(request);
                 db.SaveChanges();
 
-                souvenierID_tmp = null;
+                souvenirID_tmp = null;
                 return RedirectToAction("MyOwnRequests");
             }
             else
@@ -550,14 +550,18 @@ namespace PrezzieWithDB.Controllers
 
         public ActionResult ChangePicture(int? souvenirID)
         {
-            souvenierID_tmp = souvenirID;
+            if (souvenirID == null)
+            {
+                return RedirectToAction("Index");
+            }
+            souvenirID_tmp = souvenirID;
             Request request = db.requests.Find(souvenirID);
             return View(request);
         }
         [HttpPost]
         public ActionResult ChangePicture(HttpPostedFileBase file)
         {
-            Request request = db.requests.Find(souvenierID_tmp);
+            Request request = db.requests.Find(souvenirID_tmp);
             try
             {
                 string fileName = request.souvenirID.ToString();
@@ -573,16 +577,16 @@ namespace PrezzieWithDB.Controllers
             }
             db.Entry(request).CurrentValues.SetValues(request);
             db.SaveChanges();
-            souvenierID_tmp = null;
+            souvenirID_tmp = null;
             return RedirectToAction("MyOwnRequests");
         }
         public ActionResult DeletePicture()
         {
-            Request request = db.requests.Find(souvenierID_tmp);
+            Request request = db.requests.Find(souvenirID_tmp);
             request.souvenir.selectedPictureSouvenir = "~/Content/defaultSouvenir.png";
             db.Entry(request).CurrentValues.SetValues(request);
             db.SaveChanges();
-            souvenierID_tmp = null;
+            souvenirID_tmp = null;
             return RedirectToAction("MyOwnRequests");
         }
 
@@ -593,7 +597,7 @@ namespace PrezzieWithDB.Controllers
 
         public ActionResult FullFilled(int id, string userNameDelivery)
         {
-            souvenierID_tmp = id;
+            souvenirID_tmp = id;
             Customer customer = new Customer();
             customer.userName = userNameDelivery;
             return View(customer);
@@ -601,7 +605,7 @@ namespace PrezzieWithDB.Controllers
         [HttpPost]
         public ActionResult FullFilled(int stars)
         {
-            Request request = db.requests.Find(souvenierID_tmp);
+            Request request = db.requests.Find(souvenirID_tmp);
             Customer customer = db.customers.Find(request.userNameDelivery);
             request.status = "done";
             CustomerRating customerRating = new CustomerRating();
