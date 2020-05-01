@@ -88,12 +88,12 @@ namespace PrezzieWithDB.Controllers
                 var diff = (today - model.birthday).TotalDays;
                 if (diff < 6570)
                 {
-                    ViewBag.ErrorMessageBirthday = "You have to be 18 Years old to register on this homepage";
+                    ViewBag.ErrorMessageBirthday = "You have to be 18 Years old to register on this homepage.";
                     isValid = false;
                 }
                 if (diff > 43800)
                 {
-                    ViewBag.ErrorMessageBirthday = "Your birth date would mean you are over 120 years old. Sorry that's not possible :-)";
+                    ViewBag.ErrorMessageBirthday = "Your birth date would mean you are over 120 years old. Sorry that's not possible. :-)";
                     isValid = false;
                 }
             }

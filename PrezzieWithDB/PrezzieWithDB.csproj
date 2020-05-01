@@ -143,9 +143,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004300841485_Ínit.cs" />
-    <Compile Include="Migrations\202004300841485_Ínit.Designer.cs">
-      <DependentUpon>202004300841485_Ínit.cs</DependentUpon>
+    <Compile Include="Migrations\202005010951112_init.cs" />
+    <Compile Include="Migrations\202005010951112_init.Designer.cs">
+      <DependentUpon>202005010951112_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -253,6 +253,8 @@
     <Content Include="Views\Request\Delete.cshtml" />
     <Content Include="Views\Request\FullFilled.cshtml" />
     <Content Include="Views\Customer\ChangePassword.cshtml" />
+    <Content Include="Views\Request\ContactMe.cshtml" />
+    <Content Include="Views\Request\Sent2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,8 +273,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004300841485_Ínit.resx">
-      <DependentUpon>202004300841485_Ínit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005010951112_init.resx">
+      <DependentUpon>202005010951112_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

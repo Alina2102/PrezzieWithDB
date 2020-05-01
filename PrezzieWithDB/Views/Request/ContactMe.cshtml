@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ContactMe</h2>
+<h2>Contact the user</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>RequestContactModel</h4>
     <hr />
     <dt>
         Souvenir:
@@ -35,7 +34,8 @@
     </dt>
 
     <dd style="margin-top:1em">
-        @Html.EditorFor(model => model.emailSubject, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DisplayFor(model => model.emailSubject)
+        @Html.HiddenFor(model => model.emailSubject)
     </dd>
 
     <dt style="margin-top:1em">
@@ -55,5 +55,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to request", "Details", new { id = Model.souvenirID })
 </div>

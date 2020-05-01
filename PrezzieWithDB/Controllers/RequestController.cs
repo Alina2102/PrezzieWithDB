@@ -680,8 +680,13 @@ namespace PrezzieWithDB.Controllers
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
                 await smtp.SendMailAsync(message);
-                return RedirectToAction("Sent");
+                return RedirectToAction("Sent2");
             }
+        }
+
+        public ActionResult Sent2()
+        {
+            return View();
         }
     }
 }
