@@ -101,10 +101,12 @@ namespace PrezzieWithDB.Controllers
         }
         public ActionResult MyOwnRequests()
         {
+            ViewBag.status = "New";
             try
             {
                 string userName = Session["userName"].ToString();
-                var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+                //var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
+                var requests = db.requests.Where(x => x.status == "new");
                 requests = requests.OrderByDescending(r => r.souvenirID);
                 List<Request> myRequests = new List<Request>();
 
@@ -610,14 +612,20 @@ namespace PrezzieWithDB.Controllers
             request.status = "done";
             CustomerRating customerRating = new CustomerRating();
             customerRating.customer = customer;
+            customerRating.ratingDate = DateTime.Now;
+            customerRating.userEvaluating = Session["userName"].ToString();
 
             Rating rating = db.ratings.Find(stars);
 
             customerRating.rating = rating;
-            db.customerRatings.Add(customerRating);
-            db.Entry(request).CurrentValues.SetValues(request);
-            db.Entry(customer).CurrentValues.SetValues(customer);
 
+            db.customerRatings.Add(customerRating);
+            db.SaveChanges();
+
+            db.Entry(request).CurrentValues.SetValues(request);
+            db.SaveChanges();
+
+            db.Entry(customer).CurrentValues.SetValues(customer);
             db.SaveChanges();
 
             return RedirectToAction("MyOwnRequests");
@@ -664,7 +672,7 @@ namespace PrezzieWithDB.Controllers
 
             Request request = db.requests.Find(rcm.souvenirID);
             request.status = "in progress";
-            request.userNameDelivery = rcm.userName;
+            request.userNameDelivery = Session["userName"].ToString();
             db.Entry(request).CurrentValues.SetValues(request);
             db.SaveChanges();
 

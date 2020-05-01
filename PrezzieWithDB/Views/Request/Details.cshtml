@@ -143,7 +143,7 @@
                     }
                 </dl>
             </div>
-            @if (Session["userName"].ToString() != Model.userName)
+            @if (Session["userName"].ToString() != Model.userName && Model.status == "new")
             { 
             <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Contact me", "ContactMe", new { souvenirID = Model.souvenirID, souvenirName = Model.souvenirName, countrySouv = Model.countrySouv, eMail = Model.eMail, firstName = Model.firstName, surname = Model.surname}) </p>
             }
