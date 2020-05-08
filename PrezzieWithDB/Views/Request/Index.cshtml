@@ -109,10 +109,10 @@
 
             </div>
             <div class="col-md-2">
-                <p><a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.souvenirID })</p>
+                <p><a class="btn btn-default" style="background-color:#56c8c8; margin-top:11em; margin-left:6em" @Html.ActionLink("Details", "Details", new { id = item.requestID })</p>
                 @if (Session["userName"] != null && Session["userName"].ToString() == "Admin")
                 {
-                    <p><a class="btn btn-default" style="background-color:firebrick; margin-left:6em" @Html.ActionLink("Delete", "Delete", new { id = item.souvenirID })</p>
+                    <p><a class="btn btn-default" style="background-color:firebrick; margin-left:6em" @Html.ActionLink("Delete", "Delete", new { id = item.requestID })</p>
                 }
             </div>
             </div>
@@ -120,5 +120,3 @@
     </div>
 
 }
-
-

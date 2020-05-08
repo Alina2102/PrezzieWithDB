@@ -258,13 +258,13 @@ namespace PrezzieWithDB.Controllers
 
                     foreach (CustomerRating cr in customerRatings)
                     {
-                        cv.rating += cr.ratingID;
+                        cv.rating += cr.rating.ratingValue;
                     }
                     cv.ratingCount = customerRatings.Count;
                     cv.rating /= cv.ratingCount;
                     cv.rating = Math.Round(cv.rating, 1);
                     int ratingRounded = (int)cv.rating;
-                    cv.ratingDescription = db.ratings.Find(ratingRounded).ratingDescription;
+                    cv.ratingDescription = db.ratings.Find(ratingRounded).ratingValueDescription;
                 }
                 catch (Exception)
                 {

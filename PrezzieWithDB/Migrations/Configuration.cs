@@ -24,28 +24,28 @@ namespace PrezzieWithDB.Migrations
 
             ratings.Add(new Rating()
             {
-                ratingID = 1,
-                ratingDescription = "bad"
+                ratingValue = 1,
+                ratingValueDescription = "bad"
             });
             ratings.Add(new Rating()
             {
-                ratingID = 2,
-                ratingDescription = "poor"
+                ratingValue = 2,
+                ratingValueDescription = "poor"
             });
             ratings.Add(new Rating()
             {
-                ratingID = 3,
-                ratingDescription = "okay"
+                ratingValue = 3,
+                ratingValueDescription = "okay"
             });
             ratings.Add(new Rating()
             {
-                ratingID = 4,
-                ratingDescription = "good"
+                ratingValue = 4,
+                ratingValueDescription = "good"
             });
             ratings.Add(new Rating()
             {
-                ratingID = 5,
-                ratingDescription = "super"
+                ratingValue = 5,
+                ratingValueDescription = "super"
             });
 
             foreach (Rating rating in ratings)

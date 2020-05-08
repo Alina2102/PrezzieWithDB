@@ -73,7 +73,7 @@
             </div>
             @if (Session["userName"].ToString() == Model.userName)
             {
-                <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Edit", "Edit", new { id = Model.souvenirID }) </p>
+                <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Edit", "Edit", new { id = Model.requestID }) </p>
             }
         </div>
 
@@ -145,7 +145,7 @@
             </div>
             @if (Session["userName"].ToString() != Model.userName && Model.status == "new")
             { 
-            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Contact me", "ContactMe", new { souvenirID = Model.souvenirID, souvenirName = Model.souvenirName, countrySouv = Model.countrySouv, eMail = Model.eMail, firstName = Model.firstName, surname = Model.surname}) </p>
+            <p><a class="btn btn-default" style="background-color:#feab33" @Html.ActionLink("Contact me", "ContactMe", new { souvenirID = Model.requestID, souvenirName = Model.souvenirName, countrySouv = Model.countrySouv, eMail = Model.eMail, firstName = Model.firstName, surname = Model.surname}) </p>
             }
         </div>
     </div>

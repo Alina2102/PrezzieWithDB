@@ -27,7 +27,7 @@ namespace PrezzieWithDB.Controllers
         public ActionResult Index()
         {
             var requests = db.requests.Where(x => x.status == "new");
-            requests = requests.OrderByDescending(r => r.souvenirID);
+            requests = requests.OrderByDescending(r => r.requestID);
             ViewBag.sort = "Latest";
             ViewBag.New = true;
             ViewBag.inProgress = false;
@@ -76,7 +76,7 @@ namespace PrezzieWithDB.Controllers
                     requests = requests.OrderBy(r => r.userName);
                     break;
                 default:
-                    requests = requests.OrderByDescending(r => r.souvenirID);
+                    requests = requests.OrderByDescending(r => r.requestID);
                     break;
             }
             ViewBag.sort = sorting;
@@ -107,7 +107,7 @@ namespace PrezzieWithDB.Controllers
                 string userName = Session["userName"].ToString();
                 //var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
                 var requests = db.requests.Where(x => x.status == "new");
-                requests = requests.OrderByDescending(r => r.souvenirID);
+                requests = requests.OrderByDescending(r => r.requestID);
                 List<Request> myRequests = new List<Request>();
 
                 foreach (Request r in requests)
@@ -131,7 +131,7 @@ namespace PrezzieWithDB.Controllers
         {
             string userName = Session["userName"].ToString();
             var requests = db.requests.Include(r => r.customer).Include(r => r.souvenir);
-            requests = requests.OrderByDescending(r => r.souvenirID);
+            requests = requests.OrderByDescending(r => r.requestID);
             switch (status)
             {
                 case "InProgress":
@@ -296,7 +296,7 @@ namespace PrezzieWithDB.Controllers
                 request.amount = model.amount;
                 request.reward = model.reward;
                 request.status = "new";
-                request.souvenirID = souvenirInfo.souvenirId;
+                request.requestID = souvenirInfo.souvenirId;
 
                 db.requests.Add(request);
                 db.SaveChanges();
@@ -461,7 +461,7 @@ namespace PrezzieWithDB.Controllers
             Request request = db.requests.Find(id);
             Customer customer = request.customer;
             /////////////////////////////////////////////////
-            var body = "<p>Dear " + customer.profile.firstName + ",</p> " + "<p></p><p>we had to delete your request " + request.souvenir.souvenirName + " with the request ID: " + request.souvenirID + " because it was against our business security rules</p><p></p><p>With kind Regards</p><p>Your Prezzie Team</p>";
+            var body = "<p>Dear " + customer.profile.firstName + ",</p> " + "<p></p><p>we had to delete your request " + request.souvenir.souvenirName + " with the request ID: " + request.requestID + " because it was against our business security rules</p><p></p><p>With kind Regards</p><p>Your Prezzie Team</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(customer.profile.eMail));  // replace with valid value 
             message.From = new MailAddress("prezzie.info@gmail.com");  // replace with valid value
@@ -502,7 +502,7 @@ namespace PrezzieWithDB.Controllers
             RequestView rv = new RequestView();
             var request = db.requests.Find(souvenirID);
 
-            rv.souvenirID = request.souvenirID;
+            rv.requestID = request.requestID;
             rv.userName = request.userName;
             rv.amount = request.amount;
             rv.reward = request.reward;
@@ -531,13 +531,13 @@ namespace PrezzieWithDB.Controllers
 
                 foreach (CustomerRating cr in customerRatings)
                 {
-                    rv.rating += cr.ratingID;
+                    rv.rating += cr.rating.ratingValue;
                 }
                 rv.ratingCount = customerRatings.Count;
                 rv.rating /= rv.ratingCount;
                 rv.rating = Math.Round(rv.rating, 1);
                 int ratingRounded = (int)rv.rating;
-                rv.ratingDescription = db.ratings.Find(ratingRounded).ratingDescription;
+                rv.ratingDescription = db.ratings.Find(ratingRounded).ratingValueDescription;
             }
             catch (Exception)
             {
@@ -566,7 +566,7 @@ namespace PrezzieWithDB.Controllers
             Request request = db.requests.Find(souvenirID_tmp);
             try
             {
-                string fileName = request.souvenirID.ToString();
+                string fileName = request.requestID.ToString();
                 string extension = Path.GetExtension(file.FileName);
                 fileName += extension;
                 request.souvenir.selectedPictureSouvenir = "~/Content/" + fileName;

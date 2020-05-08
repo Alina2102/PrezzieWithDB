@@ -9,8 +9,8 @@ namespace PrezzieWithDB.Models
     public class Rating
     {
         [Key]
-        public int ratingID { get; set; }
-        public string ratingDescription { get; set; }
+        public int ratingValue { get; set; }
+        public string ratingValueDescription { get; set; }
 
         public virtual ICollection<CustomerRating> customerRatings { get; set; }
     }

@@ -10,8 +10,6 @@ namespace PrezzieWithDB.Models
     {
         [Key]
         public int customerRatingID { get; set; }
-        public string userName { get; set; }
-        public int ratingID { get; set; }
         public DateTime ratingDate { get; set; }
         public string userEvaluating { get; set; }
 

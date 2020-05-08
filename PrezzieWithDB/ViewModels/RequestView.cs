@@ -9,7 +9,7 @@ namespace PrezzieWithDB.ViewModels
 {
     public class RequestView
     {
-        public int souvenirID { get; set; }
+        public int requestID { get; set; }
         public string userName { get; set; }
         public int amount { get; set; }
         public string reward { get; set; }
