@@ -13,7 +13,7 @@ namespace PrezzieWithDB.Models
         public int requestID { get; set; }
         public string userName { get; set; }
         public int amount { get; set; }
-        public string reward { get; set; }
+        public double reward { get; set; }
         public string status { get; set; }
         public string userNameDelivery { get; set; }
 
@@ -21,5 +21,6 @@ namespace PrezzieWithDB.Models
         public virtual Souvenir souvenir { get; set; }
         [Required]
         public virtual Customer customer { get; set; }
+
     }
 }

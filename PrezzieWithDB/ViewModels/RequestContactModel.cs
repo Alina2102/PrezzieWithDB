@@ -13,7 +13,7 @@ namespace PrezzieWithDB.ViewModels
         public int souvenirID { get; set; }
         public string userName { get; set; }
         public int amount { get; set; }
-        public string reward { get; set; }
+        public double reward { get; set; }
         public string status { get; set; }
         public string souvenirName { get; set; }
         public string countrySouv { get; set; }

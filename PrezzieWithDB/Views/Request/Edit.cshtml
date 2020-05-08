@@ -75,17 +75,6 @@
         </div>
 
         <div class="form-group">
-            <b class="control-label col-md-2">Reward</b>
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.reward, Enumerable.Range(1, 100).Select(i => new SelectListItem { Text = i.ToString() + "%", Value = i.ToString() }), new { @class = "form-control" })
-                @if (ViewBag.ErrorMessageReward != null)
-                {
-                    <p style="color:firebrick">@ViewBag.ErrorMessageReward</p>
-                }
-            </div>
-        </div>
-
-        <div class="form-group">
             <b class="control-label col-md-2">About the souvenir</b>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.descriptionSouv, new { htmlAttributes = new { @class = "form-control" } })

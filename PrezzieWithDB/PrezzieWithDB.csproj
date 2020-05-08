@@ -152,6 +152,10 @@
     <Compile Include="Migrations\202005071324473_changemodels.designer.cs">
       <DependentUpon>202005071324473_changemodels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005081347036_changeReward.cs" />
+    <Compile Include="Migrations\202005081347036_changeReward.designer.cs">
+      <DependentUpon>202005081347036_changeReward.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerRating.cs" />
@@ -173,7 +177,6 @@
     <Compile Include="ViewModels\RequestCreate.cs" />
     <Compile Include="ViewModels\RequestEditView.cs" />
     <Compile Include="ViewModels\RequestView.cs" />
-    <Compile Include="ViewModels\RequiredAttribute.cs" />
     <Compile Include="ViewModels\SendMailModel.cs" />
     <Compile Include="ViewModels\SouvenirView.cs" />
   </ItemGroup>
@@ -283,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005071324473_changemodels.resx">
       <DependentUpon>202005071324473_changemodels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005081347036_changeReward.resx">
+      <DependentUpon>202005081347036_changeReward.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

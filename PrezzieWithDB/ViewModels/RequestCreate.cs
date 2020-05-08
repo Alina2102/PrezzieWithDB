@@ -17,7 +17,7 @@ namespace PrezzieWithDB.ViewModels
         [Range(0, 10000)]
         public string price { get; set; }
         public string currency { get; set; }
-        public string reward { get; set; }
+        public double reward { get; set; }
         [DataType(DataType.MultilineText)]
         public string descriptionSouv { get; set; }
         [DisplayName("Upload Request Picture")]

@@ -42,14 +42,8 @@
                     <dt style="margin-top:1em">
                         Reward:
                     </dt>
-                    @{ string displayReward = (Decimal.Parse(Model.reward) * Model.amount * Model.price / 100).ToString();
-                        if (displayReward == null)
-                        {
-                            displayReward = "Nothing yet";
-                        }
-                    }
                     <dd style="margin-top:1em">
-                        @displayReward @Model.currency
+                        @Model.reward @Model.currency
                     </dd>
 
                     <dt style="margin-top:1em">

@@ -206,7 +206,6 @@ namespace PrezzieWithDB.Controllers
             ViewBag.ErrorMessageAmount = null;
             ViewBag.ErrorMessagePrice = null;
             ViewBag.ErrorMessageCurrency = null;
-            ViewBag.ErrorMessageReward = null;
             ViewBag.ErrorMessageDescription = null;
 
             if (model.souvenirName == null || model.souvenirName.Length < 3 || model.souvenirName.Length > 30)
@@ -233,11 +232,6 @@ namespace PrezzieWithDB.Controllers
             if (model.currency == null)
             {
                 ViewBag.ErrorMessageCurrency = "Please select a currency.";
-                isValid = false;
-            }
-            if (model.reward == null)
-            {
-                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward in %).";
                 isValid = false;
             }
             if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
@@ -294,7 +288,8 @@ namespace PrezzieWithDB.Controllers
                 request.souvenir = souvenir;
                 request.customer = customer;
                 request.amount = model.amount;
-                request.reward = model.reward;
+                request.reward = (double) (request.amount * request.souvenir.souvenirInfo.price * 25) / 100;
+                request.reward = Math.Round(request.reward, 2);
                 request.status = "new";
                 request.requestID = souvenirInfo.souvenirId;
 
@@ -328,14 +323,13 @@ namespace PrezzieWithDB.Controllers
 
             RequestEditView requestEdit = new RequestEditView();
             requestEdit.amount = request.amount;
-            requestEdit.reward = request.reward;
             requestEdit.status = request.status;
             requestEdit.souvenirName = request.souvenir.souvenirName;
             requestEdit.countrySouv = request.souvenir.countrySouv;
             requestEdit.price = request.souvenir.souvenirInfo.price.ToString();
             requestEdit.currency = request.souvenir.souvenirInfo.currency;
             requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
-
+            requestEdit.reward = request.reward;
             return View(requestEdit);
         }
 
@@ -353,7 +347,6 @@ namespace PrezzieWithDB.Controllers
             ViewBag.ErrorMessageAmount = null;
             ViewBag.ErrorMessagePrice = null;
             ViewBag.ErrorMessageCurrency = null;
-            ViewBag.ErrorMessageReward = null;
             ViewBag.ErrorMessageDescription = null;
             ViewBag.ErrorMessageStatus = null;
 
@@ -381,11 +374,6 @@ namespace PrezzieWithDB.Controllers
             if (model.currency == null)
             {
                 ViewBag.ErrorMessageCurrency = "Please select a currency.";
-                isValid = false;
-            }
-            if (model.reward == null)
-            {
-                ViewBag.ErrorMessageReward = "Please select the percentage of your award (the reward is calculated by price * amount * reward in %).";
                 isValid = false;
             }
             if (model.descriptionSouv == null || model.descriptionSouv.Length > 300 || model.descriptionSouv.Length < 5)
@@ -424,8 +412,9 @@ namespace PrezzieWithDB.Controllers
 
                 Request request = db.requests.Find(souvenirID_tmp);
                 request.amount = model.amount;
-                request.reward = model.reward;
                 request.status = model.status;
+                request.reward = (double)(request.amount * request.souvenir.souvenirInfo.price * 25) / 100;
+                request.reward = Math.Round(request.reward, 2); 
                 db.Entry(request).CurrentValues.SetValues(request);
                 db.SaveChanges();
 
