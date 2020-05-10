@@ -24,7 +24,7 @@
                     </dd>
 
                     <dt style="margin-top:1em">
-                        Amount:
+                        Quantity:
                     </dt>
 
                     <dd style="margin-top:1em">
@@ -36,14 +36,14 @@
                     </dt>
 
                     <dd style="margin-top:1em">
-                        @Model.price @Model.currency
+                        @Model.price.ToString().Replace(".",",") @Model.currency
                     </dd>
 
                     <dt style="margin-top:1em">
                         Reward:
                     </dt>
                     <dd style="margin-top:1em">
-                        @Model.reward @Model.currency
+                        @Model.reward.ToString().Replace(".",",") @Model.currency
                     </dd>
 
                     <dt style="margin-top:1em">

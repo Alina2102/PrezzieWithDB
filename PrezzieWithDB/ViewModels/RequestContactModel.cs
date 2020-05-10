@@ -17,7 +17,7 @@ namespace PrezzieWithDB.ViewModels
         public string status { get; set; }
         public string souvenirName { get; set; }
         public string countrySouv { get; set; }
-        public decimal price { get; set; }
+        public double price { get; set; }
         public string currency { get; set; }
         public string descriptionSouv { get; set; }
         public string eMail { get; set; }

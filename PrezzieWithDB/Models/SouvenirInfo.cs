@@ -10,8 +10,8 @@ namespace PrezzieWithDB.Models
     {
 
         [Key]
-        public int souvenirId { get; set; }
-        public decimal price { get; set; }
+        public int souvenirInfoID { get; set; }
+        public double price { get; set; }
         public string currency { get; set; }
         [DataType(DataType.MultilineText)]
         public string descriptionSouv { get; set; }

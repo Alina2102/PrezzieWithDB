@@ -10,7 +10,7 @@ namespace PrezzieWithDB.Models
     {
 
         [Key]
-        public int souvenirId { get; set; }
+        public int souvenirID { get; set; }
         public string souvenirName { get; set; }
         public string countrySouv { get; set; }
         public string selectedPictureSouvenir { get; set; }

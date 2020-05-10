@@ -27,17 +27,13 @@
 
             <p>
                 <input type="radio" name="sorting" value="Latest" @(ViewBag.sort == "Latest" ? "checked = 'true'" : "")>
-
                 <label for="la"> Latest</label>
+
                 <input type="radio" name="sorting" value="Souvenir" @(ViewBag.sort == "Souvenir" ? "checked = 'true'" : "")>
-
                 <label for="sv"> Souvenir</label>
+
                 <input type="radio" name="sorting" value="Country" @(ViewBag.sort == "Country" ? "checked = 'true'" : "")>
-
                 <label for="co"> Country</label>
-                <input type="radio" name="sorting" value="Username" @(ViewBag.sort == "Username" ? "checked = 'true'" : "")>
-
-                <label for="un"> Username</label>
             </p>
 
             <p>
@@ -99,10 +95,10 @@
                     </tr>
                     <tr>
                         <td><b>Usual price per piece:</b></td>
-                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price @item.souvenir.souvenirInfo.currency</td>
+                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price.ToString().Replace(".",",") @item.souvenir.souvenirInfo.currency</td>
                     </tr>
                     <tr>
-                        <td><b>Amount:</b></td>
+                        <td><b>Quantity:</b></td>
                         <td style="padding-left:4em">@item.amount</td>
                     </tr>
                 </table>

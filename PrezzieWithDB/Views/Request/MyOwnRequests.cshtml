@@ -18,7 +18,6 @@
 
 @using (Html.BeginForm())
 {
-
     <p>
         Select status:
     </p>
@@ -35,10 +34,7 @@
     </p>
 
     <input type="submit" value="Update" name="sorting" class="btn btn-default" style="background-color:#56c8c8; margin-bottom: 2em" />
-
 }
-
-
 
 @foreach (var item in Model)
 {
@@ -65,10 +61,14 @@
                     </tr>
                     <tr>
                         <td><b>Usual price per piece:</b></td>
-                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price @item.souvenir.souvenirInfo.currency</td>
+                        <td style="padding-left:4em">@item.souvenir.souvenirInfo.price.ToString().Replace(".", ",") @item.souvenir.souvenirInfo.currency</td>
                     </tr>
                     <tr>
-                        <td><b>Amount:</b></td>
+                        <td><b>Reward:</b></td>
+                        <td style="padding-left:4em">@item.reward.ToString().Replace(".", ",") @item.souvenir.souvenirInfo.currency</td>
+                    </tr>
+                    <tr>
+                        <td><b>Quantity:</b></td>
                         <td style="padding-left:4em">@item.amount</td>
                     </tr>
                     <tr>

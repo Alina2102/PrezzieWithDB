@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -72,9 +74,6 @@ namespace PrezzieWithDB.Controllers
                     break;
                 case "Country":
                     requests = requests.OrderBy(r => r.souvenir.countrySouv);
-                    break;
-                case "Username":
-                    requests = requests.OrderBy(r => r.userName);
                     break;
                 default:
                     requests = requests.OrderByDescending(r => r.requestID);
@@ -222,12 +221,19 @@ namespace PrezzieWithDB.Controllers
             //Fehlermeldung von amount wird noch nicht angezeigt
             if (model.amount < 1 || model.amount > 1000)
             {
-                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000.";
+                ViewBag.ErrorMessageAmount = "Please enter a quantity between 1 and 1000.";
                 isValid = false;
             }
-            if (model.price == null || model.price.Length > 7)
+            string tmp = model.price.Replace(",", "");
+            tmp = tmp.Replace(".", "");
+            if (model.price == null || model.price.Length > 10)
             {
-                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits.";
+                ViewBag.ErrorMessagePrice = "Please enter a price under 10 digits.";
+                isValid = false;
+            }
+            if ((model.price.Length - tmp.Length) > 1)
+            {
+                ViewBag.ErrorMessagePrice = "Maximum one ',' or '.' !";
                 isValid = false;
             }
             if (model.currency == null)
@@ -244,18 +250,18 @@ namespace PrezzieWithDB.Controllers
             if (isValid == true)
             {
                 SouvenirInfo souvenirInfo = new SouvenirInfo();
-                if (model.price == null)
+                if (model.price.Contains(","))
                 {
-                    model.price = "0,0";
+                    model.price = model.price.Replace(",", ".");
                 }
-                else
-                if (model.price.Contains("."))
-                {
-                    model.price = model.price.Replace(".", ",");
-                }
-                souvenirInfo.price = Decimal.Parse(model.price);
+                NumberStyles style = NumberStyles.AllowDecimalPoint;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                double d;
+                double.TryParse(model.price, style, culture, out d);
+                souvenirInfo.price = Math.Round(d, 2);
                 souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
+
 
                 db.souvenirInfos.Add(souvenirInfo);
                 db.SaveChanges();
@@ -264,7 +270,7 @@ namespace PrezzieWithDB.Controllers
 
                 try
                 {
-                    string fileName = souvenirInfo.souvenirId.ToString();
+                    string fileName = souvenirInfo.souvenirInfoID.ToString();
                     string extension = Path.GetExtension(file.FileName);
                     fileName += extension;
                     souvenir.selectedPictureSouvenir = "~/Content/" + fileName;
@@ -275,7 +281,7 @@ namespace PrezzieWithDB.Controllers
                 {
                     souvenir.selectedPictureSouvenir = "~/Content/defaultSouvenir.png";
                 }
-                souvenir.souvenirId = souvenirInfo.souvenirId;
+                souvenir.souvenirID = souvenirInfo.souvenirInfoID;
                 souvenir.souvenirName = model.souvenirName;
                 souvenir.countrySouv = model.countrySouv;
                 souvenir.souvenirInfo = souvenirInfo;
@@ -292,7 +298,7 @@ namespace PrezzieWithDB.Controllers
                 request.reward = (double) (request.amount * request.souvenir.souvenirInfo.price * rewardpercent) / 100;
                 request.reward = Math.Round(request.reward, 2);
                 request.status = "new";
-                request.requestID = souvenirInfo.souvenirId;
+                request.requestID = souvenirInfo.souvenirInfoID;
 
                 db.requests.Add(request);
                 db.SaveChanges();
@@ -327,7 +333,7 @@ namespace PrezzieWithDB.Controllers
             requestEdit.status = request.status;
             requestEdit.souvenirName = request.souvenir.souvenirName;
             requestEdit.countrySouv = request.souvenir.countrySouv;
-            requestEdit.price = request.souvenir.souvenirInfo.price.ToString();
+            requestEdit.price = request.souvenir.souvenirInfo.price.ToString().Replace(".",",");
             requestEdit.currency = request.souvenir.souvenirInfo.currency;
             requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
             requestEdit.reward = request.reward;
@@ -364,13 +370,20 @@ namespace PrezzieWithDB.Controllers
             }
             if (model.amount < 1 || model.amount > 1000)
             {
-                ViewBag.ErrorMessageAmount = "Please enter an amount between 1 and 1000.";
+                ViewBag.ErrorMessageAmount = "Please enter a quantity between 1 and 1000.";
                 isValid = false;
             }
-            if (model.price == null || model.price.Length > 7)
+            string tmp = model.price.Replace(",", "");
+            tmp = tmp.Replace(".", "");
+            if (model.price == null || model.price.Length > 10)
             {
-                ViewBag.ErrorMessagePrice = "Please enter a price under 7 digits.";
+                ViewBag.ErrorMessagePrice = "Please enter a price under 10 digits.";
                 isValid = false;
+            }
+            if ((model.price.Length - tmp.Length) > 1)
+            {
+                    ViewBag.ErrorMessagePrice = "Maximum one ',' or '.' !";
+                    isValid = false;
             }
             if (model.currency == null)
             {
@@ -391,15 +404,15 @@ namespace PrezzieWithDB.Controllers
             if (isValid == true)
             {
                 SouvenirInfo souvenirInfo = db.souvenirInfos.Find(souvenirID_tmp);
-                if (model.price == null)
+                if (model.price.Contains(","))
                 {
-                    model.price = "0,0";
+                   model.price = model.price.Replace(",", ".");
                 }
-                else if (model.price.Contains("."))
-                {
-                    model.price = model.price.Replace(".", ",");
-                }
-                souvenirInfo.price = Decimal.Parse(model.price);
+                NumberStyles style = NumberStyles.AllowDecimalPoint;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                double d; 
+                double.TryParse(model.price, style, culture, out d);
+                souvenirInfo.price = Math.Round(d,2); 
                 souvenirInfo.currency = model.currency;
                 souvenirInfo.descriptionSouv = model.descriptionSouv;
                 db.Entry(souvenirInfo).CurrentValues.SetValues(souvenirInfo);
