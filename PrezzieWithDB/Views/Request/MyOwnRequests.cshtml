@@ -13,7 +13,6 @@
 
 <p>
     <a href='@Url.Action("Create", "Request")' class="btn btn-default" style="background-color:#feab33; margin-top:1em; margin-bottom:1em">Create new</a>
-    <a href='@Url.Action("Index", "Customer")' class="btn btn-default" style="background-color:#56c8c8; margin-top:1em; margin-bottom:1em">Back to Profile</a>
 </p>
 
 @using (Html.BeginForm())
@@ -52,24 +51,21 @@
                         <td style="padding-left:4em">@item.souvenir.countrySouv</td>
                     </tr>
                     <tr>
-                        <td><b>Username:</b></td>
-                        <td style="padding-left:4em">@item.customer.userName</td>
-                    </tr>
-                    <tr>
-                        <td><b>Country User:</b></td>
-                        <td style="padding-left:4em">@item.customer.countryUser</td>
-                    </tr>
-                    <tr>
                         <td><b>Usual price per piece:</b></td>
                         <td style="padding-left:4em">@item.souvenir.souvenirInfo.price.ToString().Replace(".", ",") @item.souvenir.souvenirInfo.currency</td>
+                    </tr>
+                    <tr>
+                        <td><b>Quantity:</b></td>
+                        <td style="padding-left:4em">@item.amount</td>
                     </tr>
                     <tr>
                         <td><b>Reward:</b></td>
                         <td style="padding-left:4em">@item.reward.ToString().Replace(".", ",") @item.souvenir.souvenirInfo.currency</td>
                     </tr>
                     <tr>
-                        <td><b>Quantity:</b></td>
-                        <td style="padding-left:4em">@item.amount</td>
+                        <td><b>Total price:</b></td>
+                        @{ double totalprice = (item.souvenir.souvenirInfo.price * item.amount) + item.reward;}
+                        <td style="padding-left:4em">@totalprice.ToString().Replace(".", ",") @item.souvenir.souvenirInfo.currency</td>
                     </tr>
                     <tr>
                         <td><b>Status:</b></td>

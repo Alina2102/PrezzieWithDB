@@ -23,6 +23,15 @@
                         @Html.DisplayFor(model => model.countrySouv)
                     </dd>
 
+
+                    <dt style="margin-top:1em">
+                        Usual price per piece:
+                    </dt>
+
+                    <dd style="margin-top:1em">
+                        @Model.price.ToString().Replace(".", ",") @Model.currency
+                    </dd>
+
                     <dt style="margin-top:1em">
                         Quantity:
                     </dt>
@@ -32,24 +41,23 @@
                     </dd>
 
                     <dt style="margin-top:1em">
-                        Usual price per piece:
-                    </dt>
-
-                    <dd style="margin-top:1em">
-                        @Model.price.ToString().Replace(".",",") @Model.currency
-                    </dd>
-
-                    <dt style="margin-top:1em">
                         Reward:
                     </dt>
                     <dd style="margin-top:1em">
-                        @Model.reward.ToString().Replace(".",",") @Model.currency
+                        @Model.reward.ToString().Replace(".", ",") @Model.currency
                     </dd>
+
+                    <dt style="margin-top:1em">
+                        Total price:
+                    </dt>
+                    @{ double totalprice = (Model.price * Model.amount) + Model.reward;}
+                <dd style="margin-top:1em">
+                    @totalprice.ToString().Replace(".", ",") @Model.currency
+                </dd>
 
                     <dt style="margin-top:1em">
                         Status:
                     </dt>
-
                     <dd style="margin-top:1em">
                         @Html.DisplayFor(model => model.status)
                     </dd>
