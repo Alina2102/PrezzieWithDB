@@ -23,7 +23,7 @@ namespace PrezzieWithDB.ViewModels
         public string countryUser { get; set; }
         public string firstName { get; set; }
         public string surname { get; set; }
-        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)] 
         public DateTime birthday { get; set; }
         public string descriptionUser { get; set; }
         [DisplayName("Upload Request Picture")]

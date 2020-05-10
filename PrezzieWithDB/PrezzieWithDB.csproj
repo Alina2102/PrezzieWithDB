@@ -144,17 +144,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005020739071_Init.cs" />
-    <Compile Include="Migrations\202005020739071_Init.designer.cs">
-      <DependentUpon>202005020739071_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005071324473_changemodels.cs" />
-    <Compile Include="Migrations\202005071324473_changemodels.designer.cs">
-      <DependentUpon>202005071324473_changemodels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005081347036_changeReward.cs" />
-    <Compile Include="Migrations\202005081347036_changeReward.designer.cs">
-      <DependentUpon>202005081347036_changeReward.cs</DependentUpon>
+    <Compile Include="Migrations\202005101217432_Init.cs" />
+    <Compile Include="Migrations\202005101217432_Init.designer.cs">
+      <DependentUpon>202005101217432_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -281,14 +273,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005020739071_Init.resx">
-      <DependentUpon>202005020739071_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005071324473_changemodels.resx">
-      <DependentUpon>202005071324473_changemodels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005081347036_changeReward.resx">
-      <DependentUpon>202005081347036_changeReward.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005101217432_Init.resx">
+      <DependentUpon>202005101217432_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

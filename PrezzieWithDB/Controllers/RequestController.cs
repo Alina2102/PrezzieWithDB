@@ -22,6 +22,7 @@ namespace PrezzieWithDB.Controllers
     {
         private PrezzieContext db = new PrezzieContext();
         private static int? souvenirID_tmp = null;
+        private double rewardpercent = 25;
 
         // GET: Request
         public ActionResult Index()
@@ -288,7 +289,7 @@ namespace PrezzieWithDB.Controllers
                 request.souvenir = souvenir;
                 request.customer = customer;
                 request.amount = model.amount;
-                request.reward = (double) (request.amount * request.souvenir.souvenirInfo.price * 25) / 100;
+                request.reward = (double) (request.amount * request.souvenir.souvenirInfo.price * rewardpercent) / 100;
                 request.reward = Math.Round(request.reward, 2);
                 request.status = "new";
                 request.requestID = souvenirInfo.souvenirId;
@@ -413,7 +414,7 @@ namespace PrezzieWithDB.Controllers
                 Request request = db.requests.Find(souvenirID_tmp);
                 request.amount = model.amount;
                 request.status = model.status;
-                request.reward = (double)(request.amount * request.souvenir.souvenirInfo.price * 25) / 100;
+                request.reward = (double)(request.amount * request.souvenir.souvenirInfo.price * rewardpercent) / 100;
                 request.reward = Math.Round(request.reward, 2); 
                 db.Entry(request).CurrentValues.SetValues(request);
                 db.SaveChanges();

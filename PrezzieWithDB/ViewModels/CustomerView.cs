@@ -16,8 +16,7 @@ namespace PrezzieWithDB.ViewModels
         public string password { get; set; }
         public string firstName { get; set; }
         public string surname { get; set; }
-        [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime birthday { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)] public DateTime birthday { get; set; }
         public string descriptionUser { get; set; }
         [DisplayName("Upload Profile Picture")]
         public string selectedPictureCustomer { get; set; }
