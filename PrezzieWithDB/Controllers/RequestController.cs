@@ -189,7 +189,14 @@ namespace PrezzieWithDB.Controllers
         // GET: Request/Create
         public ActionResult Create()
         {
-            return View();
+            try {
+                string userName = Session["userName"].ToString();
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Customer");
+            }
         }
 
         // POST: Request/Create
@@ -295,7 +302,7 @@ namespace PrezzieWithDB.Controllers
                 request.souvenir = souvenir;
                 request.customer = customer;
                 request.amount = model.amount;
-                request.reward = (double) (request.amount * request.souvenir.souvenirInfo.price * rewardpercent) / 100;
+                request.reward = (double)(request.amount * request.souvenir.souvenirInfo.price * rewardpercent) / 100;
                 request.reward = Math.Round(request.reward, 2);
                 request.status = "new";
                 request.requestID = souvenirInfo.souvenirInfoID;
@@ -315,30 +322,43 @@ namespace PrezzieWithDB.Controllers
         // GET: Request/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return RedirectToAction("Index");
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                souvenirID_tmp = id;
+                Request request = db.requests.Find(id);
+
+                if (request == null)
+                {
+                    return HttpNotFound();
+                }
+                string userName = Session["userName"].ToString();
+                if (userName != request.userName)
+                {
+                    return RedirectToAction("Index", "Request");
+                }
+
+                RequestEditView requestEdit = new RequestEditView();
+                requestEdit.amount = request.amount;
+                requestEdit.status = request.status;
+                requestEdit.souvenirName = request.souvenir.souvenirName;
+                requestEdit.countrySouv = request.souvenir.countrySouv;
+                requestEdit.price = request.souvenir.souvenirInfo.price.ToString().Replace(".", ",");
+                requestEdit.currency = request.souvenir.souvenirInfo.currency;
+                requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
+                requestEdit.reward = request.reward;
+                return View(requestEdit);
             }
 
-            souvenirID_tmp = id;
-            Request request = db.requests.Find(id);
-
-            if (request == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Customer");
             }
-
-            RequestEditView requestEdit = new RequestEditView();
-            requestEdit.amount = request.amount;
-            requestEdit.status = request.status;
-            requestEdit.souvenirName = request.souvenir.souvenirName;
-            requestEdit.countrySouv = request.souvenir.countrySouv;
-            requestEdit.price = request.souvenir.souvenirInfo.price.ToString().Replace(".",",");
-            requestEdit.currency = request.souvenir.souvenirInfo.currency;
-            requestEdit.descriptionSouv = request.souvenir.souvenirInfo.descriptionSouv;
-            requestEdit.reward = request.reward;
-            return View(requestEdit);
-        }
+}
 
         // POST: Request/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -444,16 +464,28 @@ namespace PrezzieWithDB.Controllers
         // GET: Request/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string userName = Session["userName"].ToString();
+                if (userName != "Admin")
+                {
+                    return RedirectToAction("Index", "Request");
+                }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Request request = db.requests.Find(id);
+                if (request == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(request);
             }
-            Request request = db.requests.Find(id);
-            if (request == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Customer");
             }
-            return View(request);
         }
 
         // POST: Request/Delete/5

@@ -403,24 +403,43 @@ namespace PrezzieWithDB.Controllers
         // GET: Customer/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string userName = Session["userName"].ToString();
+                if (userName != "Admin")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Customer customer = db.customers.Find(id);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(customer);
             }
-            Customer customer = db.customers.Find(id);
-            if (customer == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Customer");
             }
-            return View(customer);
-        }
-
-        // POST: Customer/Delete/5
-        [HttpPost, ActionName("Delete")]
+    }
+                                    
+    // POST: Customer/Delete/5
+    [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+
+
             Customer customer = db.customers.Find(id);
+            foreach(CustomerRating cr in customer.customerRatings.ToList())
+            {
+                db.customerRatings.Remove(cr);
+            }
+            db.SaveChanges();
             db.customers.Remove(customer);
             db.SaveChanges();
             Profile profile = db.profiles.Find(id);
