@@ -231,6 +231,13 @@ namespace PrezzieWithDB.Controllers
                 ViewBag.ErrorMessageAmount = "Please enter a quantity between 1 and 1000.";
                 isValid = false;
             }
+            if(model.price == null)
+            {
+                ViewBag.ErrorMessagePrice = "Please enter a price";
+                isValid = false;
+            }
+            else
+            {
             string tmp = model.price.Replace(",", "");
             tmp = tmp.Replace(".", "");
             if (model.price == null || model.price.Length > 10)
@@ -242,6 +249,7 @@ namespace PrezzieWithDB.Controllers
             {
                 ViewBag.ErrorMessagePrice = "Maximum one ',' or '.' !";
                 isValid = false;
+            }
             }
             if (model.currency == null)
             {
